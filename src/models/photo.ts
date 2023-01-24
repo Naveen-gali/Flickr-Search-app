@@ -1,4 +1,5 @@
-import { Instance, types } from "mobx-state-tree";
+import axios from "axios";
+import { flow, Instance, types } from "mobx-state-tree";
 
 export type PhotoType = Instance<typeof photo>
 
@@ -11,7 +12,7 @@ export const photo = types.model({
     title: types.string,
     ispublic: types.integer,
     isfriend: types.integer,
-    isfamily: types.integer
+    isfamily: types.integer,
 }).views(self => ({
     isPublic(): boolean {
         return self.ispublic === 1 ? true : false;
@@ -22,4 +23,13 @@ export const photo = types.model({
     isFamily(): boolean {
         return self.isfamily === 1 ? true : false;
     }
+})).actions(self => ({
+    // getImageInfo: flow(function* (photo_id: string,secret: string){
+    //     const response = yield axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=debb070988cf38ae1960392875f73796&photo_id=${photo_id}&secret=${secret}&format=json&nojsoncallback=1`)
+    //     .then((res) => {
+    //         return res.data.photo.owner.username
+    //     },(err) => {
+    //         console.log("ERR :_ ",err);
+    //     })
+    // }) 
 }))
