@@ -5,8 +5,8 @@ import DescriptionScreen from "../Screens/DescriptionScreen";
 import type {NavigationContainerProps} from "@react-navigation/native";
 
 export type RootStoreParams = {
-    Home: NavigationContainerProps,
-    DescriptionScreen: NavigationContainerProps
+    Home: undefined,
+    DescriptionScreen: {photoId: string}
 }
 
 const Stack = createNativeStackNavigator<RootStoreParams>();

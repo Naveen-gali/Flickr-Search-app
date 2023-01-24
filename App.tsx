@@ -11,6 +11,7 @@ import RNBootSplash from "react-native-bootsplash";
 import { RootNavigator } from './src/Navigation/RootNavigator';
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import { store, StoreContext } from './src/models/store';
+import {Provider as PaperProvider} from "react-native-paper";
 
 const RootStore = store.create({
   photos: [],
@@ -18,14 +19,17 @@ const RootStore = store.create({
   pages: 0, 
   perpage: 0,
   total: 0,
+  isLoading: false
 });
 
 function App(): JSX.Element {
   return (
     <StoreContext.Provider value={RootStore}>
-      <NavigationContainer onReady={() => RNBootSplash.hide({fade: true,duration: 500})}>
-          <RootNavigator />
-      </NavigationContainer>
+      <PaperProvider>
+        <NavigationContainer onReady={() => RNBootSplash.hide({fade: true,duration: 500})}>
+            <RootNavigator />
+        </NavigationContainer>
+      </PaperProvider>
     </StoreContext.Provider>
   );
 }
