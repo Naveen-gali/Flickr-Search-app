@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack"; 
-import { RootStoreParams } from "../../Navigation/RootNavigator";
+import React, {useEffect} from 'react';
+import {Text, View} from 'react-native';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStoreParams} from '../../navigation/RootNavigator';
 
-type Props = NativeStackScreenProps<RootStoreParams,"DescriptionScreen">
+type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
 
-const DescriptionScreen = ({navigation,route}: Props) => {
+const DescriptionScreen = ({navigation, route}: Props) => {
+  const {photoId} = route.params;
 
-    useEffect(() => {
-        navigation.setOptions({headerTitle: photoId})
-    },[])
+  useEffect(() => {
+    navigation.setOptions({headerTitle: photoId});
+  }, [navigation, photoId]);
 
-    const {photoId} = route.params;
-    return(
-        <View>
-            <Text>DescriptionScreen Page</Text>
-            <Text>Photo ID {photoId}</Text>
-        </View>
-    )
-}
+  return (
+    <View>
+      <Text>DescriptionScreen Page</Text>
+      <Text>Photo ID {photoId}</Text>
+    </View>
+  );
+};
 
 export default DescriptionScreen;
