@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     // marginHorizontal: 2,
     flexDirection: 'row',
-    // marginTop: 10,
+    marginTop: 10,
     // marginBottom: 10
   },
   inputStyle: {

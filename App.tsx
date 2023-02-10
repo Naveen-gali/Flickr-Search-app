@@ -13,7 +13,9 @@ const RootStore = store.create({
   pages: 0,
   perpage: 0,
   total: 0,
-  isLoading: false,
+  error: '',
+  infoLoading: false,
+  photosLoading: false,
 });
 
 function App(): JSX.Element {

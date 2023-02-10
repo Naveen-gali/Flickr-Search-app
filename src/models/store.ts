@@ -1,7 +1,8 @@
 import {flow, Instance, types} from 'mobx-state-tree';
 import {createContext} from 'react';
 import flickr from '../api/flickr';
-import {IMAGE_URL, SEARCH_METHOD} from '../constants/urlConstants';
+import {IMAGE_URL, SEARCH_METHOD, INFO_METHOD} from '../constants/urlConstants';
+import {infoData} from './defaultValues';
 import {photo} from './photo';
 
 export type StoreType = Instance<typeof store>;
@@ -12,8 +13,12 @@ export const store = types
     pages: types.number,
     perpage: types.number,
     total: types.number,
-    isLoading: types.boolean,
+    photosLoading: types.boolean,
     photos: types.array(photo),
+    info: types.frozen(infoData),
+    // info: types.frozen(info),
+    infoLoading: types.boolean,
+    error: types.string,
   })
   .views(self => ({
     get PageNumber(): number {
@@ -28,16 +33,17 @@ export const store = types
     get photosCount(): number {
       return self.photos.length;
     },
-    get loading(): boolean {
-      return self.isLoading;
-    },
-    setIsLoading(state: boolean) {
-      self.isLoading = state;
+    changeLoading(type: 'photos' & 'info', value: boolean) {
+      if (type === 'photos') {
+        self.photosLoading = value;
+      } else {
+        self.infoLoading = value;
+      }
     },
   }))
   .actions(self => ({
     getPhotos: flow(function* (text: string, perPage: number = 20) {
-      self.setIsLoading(true);
+      self.photosLoading = true;
       // const response = yield axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=debb070988cf38ae1960392875f73796&text=${text}&format=json&nojsoncallback=1`);
       const response = yield flickr.get(`?method=${SEARCH_METHOD}`, {
         params: {
@@ -48,7 +54,7 @@ export const store = types
           per_page: perPage,
         },
       });
-      self.setIsLoading(false);
+      self.photosLoading = false;
       console.log('PHOTOS : ', response.data.photos);
       self.photos = response.data.photos.photo;
     }),
@@ -62,6 +68,25 @@ export const store = types
         thumbnail ? '_w' : ''
       }.jpg`;
     },
+    getImageInfo: flow(function* (photo_id: string, secret: string) {
+      self.infoLoading = true;
+      try {
+        const response = yield flickr.get(`/?method=${INFO_METHOD}`, {
+          params: {
+            api_key: 'debb070988cf38ae1960392875f73796',
+            photo_id,
+            secret,
+            format: 'json',
+            nojsoncallback: 1,
+          },
+        });
+        self.info = response.data.photo;
+        self.infoLoading = false;
+      } catch (err) {
+        self.infoLoading = false;
+        self.error = 'SomeThing Unexpected Happened!';
+      }
+    }),
   }));
 
 export const StoreContext = createContext<StoreType>({} as StoreType);
