@@ -8,18 +8,19 @@ import {
   Alert,
 } from 'react-native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../../navigation/RootNavigator';
+import {RootStoreParams} from '../navigation/RootNavigator';
 import {useNavigation} from '@react-navigation/native';
-import {StoreContext} from '../../models/store';
+import {StoreContext} from '../models/store';
 import {observer} from 'mobx-react-lite';
-import PhotoComponent from '../../components/PhotoComponent';
+import PhotoComponent from '../components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../components/SearchBar';
 
 const Home = observer(() => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStoreParams>>();
-  const {getPhotos, photosCount, photos, isLoading} = useContext(StoreContext);
+  const {getPhotos, photosCount, photos, photosLoading} =
+    useContext(StoreContext);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const Home = observer(() => {
             }}
             alwaysBounceVertical={true}
             ListFooterComponent={() => <Text>End..</Text>}
-            refreshing={isLoading}
+            refreshing={photosLoading}
             onRefresh={() => getPhotos(query.length > 0 ? query : 'India')}
             contentContainerStyle={styles.flatListContentStyle}
           />

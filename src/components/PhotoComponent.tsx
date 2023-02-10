@@ -19,6 +19,7 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
       onPress={() =>
         navigation.navigate('DescriptionScreen', {
           photoId: photo.id,
+          secret: photo.secret,
         })
       }>
       <Image
