@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: 10,
+    color: '#000000',
   },
 });
 

@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {PhotoType} from '../models/photo';
 import {StoreContext} from '../models/store';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams} from '../navigation/RootNavigator';
+import Card from './Card';
 
 type Props = {
   photo: PhotoType;
@@ -14,46 +15,44 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
   const {getImageUrl} = useContext(StoreContext);
 
   return (
-    <TouchableOpacity
-      style={styles.rootView}
+    <Card
       onPress={() =>
         navigation.navigate('DescriptionScreen', {
           photoId: photo.id,
           secret: photo.secret,
         })
       }>
-      <Image
-        source={{uri: getImageUrl(photo.server, photo.id, photo.secret, true)}}
-        style={styles.imageStyle}
-        resizeMode="cover"
-      />
-      <View style={styles.detailsView}>
-        <Text style={styles.titleText}>{photo.title}</Text>
-      </View>
-    </TouchableOpacity>
+      <>
+        <Image
+          source={{
+            uri: getImageUrl(photo.server, photo.id, photo.secret, true),
+          }}
+          style={styles.imageStyle}
+          resizeMode="cover"
+        />
+        <View style={styles.detailsView}>
+          <Text style={styles.titleText}>{photo.title}</Text>
+        </View>
+      </>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  rootView: {
-    height: 210,
-    // borderWidth : 1,
-    flex: 1,
-    flexDirection: 'row',
-    marginVertical: 10,
-  },
   imageStyle: {
     width: 150,
-    height: 200,
+    height: 195,
     borderRadius: 10,
     overflow: 'hidden',
+    marginRight: 10,
   },
   titleText: {
     textAlign: 'center',
     flexWrap: 'wrap',
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: 15,
+    color: 'black',
   },
   detailsView: {
     flex: 1,
