@@ -17,125 +17,125 @@ export type UrlType = Instance<typeof url>;
 export type NoteType = Instance<typeof note>;
 
 const gift = types.model({
-  gift_eligible: types.string,
+  gift_eligible: '',
   eligible_durations: types.array(types.string),
-  new_flow: types.string,
+  new_flow: '',
 });
 
 const owner = types.model({
-  nsid: types.string,
-  username: types.string,
-  realname: types.string,
-  location: types.string,
-  iconserver: types.string,
-  iconfarm: types.number,
-  path_alias: types.string,
-  gift: gift,
+  nsid: '',
+  username: '',
+  realname: '',
+  location: '',
+  iconserver: '',
+  iconfarm: 0,
+  path_alias: '',
+  gift: types.optional(gift, {}),
 });
 
 const title = types.model({
-  _content: types.string,
+  _content: '',
 });
 
 const description = types.model({
-  _content: types.string,
+  _content: '',
 });
 
 const dates = types.model({
-  posted: types.string,
-  taken: types.string,
-  takengranularity: types.number,
-  takenunknown: types.number,
-  lastupdate: types.string,
+  posted: '',
+  taken: '',
+  takengranularity: 0,
+  takenunknown: 0,
+  lastupdate: '',
 });
 
 const visibility = types.model({
-  ispublic: types.number,
-  isfriend: types.number,
-  isfamily: types.number,
+  ispublic: 0,
+  isfriend: 0,
+  isfamily: 0,
 });
 
 const editability = types.model({
-  cancomment: types.number,
-  canaddmeta: types.number,
+  cancomment: 0,
+  canaddmeta: 0,
 });
 
 const publiceditability = types.model({
-  cancomment: types.number,
-  canaddmeta: types.number,
+  cancomment: 0,
+  canaddmeta: 0,
 });
 
 const usage = types.model({
-  candownload: types.number,
-  canblog: types.number,
-  canprint: types.number,
-  canshare: types.number,
+  candownload: 0,
+  canblog: 0,
+  canprint: 0,
+  canshare: 0,
 });
 
 const comments = types.model({
-  _content: types.number,
+  _content: 0,
 });
 
 const people = types.model({
-  haspeople: types.number,
+  haspeople: 0,
 });
 
 const tag = types.model({
-  id: types.string,
-  author: types.string,
-  authorname: types.string,
-  raw: types.string,
-  _content: types.string,
-  machine_tag: types.number,
+  id: '',
+  author: '',
+  authorname: '',
+  raw: '',
+  _content: '',
+  machine_tag: 0,
 });
 
 const url = types.model({
-  type: types.string,
-  _content: types.string,
+  type: '',
+  _content: '',
 });
 
-const note = types.model({
-  id: types.string,
-  author: types.string,
-  authorname: types.string,
-  x: types.string,
-  y: types.string,
-  w: types.string,
-  h: types.string,
-  _content: types.string,
+const note = types.model('NoteModel').props({
+  id: '',
+  author: '',
+  authorname: '',
+  x: '',
+  y: '',
+  w: '',
+  h: '',
+  _content: '',
 });
 
-export const info = types.model({
-  id: types.string,
-  secret: types.string,
-  server: types.string,
-  farm: types.number,
-  dateuploaded: types.string,
-  isfavorite: types.number,
-  license: types.number,
-  safety_level: types.number,
-  rotation: types.number,
-  originalsecret: types.string,
-  originalformat: types.string,
-  owner: owner,
-  title: title,
-  description: description,
-  visibility: visibility,
-  dates: dates,
-  views: types.string,
-  editability: editability,
-  publiceditability: publiceditability,
-  usage: usage,
-  comments: comments,
+export const info = types.model('InfoModel').props({
+  id: '',
+  secret: '',
+  server: '',
+  farm: 0,
+  dateuploaded: '',
+  isfavorite: '',
+  license: '',
+  safety_level: '',
+  rotation: 0,
+  originalsecret: '',
+  originalformat: '',
+  owner: types.optional(owner, {}),
+  title: types.optional(title, {}),
+  description: types.optional(description, {}),
+  visibility: types.optional(visibility, {}),
+  dates: types.optional(dates, {}),
+  views: '',
+  editability: types.optional(editability, {}),
+  publiceditability: types.optional(publiceditability, {}),
+  usage: types.optional(usage, {}),
+  comments: types.optional(comments, {}),
   notes: types.model({
     note: types.array(note),
   }),
-  people: people,
+  people: types.optional(people, {}),
   tags: types.model({
     tag: types.array(tag),
   }),
   urls: types.model({
     url: types.array(url),
   }),
-  media: types.string,
+  media: '',
 });

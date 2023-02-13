@@ -1,22 +1,26 @@
-import {flow, Instance, types} from 'mobx-state-tree';
+import {flow, getSnapshot, Instance, types} from 'mobx-state-tree';
 import {createContext} from 'react';
 import flickr from '../api/flickr';
 import {IMAGE_URL, SEARCH_METHOD, INFO_METHOD} from '../constants/urlConstants';
-import {infoData} from './defaultValues';
 import {photo} from './photo';
+import {info} from './info';
 
 export type StoreType = Instance<typeof store>;
 
 export const store = types
-  .model({
+  .model('StoreModel')
+  .props({
     page: types.number,
     pages: types.number,
     perpage: types.number,
     total: types.number,
     photosLoading: types.boolean,
     photos: types.array(photo),
-    info: types.frozen(infoData),
-    // info: types.frozen(info),
+    info: types.frozen(
+      getSnapshot(
+        info.create({notes: {note: []}, tags: {tag: []}, urls: {url: []}}),
+      ),
+    ),
     infoLoading: types.boolean,
     error: types.string,
   })
