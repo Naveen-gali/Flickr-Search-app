@@ -9,7 +9,6 @@ import HeadingComponent from '../components/HeadingComponent';
 import OwnerComponent from '../components/OwnerComponent';
 import TagsList from '../components/TagsList';
 import DescriptionText from '../components/DescriptionText';
-// import DatesComponent from '../../components/DatesComponent';
 
 type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
 
