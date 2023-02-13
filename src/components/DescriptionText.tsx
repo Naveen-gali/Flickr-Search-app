@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     textAlign: 'justify',
+    color: '#000000',
   },
   badge: {
     borderWidth: 1,

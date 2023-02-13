@@ -40,16 +40,12 @@ const Home = observer(() => {
       <View style={styles.rootView}>
         {/* <Searchbar placeholder="Search Photos" onChangeText={(e) => console.log(e)} value={query} style={styles.searchContainer} /> */}
         <SearchBar
-          //   term={query}
-          //   onTermChange={e => setQuery(e)}
-          //   onTermSubmit={onSubmit}
-          //   placeholder="Search Photos"
           value={query}
           onChangeText={setQuery}
           onEndEditing={onSubmit}
           placeholder="Search Photos"
         />
-        <Text>Results Found ({photosCount})</Text>
+        <Text style={styles.resultsText}>Results Found ({photosCount})</Text>
         <View style={styles.flatListContainer}>
           <FlatList
             data={photos}
@@ -63,6 +59,8 @@ const Home = observer(() => {
             refreshing={photosLoading}
             onRefresh={() => getPhotos(query.length > 0 ? query : 'India')}
             contentContainerStyle={styles.flatListContentStyle}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponentStyle={styles.listFooter}
           />
         </View>
       </View>
@@ -83,6 +81,13 @@ const styles = StyleSheet.create({
   },
   flatListContentStyle: {
     paddingBottom: 130,
+  },
+  resultsText: {
+    marginVertical: 10,
+    color: '#000000',
+  },
+  listFooter: {
+    marginVertical: 10,
   },
 });
 

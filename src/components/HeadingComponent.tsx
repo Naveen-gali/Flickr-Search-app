@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'left',
+    color: 'black',
   },
   container: {
     marginHorizontal: 1,

@@ -17,7 +17,7 @@ const TagComponent = (props: Props) => {
       onPress={() =>
         Linking.openURL(`https://www.flickr.com/photos/tags/${_content}`)
       }>
-      <Text># {_content}</Text>
+      <Text style={styles.text}># {_content}</Text>
     </TouchableOpacity>
   );
 };
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 10,
     backgroundColor: '#D3D3D9',
+  },
+  text: {
+    color: '#000000',
   },
 });
 
