@@ -1,11 +1,43 @@
-import {flow, getSnapshot, Instance, types} from 'mobx-state-tree';
+import {
+  cast,
+  flow,
+  getSnapshot,
+  Instance,
+  toGenerator,
+  types,
+} from 'mobx-state-tree';
 import {createContext} from 'react';
-import flickr from '../api/flickr';
 import {IMAGE_URL, SEARCH_METHOD, INFO_METHOD} from '../constants/urlConstants';
-import {photo} from './photo';
-import {info} from './info';
+import {photo, PhotoType} from './photo';
+import {info, InfoType} from './info';
+import {GetApi} from '../api/api';
 
 export type StoreType = Instance<typeof store>;
+
+export interface Photo {
+  id: string;
+  owner: string;
+  secret: string;
+  server: string;
+  farm: number;
+  title: string;
+  ispublic: number;
+  isfriend: number;
+  isfamily: number;
+}
+
+type SearchApiResponse = {
+  photos: {
+    page: number;
+    pages: number;
+    perpage: number;
+    photo: PhotoType[];
+  };
+};
+
+type InfoApiResponse = {
+  photo: InfoType;
+};
 
 export const store = types
   .model('StoreModel')
@@ -15,7 +47,7 @@ export const store = types
     perpage: types.number,
     total: types.number,
     photosLoading: types.boolean,
-    photos: types.array(photo),
+    photos: types.optional(types.array(photo), []),
     info: types.frozen(
       getSnapshot(
         info.create({notes: {note: []}, tags: {tag: []}, urls: {url: []}}),
@@ -46,21 +78,34 @@ export const store = types
     },
   }))
   .actions(self => ({
-    getPhotos: flow(function* (text: string, perPage: number = 20) {
+    getPhotos: flow(function* (
+      text: string,
+      perPage: number = 20,
+      page: number = 1,
+      newRequest: boolean = false,
+    ) {
       self.photosLoading = true;
-      // const response = yield axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=debb070988cf38ae1960392875f73796&text=${text}&format=json&nojsoncallback=1`);
-      const response = yield flickr.get(`?method=${SEARCH_METHOD}`, {
-        params: {
-          api_key: 'debb070988cf38ae1960392875f73796',
-          text: text,
-          format: 'json',
-          nojsoncallback: 1,
-          per_page: perPage,
-        },
-      });
-      self.photosLoading = false;
-      console.log('PHOTOS : ', response.data.photos);
-      self.photos = response.data.photos.photo;
+      try {
+        const response = yield* toGenerator(
+          GetApi<SearchApiResponse>(SEARCH_METHOD, {
+            api_key: 'debb070988cf38ae1960392875f73796',
+            text: text ? text : 'India',
+            format: 'json',
+            nojsoncallback: 1,
+            per_page: perPage,
+            page: !newRequest ? page : 1,
+          }),
+        );
+        self.photos =
+          self.photos && !newRequest
+            ? cast(self.photos.concat(response.photos.photo))
+            : cast(response.photos.photo);
+        self.page = response.photos.page;
+        self.pages = response.photos.pages;
+        self.photosLoading = false;
+      } catch (err) {
+        self.error = 'Some Thing Unexpected Happened!';
+      }
     }),
     getImageUrl: (
       serverId: string,
@@ -75,16 +120,17 @@ export const store = types
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       self.infoLoading = true;
       try {
-        const response = yield flickr.get(`/?method=${INFO_METHOD}`, {
-          params: {
+        const response = yield* toGenerator(
+          GetApi<InfoApiResponse>(INFO_METHOD, {
             api_key: 'debb070988cf38ae1960392875f73796',
             photo_id,
             secret,
             format: 'json',
             nojsoncallback: 1,
-          },
-        });
-        self.info = response.data.photo;
+          }),
+        );
+        self.info = response.photo;
+
         self.infoLoading = false;
       } catch (err) {
         self.infoLoading = false;
