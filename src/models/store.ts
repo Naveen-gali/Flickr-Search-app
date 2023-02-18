@@ -8,36 +8,17 @@ import {
 } from 'mobx-state-tree';
 import {createContext} from 'react';
 import {IMAGE_URL, SEARCH_METHOD, INFO_METHOD} from '../constants/urlConstants';
-import {photo, PhotoType} from './photo';
-import {info, InfoType} from './info';
+import {photo} from './Photo';
+import {info} from './Info';
 import {GetApi} from '../api/api';
+import {ImageType} from '../constants/enums';
+import {
+  ErrorResponse,
+  InfoApiResponse,
+  SearchApiResponse,
+} from '../constants/responseTypes';
 
 export type StoreType = Instance<typeof store>;
-
-export interface Photo {
-  id: string;
-  owner: string;
-  secret: string;
-  server: string;
-  farm: number;
-  title: string;
-  ispublic: number;
-  isfriend: number;
-  isfamily: number;
-}
-
-type SearchApiResponse = {
-  photos: {
-    page: number;
-    pages: number;
-    perpage: number;
-    photo: PhotoType[];
-  };
-};
-
-type InfoApiResponse = {
-  photo: InfoType;
-};
 
 export const store = types
   .model('StoreModel')
@@ -87,46 +68,52 @@ export const store = types
       self.photosLoading = true;
       try {
         const response = yield* toGenerator(
-          GetApi<SearchApiResponse>(SEARCH_METHOD, {
-            api_key: 'debb070988cf38ae1960392875f73796',
+          GetApi<SearchApiResponse | ErrorResponse>(SEARCH_METHOD, {
+            // api_key: 'debb070988cf38ae1960392875f73796',
+            // format: 'json',
+            // nojsoncallback: 1,
             text: text ? text : 'India',
-            format: 'json',
-            nojsoncallback: 1,
             per_page: perPage,
             page: !newRequest ? page : 1,
           }),
         );
-        self.photos =
-          self.photos && !newRequest
-            ? cast(self.photos.concat(response.photos.photo))
-            : cast(response.photos.photo);
-        self.page = response.photos.page;
-        self.pages = response.photos.pages;
-        self.photosLoading = false;
+        if (response.stat === 'ok') {
+          self.photos =
+            self.photos && !newRequest
+              ? cast(self.photos.concat(response.photos.photo))
+              : cast(response.photos.photo);
+          self.page = response.photos.page;
+          self.pages = response.photos.pages;
+          console.log('RES :_ ', response.photos.photo);
+        } else {
+          self.error = response.message;
+          console.log('ERR :_ ', response.message);
+          self.photosLoading = false;
+        }
       } catch (err) {
         self.error = 'Some Thing Unexpected Happened!';
+      } finally {
+        self.photosLoading = false;
       }
     }),
     getImageUrl: (
       serverId: string,
       id: string,
       secret: string,
-      thumbnail?: boolean,
+      type: ImageType = ImageType.MEDIUM500px,
     ): string => {
-      return `${IMAGE_URL}${serverId}/${id}_${secret}${
-        thumbnail ? '_w' : ''
-      }.jpg`;
+      return `${IMAGE_URL}${serverId}/${id}_${secret}${type}.jpg`;
     },
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       self.infoLoading = true;
       try {
         const response = yield* toGenerator(
           GetApi<InfoApiResponse>(INFO_METHOD, {
-            api_key: 'debb070988cf38ae1960392875f73796',
+            // api_key: 'debb070988cf38ae1960392875f73796',
+            // format: 'json',
+            // nojsoncallback: 1,
             photo_id,
             secret,
-            format: 'json',
-            nojsoncallback: 1,
           }),
         );
         self.info = response.photo;

@@ -18,7 +18,13 @@ export const RootNavigator = () => {
         component={Home}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="DescriptionScreen" component={DescriptionScreen} />
+      <Stack.Screen
+        name="DescriptionScreen"
+        component={DescriptionScreen}
+        options={{
+          title: 'Description',
+        }}
+      />
     </Stack.Navigator>
   );
 };

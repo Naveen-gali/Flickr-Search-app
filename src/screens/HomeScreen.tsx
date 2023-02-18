@@ -13,6 +13,7 @@ import {
   View,
   Alert,
   ActivityIndicator,
+  ListRenderItemInfo,
 } from 'react-native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams} from '../navigation/RootNavigator';
@@ -22,6 +23,7 @@ import {observer} from 'mobx-react-lite';
 import PhotoComponent from '../components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
 import SearchBar from '../components/SearchBar';
+import {Photo} from '../constants/interfaces';
 
 const Home = observer(() => {
   const navigation =
@@ -29,10 +31,11 @@ const Home = observer(() => {
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
     useContext(StoreContext);
   const [query, setQuery] = useState('');
-  const flatListRef = useRef();
+  const flatListRef = useRef<FlatList<Photo>>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const toTop = () => {
-    flatListRef.current.scrollToOffset({animated: true, offset: 0});
+    flatListRef.current?.scrollToOffset({animated: true, offset: 0});
   };
 
   const loadData = useCallback(() => {
@@ -57,8 +60,18 @@ const Home = observer(() => {
   };
 
   const Footer = () => {
-    return <ActivityIndicator color="black" size={'small'} />;
+    return (
+      <View style={styles.listFooter}>
+        <ActivityIndicator color="black" size={'large'} />
+      </View>
+    );
   };
+
+  const renderItem = ({item}: ListRenderItemInfo<Photo>) => {
+    return <PhotoComponent photo={cast(item)} navigation={navigation} />;
+  };
+
+  console.log('Photos :- ', photos);
 
   return (
     <SafeAreaView>
@@ -72,7 +85,9 @@ const Home = observer(() => {
         />
         {error ? (
           <View style={styles.errorContainer}>
-            <Text style={styles.error}>Some Thing Unexpected!</Text>
+            <Text style={styles.error}>
+              {error ? error : 'Some Thing Unexpected Happened'}
+            </Text>
           </View>
         ) : (
           <>
@@ -83,34 +98,28 @@ const Home = observer(() => {
               <FlatList
                 ref={flatListRef}
                 data={photos}
-                renderItem={({item}) => {
-                  return (
-                    <PhotoComponent
-                      photo={cast(item)}
-                      navigation={navigation}
-                    />
-                  );
-                }}
+                renderItem={renderItem}
                 keyExtractor={(item, index) => {
                   return index.toString();
                 }}
                 alwaysBounceVertical={true}
                 ListFooterComponent={<Footer />}
-                refreshing={photosLoading}
-                onRefresh={() =>
+                refreshing={refreshing}
+                onRefresh={() => {
+                  setRefreshing(true);
                   getPhotos(
                     query.length > 0 ? query : 'India',
                     30,
                     undefined,
                     true,
-                  )
-                }
+                  ).then(() => setRefreshing(false));
+                }}
                 contentContainerStyle={styles.flatListContentStyle}
                 showsVerticalScrollIndicator={false}
                 ListFooterComponentStyle={styles.listFooter}
                 onEndReachedThreshold={0.9}
                 onEndReached={() => {
-                  page !== pages && !photosLoading
+                  page !== pages && !photosLoading && page < pages
                     ? getPhotos(
                         query,
                         30,
@@ -119,6 +128,9 @@ const Home = observer(() => {
                       )
                     : null;
                 }}
+                initialNumToRender={10}
+                maxToRenderPerBatch={20}
+                windowSize={10}
               />
             </View>
           </>
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   listFooter: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
   error: {
     color: 'red',

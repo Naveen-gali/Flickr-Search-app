@@ -70,5 +70,8 @@
 	<string>Zocial.ttf</string>
 	<string>Fontisto.ttf</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+    <string>Light</string>
+
 </dict>
 </plist>

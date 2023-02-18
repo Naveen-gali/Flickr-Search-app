@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {PhotoType} from '../models/photo';
+import {PhotoType} from '../models/Photo';
 import {StoreContext} from '../models/store';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams} from '../navigation/RootNavigator';
 import Card from './Card';
+import {ImageType} from '../constants/enums';
 
 type Props = {
   photo: PhotoType;
@@ -25,7 +26,12 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
       <>
         <Image
           source={{
-            uri: getImageUrl(photo.server, photo.id, photo.secret, true),
+            uri: getImageUrl(
+              photo.server,
+              photo.id,
+              photo.secret,
+              ImageType.SMALL400px,
+            ),
           }}
           style={styles.imageStyle}
           resizeMode="cover"

@@ -45,3 +45,5 @@ export const photo = types
       return response;
     }),
   }));
+
+export interface Photo extends Instance<typeof photo> {}

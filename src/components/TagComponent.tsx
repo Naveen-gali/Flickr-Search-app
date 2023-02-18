@@ -1,6 +1,6 @@
 import React from 'react';
 import {Linking, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {TagType} from '../models/info';
+import {TagType} from '../models/Info';
 
 type Props = {
   tag: TagType;

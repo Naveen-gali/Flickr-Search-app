@@ -11,7 +11,7 @@ const DescriptionScreenImage = () => {
   return (
     <View>
       <Image
-        source={{uri: getImageUrl(server, id, secret, false)}}
+        source={{uri: getImageUrl(server, id, secret)}}
         style={styles.image}
       />
     </View>
