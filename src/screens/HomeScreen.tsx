@@ -62,7 +62,11 @@ const Home = observer(() => {
   const Footer = () => {
     return (
       <View style={styles.listFooter}>
-        <ActivityIndicator color="black" size={'large'} />
+        {page !== pages ? (
+          <ActivityIndicator color="black" size={'large'} />
+        ) : (
+          <Text style={styles.endText}>End Reached</Text>
+        )}
       </View>
     );
   };
@@ -103,7 +107,7 @@ const Home = observer(() => {
                   return index.toString();
                 }}
                 alwaysBounceVertical={true}
-                ListFooterComponent={<Footer />}
+                ListFooterComponent={() => <Footer />}
                 refreshing={refreshing}
                 onRefresh={() => {
                   setRefreshing(true);
@@ -178,6 +182,7 @@ const styles = StyleSheet.create({
   endText: {
     fontSize: 20,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
