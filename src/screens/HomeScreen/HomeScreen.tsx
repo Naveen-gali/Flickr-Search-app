@@ -26,7 +26,7 @@ import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
 import Colors from '../../assets/colors';
 
-const Home = observer(() => {
+export const HomeScreen = observer(() => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStoreParams>>();
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
@@ -186,5 +186,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default Home;

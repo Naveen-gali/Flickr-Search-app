@@ -21,7 +21,7 @@ import {cast} from 'mobx-state-tree';
 
 type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
 
-const DescriptionScreen = ({route}: Props) => {
+export const DescriptionScreen = observer(({route}: Props) => {
   const {photoId, secret} = route.params;
   const {getImageInfo, info, infoLoading} = useContext(StoreContext);
 
@@ -57,7 +57,7 @@ const DescriptionScreen = ({route}: Props) => {
       )}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -86,5 +86,3 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
   },
 });
-
-export default observer(DescriptionScreen);

@@ -1,7 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../screens/HomeScreen/HomeScreen';
-import DescriptionScreen from '../screens/DescriptionScreen/DescriptionScreen';
+import {HomeScreen, DescriptionScreen} from '../screens';
 
 export type RootStoreParams = {
   Home: undefined;
@@ -15,7 +14,7 @@ export const RootNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
