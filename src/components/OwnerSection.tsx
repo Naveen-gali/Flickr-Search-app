@@ -1,26 +1,27 @@
 import React, {useContext} from 'react';
 import {
   Dimensions,
-  Linking,
+  GestureResponderEvent,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
 import {StoreContext} from '../models/store';
-import OwnerProfilePic from './OwnerProfilePic';
+import Avatar from './Avatar';
+import Colors from '../assets/colors';
 
-const OwnerComponent = () => {
+type Props = {
+  onPress: (event: GestureResponderEvent) => void;
+};
+
+const OwnerSection = ({onPress}: Props) => {
   const {
     info: {owner},
   } = useContext(StoreContext);
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() =>
-        Linking.openURL(`https://www.flickr.com/people/${owner.nsid}`)
-      }>
-      <OwnerProfilePic letter={owner.username.charAt(0)} />
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Avatar name={owner.username} />
       <Text style={styles.ownerName}>{owner.username}</Text>
     </TouchableOpacity>
   );
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: 10,
-    color: '#000000',
+    color: Colors.BLACK,
   },
 });
 
-export default OwnerComponent;
+export default OwnerSection;

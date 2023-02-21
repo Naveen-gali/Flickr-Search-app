@@ -4,8 +4,9 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
+import Colors from '../assets/colors';
 
-type Props = TouchableOpacityProps & {children: JSX.Element};
+type Props = TouchableOpacityProps;
 
 const Card = (props: Props) => {
   const {children, onPress, style, ...restProps} = props;
@@ -21,13 +22,7 @@ const Card = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 210,
-    flex: 1,
-    flexDirection: 'row',
-    marginVertical: 10,
-    padding: 5,
-    borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: Colors.BLACK,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -35,8 +30,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
     elevation: 9,
-    backgroundColor: '#EBEBEB',
-    marginHorizontal: 4,
+    backgroundColor: Colors.LIGHT_WHITE,
   },
 });
 

@@ -24,6 +24,7 @@ import PhotoComponent from '../components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
 import SearchBar from '../components/SearchBar';
 import {Photo} from '../constants/interfaces';
+import Colors from '../assets/colors';
 
 const Home = observer(() => {
   const navigation =
@@ -55,7 +56,7 @@ const Home = observer(() => {
     if (query.length > 0) {
       getPhotos(query, 30, undefined, true).then(() => toTop());
     } else {
-      Alert.alert('Type SomeThing to Search!');
+      Alert.alert('Search Bar Empty!', 'Type SomeThing to Search!');
     }
   };
 
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
   },
   resultsText: {
     marginVertical: 10,
-    color: '#000000',
+    color: Colors.BLACK,
   },
   listFooter: {
     marginVertical: 20,

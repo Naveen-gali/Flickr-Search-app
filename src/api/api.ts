@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {BASE_URL} from '../constants/urlConstants';
 
 const ApiInstance = axios.create({
-  baseURL: 'https://www.flickr.com/services/rest/',
+  baseURL: BASE_URL,
 });
 
 ApiInstance.interceptors.request.use(

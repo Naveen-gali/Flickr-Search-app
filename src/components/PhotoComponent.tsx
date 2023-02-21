@@ -1,11 +1,12 @@
 import React, {useContext} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {PhotoType} from '../models/Photo';
 import {StoreContext} from '../models/store';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams} from '../navigation/RootNavigator';
 import Card from './Card';
 import {ImageType} from '../constants/enums';
+import FlickrImage from './FlickrImage';
 
 type Props = {
   photo: PhotoType;
@@ -22,37 +23,39 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
           photoId: photo.id,
           secret: photo.secret,
         })
-      }>
-      <>
-        <Image
-          source={{
-            uri: getImageUrl(
-              photo.server,
-              photo.id,
-              photo.secret,
-              ImageType.SMALL400px,
-            ),
-          }}
-          style={styles.imageStyle}
-          resizeMode="cover"
-        />
-        <View style={styles.detailsView}>
-          <Text style={styles.titleText}>{photo.title}</Text>
-        </View>
-      </>
+      }
+      style={styles.card}>
+      <FlickrImage
+        secret={photo.secret}
+        server={photo.server}
+        id={photo.id}
+        style={styles.image}
+        resizeMode="cover"
+        source={{
+          uri: getImageUrl(
+            photo.server,
+            photo.id,
+            photo.secret,
+            ImageType.SMALL_400_px,
+          ),
+        }}
+      />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>{photo.title}</Text>
+      </View>
     </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  imageStyle: {
+  image: {
     width: 150,
     height: 195,
     borderRadius: 10,
     overflow: 'hidden',
     marginRight: 10,
   },
-  titleText: {
+  title: {
     textAlign: 'center',
     flexWrap: 'wrap',
     fontSize: 18,
@@ -60,14 +63,18 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: 'black',
   },
-  detailsView: {
+  detailsContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  publicIndicator: {
-    fontSize: 20,
+  card: {
+    marginHorizontal: 4,
+    padding: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    borderRadius: 10,
   },
 });
 

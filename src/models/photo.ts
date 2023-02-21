@@ -26,7 +26,6 @@ export const photo = types
       return self.isfamily === 1 ? true : false;
     },
   }))
-  //   .actions(self => ({
   .actions(() => ({
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       const response = yield axios

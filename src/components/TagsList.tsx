@@ -1,31 +1,36 @@
 import React, {useContext} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Linking, StyleSheet, Text} from 'react-native';
 import {StoreContext} from '../models/store';
-import TagComponent from './TagComponent';
+import Tag from './Tag';
 
 const TagsList = () => {
   const {info} = useContext(StoreContext);
+
   return (
-    <View style={styles.container}>
-      {info.tags.tag.length === 0 ? (
-        <Text>No Tags Found</Text>
-      ) : (
-        <FlatList
-          data={info.tags.tag}
-          renderItem={({item, index}) => (
-            <TagComponent key={index} tag={item} />
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
+    <FlatList
+      data={info.tags.tag}
+      renderItem={({item, index}) => (
+        <Tag
+          key={index}
+          content={item._content}
+          onPress={() =>
+            Linking.openURL(
+              `https://www.flickr.com/photos/tags/${item._content}`,
+            )
+          }
         />
       )}
-    </View>
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      ListEmptyComponent={<Text>No Tags Found</Text>}
+      contentContainerStyle={styles.container}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 3,
     marginHorizontal: 1,
   },
 });

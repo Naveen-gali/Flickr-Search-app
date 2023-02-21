@@ -1,13 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ViewStyle} from 'react-native';
+import Colors from '../assets/colors';
 
 type Props = {
-  letter: string;
+  name: string;
+  style?: ViewStyle;
 };
 
-const OwnerProfilePic = ({letter}: Props) => {
+const Avatar = ({name, style}: Props) => {
+  const letter = name.charAt(0);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.text}>{letter}</Text>
     </View>
   );
@@ -16,8 +19,7 @@ const OwnerProfilePic = ({letter}: Props) => {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    backgroundColor: '#D3D3D3',
-    // padding: 18,
+    backgroundColor: Colors.DEFAULT_AVATAR_COLOR,
     height: 45,
     width: 45,
     borderRadius: 45 / 2,
@@ -32,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OwnerProfilePic;
+export default Avatar;

@@ -7,11 +7,11 @@ import {
   types,
 } from 'mobx-state-tree';
 import {createContext} from 'react';
-import {IMAGE_URL, SEARCH_METHOD, INFO_METHOD} from '../constants/urlConstants';
 import {photo} from './Photo';
 import {info} from './Info';
 import {GetApi} from '../api/api';
-import {ImageType} from '../constants/enums';
+import {SEARCH_METHOD, INFO_METHOD} from '../api/apiMethods';
+import {getImageUrl} from '../services/ImageServices';
 import {
   ErrorResponse,
   InfoApiResponse,
@@ -96,14 +96,7 @@ export const store = types
         self.photosLoading = false;
       }
     }),
-    getImageUrl: (
-      serverId: string,
-      id: string,
-      secret: string,
-      type: ImageType = ImageType.MEDIUM500px,
-    ): string => {
-      return `${IMAGE_URL}${serverId}/${id}_${secret}${type}.jpg`;
-    },
+    getImageUrl,
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       self.infoLoading = true;
       try {
