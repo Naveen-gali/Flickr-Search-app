@@ -1,21 +1,14 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  ImageProps,
-  ImageStyle,
-  StyleProp,
-} from 'react-native';
+import {Image, ImageProps} from 'react-native';
 import {ImageType} from '../constants/enums';
 import {useContext} from 'react';
 import {StoreContext} from '../models/store';
 
-type Props = ImageProps & {
+type Props = Omit<ImageProps, 'source'> & {
   secret: string;
   id: string;
   server: string;
-  type?: ImageType;
-  style: StyleProp<ImageStyle>;
+  type?: ImageType | ImageType.MEDIUM_500_px;
 };
 
 const FlickrImage = (props: Props) => {

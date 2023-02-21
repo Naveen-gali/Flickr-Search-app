@@ -22,8 +22,7 @@ type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
 
 const DescriptionScreen = ({route}: Props) => {
   const {photoId, secret} = route.params;
-  const {getImageInfo, info, infoLoading, getImageUrl} =
-    useContext(StoreContext);
+  const {getImageInfo, info, infoLoading} = useContext(StoreContext);
 
   useEffect(() => {
     getImageInfo(photoId, secret);
@@ -40,7 +39,6 @@ const DescriptionScreen = ({route}: Props) => {
             server={info.server}
             id={info.id}
             type={ImageType.MEDIUM_500_px}
-            source={{uri: getImageUrl(info.server, info.id, info.secret)}}
             style={styles.image}
           />
           <Text style={styles.heading}>{info.title?._content}</Text>

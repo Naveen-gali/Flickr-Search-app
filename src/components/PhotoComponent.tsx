@@ -1,11 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {PhotoType} from '../models/Photo';
-import {StoreContext} from '../models/store';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams} from '../navigation/RootNavigator';
 import Card from './Card';
-import {ImageType} from '../constants/enums';
 import FlickrImage from './FlickrImage';
 
 type Props = {
@@ -14,8 +12,6 @@ type Props = {
 };
 
 const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
-  const {getImageUrl} = useContext(StoreContext);
-
   return (
     <Card
       onPress={() =>
@@ -31,14 +27,6 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
         id={photo.id}
         style={styles.image}
         resizeMode="cover"
-        source={{
-          uri: getImageUrl(
-            photo.server,
-            photo.id,
-            photo.secret,
-            ImageType.SMALL_400_px,
-          ),
-        }}
       />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{photo.title}</Text>
