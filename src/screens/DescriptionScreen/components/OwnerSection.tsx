@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {
   Dimensions,
   GestureResponderEvent,
@@ -6,18 +6,17 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {StoreContext} from '../models/store';
-import Avatar from './Avatar';
-import Colors from '../assets/colors';
+import Avatar from '../../../components/Avatar';
+import Colors from '../../../assets/colors';
+import {OwnerModelType} from '../../../models/InfoModel';
 
 type Props = {
   onPress: (event: GestureResponderEvent) => void;
+  owner: OwnerModelType;
 };
 
-const OwnerSection = ({onPress}: Props) => {
-  const {
-    info: {owner},
-  } = useContext(StoreContext);
+const OwnerSection = (props: Props) => {
+  const {onPress, owner} = props;
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>

@@ -9,14 +9,15 @@ import {
   View,
 } from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../navigation/RootNavigator';
-import {StoreContext} from '../models/store';
+import {RootStoreParams} from '../../navigation/RootNavigator';
+import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
-import TagsList from '../components/TagsList';
-import Colors from '../assets/colors';
-import FlickrImage from '../components/FlickrImage';
-import {ImageType} from '../constants/enums';
-import OwnerSection from '../components/OwnerSection';
+import TagsList from './components/TagsList';
+import Colors from '../../assets/colors';
+import FlickrImage from '../../components/FlickrImage';
+import {ImageType} from '../../constants';
+import OwnerSection from './components/OwnerSection';
+import {cast} from 'mobx-state-tree';
 
 type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
 
@@ -48,6 +49,7 @@ const DescriptionScreen = ({route}: Props) => {
                 `https://www.flickr.com/people/${info.owner.nsid}`,
               )
             }
+            owner={cast(info.owner)}
           />
           <TagsList />
           <Text style={styles.description}>{info.description._content}</Text>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'left',
-    color: 'black',
+    color: Colors.BLACK,
     padding: 10,
     marginHorizontal: 2,
   },

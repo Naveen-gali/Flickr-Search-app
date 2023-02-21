@@ -7,16 +7,10 @@ import {
   types,
 } from 'mobx-state-tree';
 import {createContext} from 'react';
-import {photo} from './Photo';
-import {info} from './Info';
-import {GetApi} from '../api/api';
-import {SEARCH_METHOD, INFO_METHOD} from '../api/apiMethods';
-import {getImageUrl} from '../services/ImageServices';
-import {
-  ErrorResponse,
-  InfoApiResponse,
-  SearchApiResponse,
-} from '../constants/responseTypes';
+import {PhotoModel} from './PhotoModel';
+import {InfoModel} from './InfoModel';
+import {InfoServices, PhotoServices} from '../services';
+import {ErrorResponse, SearchApiResponse} from '../constants';
 
 export type StoreType = Instance<typeof store>;
 
@@ -28,10 +22,10 @@ export const store = types
     perpage: types.number,
     total: types.number,
     photosLoading: types.boolean,
-    photos: types.optional(types.array(photo), []),
+    photos: types.optional(types.array(PhotoModel), []),
     info: types.frozen(
       getSnapshot(
-        info.create({notes: {note: []}, tags: {tag: []}, urls: {url: []}}),
+        InfoModel.create({notes: {note: []}, tags: {tag: []}, urls: {url: []}}),
       ),
     ),
     infoLoading: types.boolean,
@@ -68,14 +62,12 @@ export const store = types
       self.photosLoading = true;
       try {
         const response = yield* toGenerator(
-          GetApi<SearchApiResponse | ErrorResponse>(SEARCH_METHOD, {
-            // api_key: 'debb070988cf38ae1960392875f73796',
-            // format: 'json',
-            // nojsoncallback: 1,
-            text: text ? text : 'India',
-            per_page: perPage,
-            page: !newRequest ? page : 1,
-          }),
+          PhotoServices.getPhotos<SearchApiResponse | ErrorResponse>(
+            text,
+            perPage,
+            page,
+            newRequest,
+          ),
         );
         if (response.stat === 'ok') {
           self.photos =
@@ -96,18 +88,12 @@ export const store = types
         self.photosLoading = false;
       }
     }),
-    getImageUrl,
+    getImageUrl: PhotoServices.getImageUrl,
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       self.infoLoading = true;
       try {
         const response = yield* toGenerator(
-          GetApi<InfoApiResponse>(INFO_METHOD, {
-            // api_key: 'debb070988cf38ae1960392875f73796',
-            // format: 'json',
-            // nojsoncallback: 1,
-            photo_id,
-            secret,
-          }),
+          InfoServices.getImageInfo(photo_id, secret),
         );
         self.info = response.photo;
 

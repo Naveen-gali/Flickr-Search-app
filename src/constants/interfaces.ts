@@ -1,4 +1,4 @@
-export interface Photo {
+interface Photo {
   id: string;
   owner: string;
   secret: string;
@@ -9,3 +9,5 @@ export interface Photo {
   isfriend: number;
   isfamily: number;
 }
+
+export type {Photo};

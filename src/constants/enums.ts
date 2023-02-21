@@ -1,4 +1,4 @@
-export enum ImageType {
+enum ImageType {
   THUMBNAIL_75_px = '_s',
   THUMBNAIL_150_px = '_q',
   THUMBNAIL_100_px = '_t',
@@ -8,3 +8,5 @@ export enum ImageType {
   MEDIUM_500_px = '',
   LARGE_1024_px = '_b',
 }
+
+export {ImageType};

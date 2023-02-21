@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {FlatList, Linking, StyleSheet, Text} from 'react-native';
-import {StoreContext} from '../models/store';
-import Tag from './Tag';
+import {StoreContext} from '../../../models/RootStore';
+import Tag from '../../../components/Tag';
 
 const TagsList = () => {
   const {info} = useContext(StoreContext);

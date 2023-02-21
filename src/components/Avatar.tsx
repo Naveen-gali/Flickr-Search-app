@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
-    color: 'black',
+    color: Colors.BLACK,
     fontWeight: '400',
     textTransform: 'capitalize',
   },

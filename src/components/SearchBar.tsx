@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   input: {
-    borderColor: 'black',
+    borderColor: Colors.BLACK,
     flex: 1,
     fontSize: 18,
   },

@@ -1,13 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {PhotoType} from '../models/Photo';
+import {PhotoModelType} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../navigation/RootNavigator';
-import Card from './Card';
-import FlickrImage from './FlickrImage';
+import {RootStoreParams} from '../../../navigation/RootNavigator';
+import Card from '../../../components/Card';
+import FlickrImage from '../../../components/FlickrImage';
+import Colors from '../../../assets/colors';
 
 type Props = {
-  photo: PhotoType;
+  photo: PhotoModelType;
   navigation: NativeStackNavigationProp<RootStoreParams>;
 };
 
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 15,
-    color: 'black',
+    color: Colors.BLACK,
   },
   detailsContainer: {
     flex: 1,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../screens/HomeScreen';
-import DescriptionScreen from '../screens/DescriptionScreen';
+import Home from '../screens/HomeScreen/HomeScreen';
+import DescriptionScreen from '../screens/DescriptionScreen/DescriptionScreen';
 
 export type RootStoreParams = {
   Home: undefined;

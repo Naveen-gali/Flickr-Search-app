@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, ImageProps} from 'react-native';
-import {ImageType} from '../constants/enums';
+import {ImageType} from '../constants';
 import {useContext} from 'react';
-import {StoreContext} from '../models/store';
+import {StoreContext} from '../models/RootStore';
 
 type Props = Omit<ImageProps, 'source'> & {
   secret: string;

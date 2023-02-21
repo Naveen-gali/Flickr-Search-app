@@ -16,15 +16,15 @@ import {
   ListRenderItemInfo,
 } from 'react-native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../navigation/RootNavigator';
+import {RootStoreParams} from '../../navigation/RootNavigator';
 import {useNavigation} from '@react-navigation/native';
-import {StoreContext} from '../models/store';
+import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
-import PhotoComponent from '../components/PhotoComponent';
+import PhotoComponent from './components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
-import SearchBar from '../components/SearchBar';
-import {Photo} from '../constants/interfaces';
-import Colors from '../assets/colors';
+import SearchBar from '../../components/SearchBar';
+import {Photo} from '../../constants';
+import Colors from '../../assets/colors';
 
 const Home = observer(() => {
   const navigation =
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   error: {
-    color: 'red',
+    color: Colors.RED,
     fontSize: 16,
   },
   errorContainer: {

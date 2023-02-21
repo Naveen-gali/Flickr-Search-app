@@ -1,22 +1,24 @@
-import {InfoType} from '../models/Info';
-import {PhotoType} from '../models/Photo';
+import {InfoModelType} from '../models/InfoModel';
+import {PhotoModelType} from '../models/PhotoModel';
 
-export type SearchApiResponse = {
+type SearchApiResponse = {
   photos: {
     page: number;
     pages: number;
     perpage: number;
-    photo: PhotoType[];
+    photo: PhotoModelType[];
   };
   stat: 'ok';
 };
 
-export type ErrorResponse = {
+type ErrorResponse = {
   stat: 'fail';
   code: number;
   message: string;
 };
 
-export type InfoApiResponse = {
-  photo: InfoType;
+type InfoApiResponse = {
+  photo: InfoModelType;
 };
+
+export type {SearchApiResponse, ErrorResponse, InfoApiResponse};

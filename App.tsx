@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import RNBootSplash from 'react-native-bootsplash';
 import {RootNavigator} from './src/navigation/RootNavigator';
-import {store, StoreContext} from './src/models/store';
+import {store, StoreContext} from './src/models/RootStore';
 import {Provider as PaperProvider} from 'react-native-paper';
 
 const RootStore = store.create({
