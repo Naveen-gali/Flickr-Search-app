@@ -10,7 +10,6 @@ import {createContext} from 'react';
 import {PhotoModel} from './PhotoModel';
 import {InfoModel} from './InfoModel';
 import {InfoServices, PhotoServices} from '../services';
-import {ErrorResponse, SearchApiResponse} from '../constants';
 
 export type StoreType = Instance<typeof store>;
 
@@ -55,23 +54,17 @@ export const store = types
   .actions(self => ({
     getPhotos: flow(function* (
       text: string,
-      perPage: number = 20,
+      perPage: number = 30,
       page: number = 1,
-      newRequest: boolean = false,
     ) {
       self.photosLoading = true;
       try {
         const response = yield* toGenerator(
-          PhotoServices.getPhotos<SearchApiResponse | ErrorResponse>(
-            text,
-            perPage,
-            page,
-            newRequest,
-          ),
+          PhotoServices.getPhotos(text, perPage, page),
         );
         if (response.stat === 'ok') {
           self.photos =
-            self.photos && !newRequest
+            self.photos && page !== 1
               ? cast(self.photos.concat(response.photos.photo))
               : cast(response.photos.photo);
           self.page = response.photos.page;

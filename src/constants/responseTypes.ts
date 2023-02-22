@@ -1,7 +1,7 @@
 import {InfoModelType} from '../models/InfoModel';
 import {PhotoModelType} from '../models/PhotoModel';
 
-type SearchApiResponse = {
+type GetPhotosResponse = {
   photos: {
     page: number;
     pages: number;
@@ -21,4 +21,4 @@ type InfoApiResponse = {
   photo: InfoModelType;
 };
 
-export type {SearchApiResponse, ErrorResponse, InfoApiResponse};
+export type {GetPhotosResponse, ErrorResponse, InfoApiResponse};

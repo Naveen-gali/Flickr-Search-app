@@ -41,7 +41,7 @@ export const HomeScreen = observer(() => {
 
   const loadData = useCallback(() => {
     if (!photosLoading) {
-      getPhotos(query, 30, undefined, true);
+      getPhotos(query, 30, undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,7 +54,7 @@ export const HomeScreen = observer(() => {
 
   const onSubmit = () => {
     if (query.length > 0) {
-      getPhotos(query, 30, undefined, true).then(() => toTop());
+      getPhotos(query, 30, undefined).then(() => toTop());
     } else {
       Alert.alert('Search Bar Empty!', 'Type SomeThing to Search!');
     }
@@ -64,7 +64,9 @@ export const HomeScreen = observer(() => {
     return (
       <View style={styles.listFooter}>
         {page !== pages ? (
-          <ActivityIndicator color="black" size={'large'} />
+          <ActivityIndicator color={Colors.BLACK} size={'large'} />
+        ) : photosLoading ? (
+          <ActivityIndicator color={Colors.GREY} />
         ) : (
           <Text style={styles.endText}>End Reached</Text>
         )}
@@ -81,7 +83,6 @@ export const HomeScreen = observer(() => {
   return (
     <SafeAreaView>
       <View style={styles.rootView}>
-        {/* <Searchbar placeholder="Search Photos" onChangeText={(e) => console.log(e)} value={query} style={styles.searchContainer} /> */}
         <SearchBar
           value={query}
           onChangeText={setQuery}
@@ -116,7 +117,6 @@ export const HomeScreen = observer(() => {
                     query.length > 0 ? query : 'India',
                     30,
                     undefined,
-                    true,
                   ).then(() => setRefreshing(false));
                 }}
                 contentContainerStyle={styles.flatListContentStyle}
@@ -125,12 +125,7 @@ export const HomeScreen = observer(() => {
                 onEndReachedThreshold={0.9}
                 onEndReached={() => {
                   page !== pages && !photosLoading && page < pages
-                    ? getPhotos(
-                        query,
-                        30,
-                        page < pages ? page + 1 : page,
-                        false,
-                      )
+                    ? getPhotos(query, 30, page < pages ? page + 1 : page)
                     : null;
                 }}
                 initialNumToRender={10}

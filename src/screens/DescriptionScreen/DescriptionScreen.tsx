@@ -32,7 +32,7 @@ export const DescriptionScreen = observer(({route}: Props) => {
   return (
     <View style={styles.rootContainer}>
       {infoLoading ? (
-        <ActivityIndicator size="small" color="blue" />
+        <ActivityIndicator size="small" color={Colors.BLUE} />
       ) : (
         <ScrollView style={styles.container}>
           <FlickrImage
