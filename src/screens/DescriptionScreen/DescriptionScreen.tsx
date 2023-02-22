@@ -13,7 +13,7 @@ import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
-import Colors from '../../assets/colors';
+import {Colors, Fonts} from '../../assets';
 import FlickrImage from '../../components/FlickrImage';
 import {ImageType} from '../../constants';
 import OwnerSection from './components/OwnerSection';
@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     marginHorizontal: 5,
     padding: 10,
+    fontFamily: Fonts.Regular,
+    fontWeight: '400',
   },
   heading: {
     fontSize: 30,
@@ -83,6 +85,8 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     padding: 10,
     marginHorizontal: 2,
+    fontFamily: Fonts.SemiBold,
+    textTransform: 'capitalize',
   },
   image: {
     height: 400,

@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Colors from '../assets/colors';
+import {Colors} from '../assets';
 
 type Props = TextInputProps & {contentStyle?: ViewStyle};
 

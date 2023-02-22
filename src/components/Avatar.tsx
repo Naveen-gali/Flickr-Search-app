@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, ViewStyle} from 'react-native';
-import Colors from '../assets/colors';
+import {Colors, Fonts} from '../assets';
 
 type Props = {
   name: string;
@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     color: Colors.BLACK,
-    fontWeight: '400',
+    fontWeight: '500',
     textTransform: 'capitalize',
+    fontFamily: Fonts.Bold,
   },
 });
 

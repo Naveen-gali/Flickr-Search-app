@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Avatar from '../../../components/Avatar';
-import Colors from '../../../assets/colors';
+import {Colors, Fonts} from '../../../assets';
 import {OwnerModelType} from '../../../models/InfoModel';
 
 type Props = {
@@ -32,16 +32,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: Dimensions.get('screen').width / 1.5,
+    width: Dimensions.get('screen').width / 1.25,
     alignItems: 'center',
   },
   ownerName: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: '500',
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: 10,
     color: Colors.BLACK,
+    fontFamily: Fonts.SemiBold,
   },
 });
 

@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import Colors from '../assets/colors';
+import {Colors} from '../assets';
 
 type Props = TouchableOpacityProps;
 

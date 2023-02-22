@@ -5,7 +5,7 @@ import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import Card from '../../../components/Card';
 import FlickrImage from '../../../components/FlickrImage';
-import Colors from '../../../assets/colors';
+import {Fonts, Colors} from '../../../assets';
 
 type Props = {
   photo: PhotoModelType;
@@ -30,7 +30,9 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
         resizeMode="cover"
       />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{photo.title}</Text>
+        <Text style={styles.title} numberOfLines={6}>
+          {photo.title}
+        </Text>
       </View>
     </Card>
   );
@@ -48,9 +50,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flexWrap: 'wrap',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '700',
     marginTop: 15,
     color: Colors.BLACK,
+    fontFamily: Fonts.SemiBold,
+    textTransform: 'capitalize',
   },
   detailsContainer: {
     flex: 1,

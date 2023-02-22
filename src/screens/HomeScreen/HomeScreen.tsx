@@ -27,7 +27,7 @@ import PhotoComponent from './components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
-import Colors from '../../assets/colors';
+import {Colors} from '../../assets';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
