@@ -1,6 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, DescriptionScreen} from '../screens';
+import {Strings} from '../assets';
 
 export enum RouteName {
   // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -27,7 +28,7 @@ export const RootNavigator = () => {
         name={RouteName.Description}
         component={DescriptionScreen}
         options={{
-          title: 'Description',
+          title: Strings.screen_titles.description,
         }}
       />
     </Stack.Navigator>

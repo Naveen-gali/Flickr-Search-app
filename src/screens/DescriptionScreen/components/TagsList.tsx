@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import {FlatList, Linking, StyleSheet, Text} from 'react-native';
 import {StoreContext} from '../../../models/RootStore';
 import Tag from '../../../components/Tag';
+import {TAG_URL} from '../../../constants';
+import {Strings} from '../../../assets';
 
 const TagsList = () => {
   const {info} = useContext(StoreContext);
@@ -13,16 +15,12 @@ const TagsList = () => {
         <Tag
           key={index}
           content={item._content}
-          onPress={() =>
-            Linking.openURL(
-              `https://www.flickr.com/photos/tags/${item._content}`,
-            )
-          }
+          onPress={() => Linking.openURL(TAG_URL + item._content)}
         />
       )}
       horizontal
       showsHorizontalScrollIndicator={false}
-      ListEmptyComponent={<Text>No Tags Found</Text>}
+      ListEmptyComponent={<Text>{Strings.description.no_tags_found}</Text>}
       contentContainerStyle={styles.container}
     />
   );

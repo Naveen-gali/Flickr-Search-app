@@ -15,7 +15,7 @@ import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
 import {Colors, Fonts} from '../../assets';
 import FlickrImage from '../../components/FlickrImage';
-import {ImageType} from '../../constants';
+import {ImageType, PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
 
@@ -47,11 +47,7 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
           />
           <Text style={styles.heading}>{info.title?._content}</Text>
           <OwnerSection
-            onPress={() =>
-              Linking.openURL(
-                `https://www.flickr.com/people/${info.owner.nsid}`,
-              )
-            }
+            onPress={() => Linking.openURL(PEOPLE_URL + info.owner.nsid)}
             owner={cast(info.owner)}
           />
           <TagsList />

@@ -1,0 +1,20 @@
+{
+    "home": {
+        "results_found": "Results Found",
+        "endReached": "End Reached",
+        "some_unexpected_happened": "Some Thing Unexpected Happened",
+        "default_query":"India",
+        "search_bar": {
+            "alert_title": "Search Bar Empty!",
+            "placeholder": "Search Photos",
+            "alert_description": "Type SomeThing to Search!"
+        }
+    },
+    "description": {
+        "no_tags_found": "No Tags Found",
+        "description": "Description"
+    },
+    "screen_titles": {
+        "description":"Description"
+    }
+}

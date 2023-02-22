@@ -27,7 +27,7 @@ import PhotoComponent from './components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
-import {Colors} from '../../assets';
+import {Colors, Strings} from '../../assets';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -64,7 +64,10 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     if (query.length > 0) {
       getPhotos(query, 30, undefined).then(() => toTop());
     } else {
-      Alert.alert('Search Bar Empty!', 'Type SomeThing to Search!');
+      Alert.alert(
+        Strings.home.search_bar.alert_title,
+        Strings.home.search_bar.alert_description,
+      );
     }
   };
 
@@ -76,7 +79,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         ) : photosLoading ? (
           <ActivityIndicator color={Colors.GREY} />
         ) : (
-          <Text style={styles.endText}>End Reached</Text>
+          <Text style={styles.endText}>{Strings.home.endReached}</Text>
         )}
       </View>
     );
@@ -86,8 +89,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     return <PhotoComponent photo={cast(item)} navigation={navigation} />;
   };
 
-  console.log('Photos :- ', photos);
-
   return (
     <SafeAreaView>
       <View style={styles.rootView}>
@@ -95,18 +96,18 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
           value={query}
           onChangeText={setQuery}
           onEndEditing={onSubmit}
-          placeholder="Search Photos"
+          placeholder={Strings.home.search_bar.placeholder}
         />
         {error ? (
           <View style={styles.errorContainer}>
             <Text style={styles.error}>
-              {error ? error : 'Some Thing Unexpected Happened'}
+              {error ? error : Strings.home.some_unexpected_happened}
             </Text>
           </View>
         ) : (
           <>
             <Text style={styles.resultsText}>
-              Results Found ({photosCount})
+              {Strings.home.results_found} ({photosCount})
             </Text>
             <View style={styles.flatListContainer}>
               <FlatList
@@ -122,7 +123,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
                 onRefresh={() => {
                   setRefreshing(true);
                   getPhotos(
-                    query.length > 0 ? query : 'India',
+                    query.length > 0 ? query : Strings.default_query,
                     30,
                     undefined,
                   ).then(() => setRefreshing(false));
