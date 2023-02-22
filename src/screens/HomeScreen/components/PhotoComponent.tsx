@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {PhotoModelType} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../../../navigation/RootNavigator';
+import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import Card from '../../../components/Card';
 import FlickrImage from '../../../components/FlickrImage';
 import Colors from '../../../assets/colors';
@@ -16,7 +16,7 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
   return (
     <Card
       onPress={() =>
-        navigation.navigate('DescriptionScreen', {
+        navigation.navigate(RouteName.Description, {
           photoId: photo.id,
           secret: photo.secret,
         })

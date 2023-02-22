@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../../navigation/RootNavigator';
+import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
@@ -19,9 +19,12 @@ import {ImageType} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
 
-type Props = NativeStackScreenProps<RootStoreParams, 'DescriptionScreen'>;
+type DescriptionScreenProps = NativeStackScreenProps<
+  RootStoreParams,
+  RouteName.Description
+>;
 
-export const DescriptionScreen = observer(({route}: Props) => {
+export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
   const {photoId, secret} = route.params;
   const {getImageInfo, info, infoLoading} = useContext(StoreContext);
 

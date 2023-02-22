@@ -15,8 +15,11 @@ import {
   ActivityIndicator,
   ListRenderItemInfo,
 } from 'react-native';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStoreParams} from '../../navigation/RootNavigator';
+import type {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {useNavigation} from '@react-navigation/native';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
@@ -26,7 +29,12 @@ import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
 import Colors from '../../assets/colors';
 
-export const HomeScreen = observer(() => {
+type HomeScreenProps = NativeStackScreenProps<
+  RootStoreParams,
+  RouteName.HomeScreen
+>;
+
+export const HomeScreen = observer((_props: HomeScreenProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStoreParams>>();
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
