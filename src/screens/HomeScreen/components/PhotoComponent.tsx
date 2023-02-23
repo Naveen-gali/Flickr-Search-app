@@ -50,10 +50,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flexWrap: 'wrap',
     fontSize: 18,
-    fontWeight: '700',
     marginTop: 15,
     color: Colors.BLACK,
-    fontFamily: Fonts.SemiBold,
+    fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
   },
   detailsContainer: {

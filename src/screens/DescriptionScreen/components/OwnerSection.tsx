@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   },
   ownerName: {
     fontSize: 25,
-    fontWeight: '500',
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: 10,

@@ -27,7 +27,7 @@ import PhotoComponent from './components/PhotoComponent';
 import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
-import {Colors, Strings} from '../../assets';
+import {Colors, Fonts, Strings} from '../../assets';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   endText: {
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: Fonts.SemiBold,
   },
 });

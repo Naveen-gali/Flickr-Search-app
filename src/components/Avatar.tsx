@@ -29,9 +29,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     color: Colors.BLACK,
-    fontWeight: '500',
     textTransform: 'capitalize',
-    fontFamily: Fonts.Bold,
+    fontFamily: Fonts.SemiBold,
   },
 });
 

@@ -72,16 +72,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     padding: 10,
     fontFamily: Fonts.Regular,
-    fontWeight: '400',
   },
   heading: {
     fontSize: 30,
-    fontWeight: 'bold',
     textAlign: 'left',
     color: Colors.BLACK,
     padding: 10,
     marginHorizontal: 2,
-    fontFamily: Fonts.SemiBold,
+    fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
   },
   image: {
