@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Dimensions,
   Linking,
   ScrollView,
@@ -18,6 +19,7 @@ import FlickrImage from '../../components/FlickrImage';
 import {ImageType, PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
+import Button from '../../components/Button';
 
 type DescriptionScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -52,6 +54,15 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
           />
           <TagsList />
           <Text style={styles.description}>{info.description._content}</Text>
+          <Button
+            mode="outlined"
+            containerStyle={styles.viewBtn}
+            onPress={() => Alert.alert('Opening in Browser?')}
+            icon="ios-share"
+            iconSize={25}
+            textStyle={styles.labelStyle}>
+            View in Browser
+          </Button>
         </ScrollView>
       )}
     </View>
@@ -85,5 +96,13 @@ const styles = StyleSheet.create({
   image: {
     height: 400,
     width: Dimensions.get('screen').width,
+  },
+  viewBtn: {
+    marginHorizontal: 10,
+    marginVertical: 20,
+  },
+  labelStyle: {
+    fontSize: 20,
+    color: Colors.LIGHT_WHITE,
   },
 });

@@ -1,0 +1,174 @@
+import React from 'react';
+import {
+  ActivityIndicator,
+  ColorValue,
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
+import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {Colors, Fonts} from '../assets';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+type IconProps = {
+  icon?: string;
+  iconSize?: number;
+  iconColor?: ColorValue | number;
+  iconRight?: boolean;
+  iconStyle?: Omit<StyleProp<TextStyle>, 'fontSize' | 'color'>;
+};
+
+type ButtonProps = Omit<TouchableOpacityProps, 'style' | 'onPress'> &
+  IconProps & {
+    mode: 'text' | 'outlined' | 'default';
+    isLoading?: boolean;
+    containerStyle?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
+    onPress: (event: GestureResponderEvent) => void;
+    loaderColor?: ColorValue;
+  };
+
+const Button = (props: ButtonProps) => {
+  const {
+    children,
+    mode,
+    isLoading,
+    containerStyle,
+    textStyle,
+    disabled,
+    onPress,
+    icon,
+    iconSize,
+    iconColor,
+    iconRight,
+    iconStyle,
+    loaderColor,
+    ...restProps
+  } = props;
+
+  const getStyle = () => {
+    if (mode === 'default') {
+      return;
+    } else if (mode === 'outlined') {
+      return styles.outlied;
+    } else if (mode === 'text') {
+      return styles.textType;
+    }
+  };
+
+  const getDisabledBtnStyle = () => {
+    if (disabled && mode === 'text') {
+      return null;
+    } else if (disabled && mode === 'default') {
+      return styles.disabledDefault;
+    } else if (disabled && mode === 'outlined') {
+      return styles.disabledOutlined;
+    }
+  };
+
+  const getDisabledLabelStyle = () => {
+    if (mode === 'default') {
+      return;
+    } else {
+      return styles.disabledLabel;
+    }
+  };
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.buttonContainer,
+        getStyle(),
+        getDisabledBtnStyle(),
+        iconRight ? styles.rightIcon : null,
+        containerStyle,
+      ]}
+      disabled={disabled || isLoading}
+      onPress={onPress}
+      {...restProps}>
+      {isLoading ? (
+        <ActivityIndicator size="small" color={loaderColor} />
+      ) : (
+        <>
+          {icon ? (
+            <Icon
+              name={icon}
+              size={iconSize}
+              style={[
+                styles.icon,
+                iconStyle,
+                disabled ? styles.disabledIcon : null,
+              ]}
+              color={iconColor}
+            />
+          ) : null}
+          <Text
+            style={[
+              styles.text,
+              textStyle,
+              mode !== 'default' ? styles.textTypeLabel : null,
+              disabled ? getDisabledLabelStyle() : null,
+            ]}>
+            {children}
+          </Text>
+        </>
+      )}
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flex: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    backgroundColor: Colors.BTN_BLUE,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    backgroundColor: undefined,
+    alignSelf: 'center',
+    fontFamily: Fonts.SemiBold,
+  },
+  outlied: {
+    borderWidth: 1,
+    borderColor: Colors.BTN_BLUE,
+    backgroundColor: undefined,
+  },
+  textType: {
+    padding: 0,
+    borderWidth: 0,
+    backgroundColor: undefined,
+  },
+  textTypeLabel: {
+    color: Colors.BLACK,
+  },
+  loading: {
+    color: Colors.LIGHT_WHITE,
+  },
+  disabledOutlined: {
+    borderColor: Colors.GREY,
+  },
+  disabledDefault: {
+    backgroundColor: Colors.GREY,
+  },
+  disabledLabel: {
+    color: Colors.GREY,
+  },
+  icon: {
+    marginHorizontal: 10,
+  },
+  disabledIcon: {
+    color: Colors.GREY,
+  },
+  rightIcon: {
+    flexDirection: 'row-reverse',
+  },
+});
+
+export default Button;

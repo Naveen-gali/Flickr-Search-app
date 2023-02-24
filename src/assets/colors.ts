@@ -6,4 +6,5 @@ export const Colors = {
   LIGHT_WHITE: '#EBEBEB',
   RED: '#FF0000',
   BLUE: '#0000FF',
+  BTN_BLUE: '#3178c6',
 };
