@@ -55,12 +55,12 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
           <TagsList />
           <Text style={styles.description}>{info.description._content}</Text>
           <Button
-            mode="outlined"
-            containerStyle={styles.viewBtn}
+            mode="default"
+            style={styles.viewBtn}
             onPress={() => Alert.alert('Opening in Browser?')}
             icon="ios-share"
-            iconSize={25}
-            textStyle={styles.labelStyle}>
+            textStyle={styles.labelStyle}
+            iconStyle={styles.btnIcon}>
             View in Browser
           </Button>
         </ScrollView>
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 20,
+    color: Colors.LIGHT_WHITE,
+  },
+  btnIcon: {
     color: Colors.LIGHT_WHITE,
   },
 });

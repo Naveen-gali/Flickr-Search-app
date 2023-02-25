@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Text,
   TextStyle,
-  ViewStyle,
 } from 'react-native';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import {Colors, Fonts} from '../assets';
@@ -15,17 +14,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type IconProps = {
   icon?: string;
-  iconSize?: number;
-  iconColor?: ColorValue | number;
   iconRight?: boolean;
-  iconStyle?: Omit<StyleProp<TextStyle>, 'fontSize' | 'color'>;
+  iconStyle?: StyleProp<TextStyle>;
 };
 
-type ButtonProps = Omit<TouchableOpacityProps, 'style' | 'onPress'> &
+type ButtonProps = Omit<TouchableOpacityProps, 'onPress'> &
   IconProps & {
     mode: 'text' | 'outlined' | 'default';
     isLoading?: boolean;
-    containerStyle?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
     onPress: (event: GestureResponderEvent) => void;
     loaderColor?: ColorValue;
@@ -36,13 +32,11 @@ const Button = (props: ButtonProps) => {
     children,
     mode,
     isLoading,
-    containerStyle,
+    style,
     textStyle,
     disabled,
     onPress,
     icon,
-    iconSize,
-    iconColor,
     iconRight,
     iconStyle,
     loaderColor,
@@ -84,7 +78,7 @@ const Button = (props: ButtonProps) => {
         getStyle(),
         getDisabledBtnStyle(),
         iconRight ? styles.rightIcon : null,
-        containerStyle,
+        style,
       ]}
       disabled={disabled || isLoading}
       onPress={onPress}
@@ -96,21 +90,19 @@ const Button = (props: ButtonProps) => {
           {icon ? (
             <Icon
               name={icon}
-              size={iconSize}
               style={[
                 styles.icon,
                 iconStyle,
                 disabled ? styles.disabledIcon : null,
               ]}
-              color={iconColor}
             />
           ) : null}
           <Text
             style={[
               styles.text,
-              textStyle,
               mode !== 'default' ? styles.textTypeLabel : null,
               disabled ? getDisabledLabelStyle() : null,
+              textStyle,
             ]}>
             {children}
           </Text>
@@ -134,6 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: undefined,
     alignSelf: 'center',
     fontFamily: Fonts.SemiBold,
+    fontSize: 20,
   },
   outlied: {
     borderWidth: 1,
@@ -162,6 +155,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginHorizontal: 10,
+    fontSize: 20,
   },
   disabledIcon: {
     color: Colors.GREY,
