@@ -1,7 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
   TextInputProps,
   ViewStyle,
@@ -12,10 +11,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../assets';
 import {ScaleServices} from '../services';
 import debounce from 'lodash.debounce';
+import TextInput from './TextInput';
 
-type Props = Omit<TextInputProps, 'onEndEditing'> & {
+type Props = Omit<TextInputProps, 'onEndEditing' | 'onChangeText'> & {
   contentStyle?: ViewStyle;
   onEndEditing: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
+  onChangeText: (text: string) => void;
 };
 
 const SearchBar: React.FunctionComponent<Props> = props => {
@@ -48,8 +49,9 @@ const SearchBar: React.FunctionComponent<Props> = props => {
         value={value}
         onChangeText={onChangeText}
         autoCapitalize="none"
+        mode="default"
+        onEndEditing={onEndEditing}
         autoCorrect={false}
-        onEndEditing={debounceSearch}
         {...restProps}
       />
     </View>
@@ -71,8 +73,9 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: Colors.BLACK,
-    flex: 1,
     fontSize: ScaleServices.scale(18),
+    borderBottomWidth: ScaleServices.scale(0),
+    paddingHorizontal: ScaleServices.scale(0),
   },
 });
 
