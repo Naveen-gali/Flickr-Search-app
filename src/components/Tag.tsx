@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Colors} from '../assets';
 import {ScaleServices} from '../services';
+import debounce from 'lodash.debounce';
 
 type Props = {
   content: string;
@@ -19,8 +20,21 @@ type Props = {
 
 const Tag = (props: Props) => {
   const {content, onPress, tagStyle, textStyle} = props;
+
+  const debouncePress = useMemo(() => {
+    return debounce(onPress, 300);
+  }, [onPress]);
+
+  useEffect(() => {
+    return () => {
+      debouncePress.cancel();
+    };
+  });
+
   return (
-    <TouchableOpacity style={[styles.container, tagStyle]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.container, tagStyle]}
+      onPress={debouncePress}>
       <Text style={[styles.text, textStyle]}># {content}</Text>
     </TouchableOpacity>
   );

@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   StyleSheet,
   TextInput,
   View,
   TextInputProps,
   ViewStyle,
+  NativeSyntheticEvent,
+  TextInputEndEditingEventData,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../assets';
 import {ScaleServices} from '../services';
+import debounce from 'lodash.debounce';
 
-type Props = TextInputProps & {contentStyle?: ViewStyle};
+type Props = Omit<TextInputProps, 'onEndEditing'> & {
+  contentStyle?: ViewStyle;
+  onEndEditing: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
+};
 
 const SearchBar: React.FunctionComponent<Props> = props => {
   const {
@@ -23,6 +29,16 @@ const SearchBar: React.FunctionComponent<Props> = props => {
     ...restProps
   } = props;
 
+  const debounceSearch = useMemo(() => {
+    return debounce(onEndEditing, 300);
+  }, [onEndEditing]);
+
+  useEffect(() => {
+    return () => {
+      debounceSearch.cancel();
+    };
+  });
+
   return (
     <View style={[styles.searchBar, contentStyle]}>
       <Icon name="search" style={styles.icon} />
@@ -33,7 +49,7 @@ const SearchBar: React.FunctionComponent<Props> = props => {
         onChangeText={onChangeText}
         autoCapitalize="none"
         autoCorrect={false}
-        onEndEditing={onEndEditing}
+        onEndEditing={debounceSearch}
         {...restProps}
       />
     </View>

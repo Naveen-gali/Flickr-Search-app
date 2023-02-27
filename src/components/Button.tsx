@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   ActivityIndicator,
   ColorValue,
@@ -12,6 +12,7 @@ import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import {Colors, Fonts} from '../assets';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {ScaleServices} from '../services';
+import debounce from 'lodash.debounce';
 
 type IconProps = {
   icon?: string;
@@ -72,6 +73,16 @@ const Button = (props: ButtonProps) => {
     }
   };
 
+  const debounceClick = useMemo(() => {
+    return debounce(onPress, 300);
+  }, [onPress]);
+
+  useEffect(() => {
+    return () => {
+      debounceClick.cancel();
+    };
+  });
+
   return (
     <TouchableOpacity
       style={[
@@ -82,7 +93,7 @@ const Button = (props: ButtonProps) => {
         style,
       ]}
       disabled={disabled || isLoading}
-      onPress={onPress}
+      onPress={debounceClick}
       {...restProps}>
       {isLoading ? (
         <ActivityIndicator size="small" color={loaderColor} />
