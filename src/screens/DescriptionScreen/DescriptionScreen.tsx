@@ -1,7 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Dimensions,
   Linking,
   ScrollView,
@@ -58,7 +57,7 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
           <Button
             mode="default"
             style={styles.viewBtn}
-            onPress={() => Alert.alert('Opening in Browser?')}
+            onPress={() => Linking.openURL(info.urls?.url[0]._content)}
             icon="ios-share"
             textStyle={styles.labelStyle}
             iconStyle={styles.btnIcon}>
