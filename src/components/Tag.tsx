@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {Colors} from '../assets';
+import {ScaleServices} from '../services';
 
 type Props = {
   content: string;
@@ -27,9 +28,9 @@ const Tag = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 5,
-    padding: 8,
-    borderRadius: 10,
+    marginHorizontal: ScaleServices.scale(5),
+    padding: ScaleServices.scale(8),
+    borderRadius: ScaleServices.scale(10),
     backgroundColor: Colors.GREY,
   },
   text: {

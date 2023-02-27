@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../assets';
+import {ScaleServices} from '../services';
 
 type Props = TextInputProps & {contentStyle?: ViewStyle};
 
@@ -41,21 +42,21 @@ const SearchBar: React.FunctionComponent<Props> = props => {
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: 30,
+    fontSize: ScaleServices.scale(30),
     alignSelf: 'center',
-    marginHorizontal: 15,
+    marginHorizontal: ScaleServices.scale(15),
   },
   searchBar: {
     backgroundColor: Colors.LIGHT_GREY,
-    height: 50,
-    borderRadius: 10,
+    height: ScaleServices.verticalScale(50),
+    borderRadius: ScaleServices.scale(10),
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: ScaleServices.verticalScale(10),
   },
   input: {
     borderColor: Colors.BLACK,
     flex: 1,
-    fontSize: 18,
+    fontSize: ScaleServices.scale(18),
   },
 });
 

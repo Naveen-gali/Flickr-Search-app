@@ -5,6 +5,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {Colors} from '../assets';
+import {ScaleServices} from '../services';
 
 type Props = TouchableOpacityProps;
 
@@ -24,11 +25,11 @@ const styles = StyleSheet.create({
   container: {
     shadowColor: Colors.BLACK,
     shadowOffset: {
-      width: 0,
-      height: 4,
+      width: ScaleServices.scale(0),
+      height: ScaleServices.verticalScale(4),
     },
     shadowOpacity: 0.32,
-    shadowRadius: 5.46,
+    shadowRadius: ScaleServices.scale(5.46),
     elevation: 9,
     backgroundColor: Colors.LIGHT_WHITE,
   },

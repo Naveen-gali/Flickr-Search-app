@@ -28,6 +28,7 @@ import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
 import {Colors, Fonts, Strings} from '../../assets';
+import {ScaleServices} from '../../services';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -151,41 +152,42 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
 const styles = StyleSheet.create({
   rootView: {
-    marginHorizontal: 10,
+    marginHorizontal: ScaleServices.scale(10),
   },
   searchContainer: {
-    marginBottom: 15,
+    marginBottom: ScaleServices.verticalScale(15),
   },
   flatListContainer: {
-    marginBottom: 30,
-    paddingBottom: 100,
+    marginBottom: ScaleServices.verticalScale(30),
+    paddingBottom: ScaleServices.verticalScale(100),
   },
   flatListContentStyle: {
-    paddingBottom: 130,
+    paddingBottom: ScaleServices.verticalScale(130),
   },
   resultsText: {
-    marginVertical: 10,
+    marginVertical: ScaleServices.verticalScale(10),
+    fontSize: ScaleServices.scale(12),
     color: Colors.BLACK,
   },
   listFooter: {
-    marginVertical: 20,
+    marginVertical: ScaleServices.verticalScale(20),
   },
   error: {
     color: Colors.RED,
-    fontSize: 16,
+    fontSize: ScaleServices.scale(16),
   },
   errorContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 40,
+    marginVertical: ScaleServices.verticalScale(40),
   },
   endContainer: {
-    marginVertical: 15,
+    marginVertical: ScaleServices.verticalScale(15),
     justifyContent: 'center',
     alignItems: 'center',
   },
   endText: {
-    fontSize: 20,
+    fontSize: ScaleServices.verticalScale(20),
     textAlign: 'center',
     fontFamily: Fonts.SemiBold,
   },

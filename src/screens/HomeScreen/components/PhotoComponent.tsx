@@ -6,6 +6,7 @@ import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import Card from '../../../components/Card';
 import FlickrImage from '../../../components/FlickrImage';
 import {Fonts, Colors} from '../../../assets';
+import {ScaleServices} from '../../../services';
 
 type Props = {
   photo: PhotoModelType;
@@ -40,17 +41,17 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 150,
-    height: 195,
-    borderRadius: 10,
+    width: ScaleServices.scale(150),
+    height: ScaleServices.verticalScale(195),
+    borderRadius: ScaleServices.verticalScale(10),
     overflow: 'hidden',
-    marginRight: 10,
+    marginRight: ScaleServices.scale(10),
   },
   title: {
     textAlign: 'center',
     flexWrap: 'wrap',
-    fontSize: 18,
-    marginTop: 15,
+    fontSize: ScaleServices.scale(18),
+    marginTop: ScaleServices.verticalScale(15),
     color: Colors.BLACK,
     fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
@@ -62,11 +63,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    marginHorizontal: 4,
-    padding: 5,
-    marginVertical: 10,
+    marginHorizontal: ScaleServices.scale(4),
+    padding: ScaleServices.scale(5),
+    marginVertical: ScaleServices.verticalScale(10),
     flexDirection: 'row',
-    borderRadius: 10,
+    borderRadius: ScaleServices.scale(10),
   },
 });
 
