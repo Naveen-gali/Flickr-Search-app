@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -19,11 +19,14 @@ const RootStore = store.create({
 });
 
 function App(): JSX.Element {
+  useEffect(() => {
+    RNBootSplash.hide({fade: true, duration: 500});
+  });
+
   return (
     <StoreContext.Provider value={RootStore}>
       <PaperProvider>
-        <NavigationContainer
-          onReady={() => RNBootSplash.hide({fade: true, duration: 500})}>
+        <NavigationContainer>
           <RootNavigator />
         </NavigationContainer>
       </PaperProvider>

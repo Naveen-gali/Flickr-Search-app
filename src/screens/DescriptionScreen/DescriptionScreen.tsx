@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: ScaleServices.verticalScale(400),
-    width: Dimensions.get('screen').width,
+    width: Dimensions.get('window').width,
   },
   viewBtn: {
     marginHorizontal: ScaleServices.scale(10),

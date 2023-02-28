@@ -42,16 +42,17 @@ const SearchBar: React.FunctionComponent<Props> = props => {
 
   return (
     <View style={[styles.searchBar, contentStyle]}>
-      <Icon name="search" style={styles.icon} />
       <TextInput
         placeholder={placeholder}
         style={[styles.input, style]}
         value={value}
         onChangeText={onChangeText}
         autoCapitalize="none"
-        mode="default"
+        mode="border-less"
         onEndEditing={onEndEditing}
         autoCorrect={false}
+        left={<Icon name="search" style={styles.icon} />}
+        right={value ? <Icon name="clear" style={styles.icon} /> : undefined}
         {...restProps}
       />
     </View>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: ScaleServices.scale(30),
     alignSelf: 'center',
-    marginHorizontal: ScaleServices.scale(15),
+    marginHorizontal: ScaleServices.scale(9),
   },
   searchBar: {
     backgroundColor: Colors.LIGHT_GREY,
@@ -70,12 +71,11 @@ const styles = StyleSheet.create({
     borderRadius: ScaleServices.scale(10),
     flexDirection: 'row',
     marginTop: ScaleServices.verticalScale(10),
+    alignItems: 'center',
   },
   input: {
     borderColor: Colors.BLACK,
-    fontSize: ScaleServices.scale(18),
-    borderBottomWidth: ScaleServices.scale(0),
-    paddingHorizontal: ScaleServices.scale(0),
+    flex: 1,
   },
 });
 
