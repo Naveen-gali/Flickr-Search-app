@@ -19,7 +19,7 @@ import {ImageType, PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
 import Button from '../../components/Button';
-import {ScaleServices} from '../../services';
+import {ScaleUtils} from '../../utils';
 
 type DescriptionScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -74,35 +74,35 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   rootContainer: {
-    marginVertical: ScaleServices.verticalScale(10),
+    marginVertical: ScaleUtils.verticalScale(10),
   },
   description: {
-    fontSize: ScaleServices.scale(16),
+    fontSize: ScaleUtils.scale(16),
     textAlign: 'justify',
     color: Colors.BLACK,
-    marginHorizontal: ScaleServices.scale(5),
-    padding: ScaleServices.scale(10),
+    marginHorizontal: ScaleUtils.scale(5),
+    padding: ScaleUtils.scale(10),
     fontFamily: Fonts.Regular,
   },
   heading: {
-    fontSize: ScaleServices.scale(30),
+    fontSize: ScaleUtils.scale(30),
     textAlign: 'left',
     color: Colors.BLACK,
-    padding: ScaleServices.scale(10),
-    marginHorizontal: ScaleServices.scale(2),
+    padding: ScaleUtils.scale(10),
+    marginHorizontal: ScaleUtils.scale(2),
     fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
   },
   image: {
-    height: ScaleServices.verticalScale(400),
+    height: ScaleUtils.verticalScale(400),
     width: Dimensions.get('window').width,
   },
   viewBtn: {
-    marginHorizontal: ScaleServices.scale(10),
-    marginVertical: ScaleServices.verticalScale(20),
+    marginHorizontal: ScaleUtils.scale(10),
+    marginVertical: ScaleUtils.verticalScale(20),
   },
   labelStyle: {
-    fontSize: ScaleServices.scale(20),
+    fontSize: ScaleUtils.scale(20),
     color: Colors.LIGHT_WHITE,
   },
   btnIcon: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextProps} from 'react-native';
 import {Fonts} from '../assets';
-import {ScaleServices} from '../services';
+import {ScaleUtils} from '../utils';
 
 type LabelProps = TextProps & {
   label?: string;
@@ -19,7 +19,7 @@ const Label = (props: LabelProps) => {
 const styles = StyleSheet.create({
   label: {
     fontFamily: Fonts.SemiBold,
-    fontSize: ScaleServices.verticalScale(16),
+    fontSize: ScaleUtils.verticalScale(16),
     flexWrap: 'wrap',
   },
 });

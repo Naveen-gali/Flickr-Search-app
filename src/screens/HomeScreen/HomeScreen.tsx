@@ -28,7 +28,7 @@ import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
 import {Photo} from '../../constants';
 import {Colors, Fonts, Strings} from '../../assets';
-import {ScaleServices} from '../../services';
+import {ScaleUtils} from '../../utils';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -152,42 +152,42 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
 const styles = StyleSheet.create({
   rootView: {
-    marginHorizontal: ScaleServices.scale(10),
+    marginHorizontal: ScaleUtils.scale(10),
   },
   searchContainer: {
-    marginBottom: ScaleServices.verticalScale(15),
+    marginBottom: ScaleUtils.verticalScale(15),
   },
   flatListContainer: {
-    marginBottom: ScaleServices.verticalScale(30),
-    paddingBottom: ScaleServices.verticalScale(100),
+    marginBottom: ScaleUtils.verticalScale(30),
+    paddingBottom: ScaleUtils.verticalScale(100),
   },
   flatListContentStyle: {
-    paddingBottom: ScaleServices.verticalScale(130),
+    paddingBottom: ScaleUtils.verticalScale(130),
   },
   resultsText: {
-    marginVertical: ScaleServices.verticalScale(10),
-    fontSize: ScaleServices.scale(12),
+    marginVertical: ScaleUtils.verticalScale(10),
+    fontSize: ScaleUtils.scale(12),
     color: Colors.BLACK,
   },
   listFooter: {
-    marginVertical: ScaleServices.verticalScale(20),
+    marginVertical: ScaleUtils.verticalScale(20),
   },
   error: {
     color: Colors.RED,
-    fontSize: ScaleServices.scale(16),
+    fontSize: ScaleUtils.scale(16),
   },
   errorContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: ScaleServices.verticalScale(40),
+    marginVertical: ScaleUtils.verticalScale(40),
   },
   endContainer: {
-    marginVertical: ScaleServices.verticalScale(15),
+    marginVertical: ScaleUtils.verticalScale(15),
     justifyContent: 'center',
     alignItems: 'center',
   },
   endText: {
-    fontSize: ScaleServices.verticalScale(20),
+    fontSize: ScaleUtils.verticalScale(20),
     textAlign: 'center',
     fontFamily: Fonts.SemiBold,
   },

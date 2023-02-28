@@ -6,7 +6,7 @@ import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import Card from '../../../components/Card';
 import FlickrImage from '../../../components/FlickrImage';
 import {Fonts, Colors} from '../../../assets';
-import {ScaleServices} from '../../../services';
+import {ScaleUtils} from '../../../utils';
 
 type Props = {
   photo: PhotoModelType;
@@ -41,17 +41,17 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: ScaleServices.scale(150),
-    height: ScaleServices.verticalScale(195),
-    borderRadius: ScaleServices.verticalScale(10),
+    width: ScaleUtils.scale(150),
+    height: ScaleUtils.verticalScale(195),
+    borderRadius: ScaleUtils.verticalScale(10),
     overflow: 'hidden',
-    marginRight: ScaleServices.scale(10),
+    marginRight: ScaleUtils.scale(10),
   },
   title: {
     textAlign: 'center',
     flexWrap: 'wrap',
-    fontSize: ScaleServices.scale(18),
-    marginTop: ScaleServices.verticalScale(15),
+    fontSize: ScaleUtils.scale(18),
+    marginTop: ScaleUtils.verticalScale(15),
     color: Colors.BLACK,
     fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    marginHorizontal: ScaleServices.scale(4),
-    padding: ScaleServices.scale(5),
-    marginVertical: ScaleServices.verticalScale(10),
+    marginHorizontal: ScaleUtils.scale(4),
+    padding: ScaleUtils.scale(5),
+    marginVertical: ScaleUtils.verticalScale(10),
     flexDirection: 'row',
-    borderRadius: ScaleServices.scale(10),
+    borderRadius: ScaleUtils.scale(10),
   },
 });
 

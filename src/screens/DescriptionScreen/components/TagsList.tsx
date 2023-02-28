@@ -4,7 +4,7 @@ import {StoreContext} from '../../../models/RootStore';
 import Tag from '../../../components/Tag';
 import {TAG_URL} from '../../../constants';
 import {Strings} from '../../../assets';
-import {ScaleServices} from '../../../services';
+import {ScaleUtils} from '../../../utils';
 
 const TagsList = () => {
   const {info} = useContext(StoreContext);
@@ -29,8 +29,8 @@ const TagsList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: ScaleServices.scale(3),
-    marginHorizontal: ScaleServices.scale(1),
+    padding: ScaleUtils.scale(3),
+    marginHorizontal: ScaleUtils.scale(1),
   },
 });
 

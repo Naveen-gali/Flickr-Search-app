@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import {Colors, Fonts} from '../assets';
-import {ScaleServices} from '../services';
+import {ScaleUtils} from '../utils';
 
 type Props = {
   name: string;
@@ -19,16 +19,16 @@ const Avatar = ({name, style}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: ScaleServices.scale(1),
+    borderWidth: ScaleUtils.scale(1),
     backgroundColor: Colors.DEFAULT_AVATAR_COLOR,
-    height: ScaleServices.scale(45),
-    width: ScaleServices.scale(45),
-    borderRadius: ScaleServices.scale(45) / 2,
+    height: ScaleUtils.scale(45),
+    width: ScaleUtils.scale(45),
+    borderRadius: ScaleUtils.scale(45) / 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontSize: ScaleServices.scale(25),
+    fontSize: ScaleUtils.scale(25),
     color: Colors.BLACK,
     textTransform: 'capitalize',
     fontFamily: Fonts.SemiBold,

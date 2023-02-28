@@ -10,8 +10,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {Colors, Fonts} from '../assets';
-import {ScaleServices} from '../services';
 import Label from './Label';
+import {ScaleUtils} from '../utils';
 
 type InputErrorProps = {
   error?: boolean;
@@ -110,20 +110,20 @@ const TextInput = (props: InputProps) => {
 const styles = StyleSheet.create({
   input: {
     flex: 1,
-    padding: ScaleServices.scale(10),
-    borderRadius: ScaleServices.scale(3),
+    padding: ScaleUtils.scale(10),
+    borderRadius: ScaleUtils.scale(3),
     backgroundColor: Colors.LIGHT_GREY,
-    fontSize: ScaleServices.verticalScale(15),
-    borderBottomWidth: ScaleServices.verticalScale(2),
+    fontSize: ScaleUtils.verticalScale(15),
+    borderBottomWidth: ScaleUtils.verticalScale(2),
     borderBottomColor: Colors.GREY,
   },
   focused: {
-    borderBottomWidth: ScaleServices.scale(2),
+    borderBottomWidth: ScaleUtils.scale(2),
     borderBottomColor: Colors.BLACK,
   },
   hint: {
-    fontSize: ScaleServices.verticalScale(12),
-    marginTop: ScaleServices.verticalScale(5),
+    fontSize: ScaleUtils.verticalScale(12),
+    marginTop: ScaleUtils.verticalScale(5),
     fontFamily: Fonts.Italic,
   },
   error: {
@@ -131,18 +131,18 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: Colors.RED,
-    marginTop: ScaleServices.verticalScale(5),
+    marginTop: ScaleUtils.verticalScale(5),
   },
   outline: {
-    borderWidth: ScaleServices.scale(1),
+    borderWidth: ScaleUtils.scale(1),
   },
   outlineDisable: {
     borderColor: Colors.GREY,
     backgroundColor: Colors.LIGHT_WHITE,
-    borderWidth: ScaleServices.scale(1),
+    borderWidth: ScaleUtils.scale(1),
   },
   defaultDisable: {
-    borderBottomWidth: ScaleServices.scale(3),
+    borderBottomWidth: ScaleUtils.scale(3),
     borderBottomColor: Colors.GREY,
   },
   borderLess: {
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginHorizontal: ScaleServices.scale(7),
+    marginHorizontal: ScaleUtils.scale(7),
   },
   container: {},
 });

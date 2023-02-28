@@ -9,7 +9,7 @@ import {
 import Avatar from '../../../components/Avatar';
 import {Colors, Fonts} from '../../../assets';
 import {OwnerModelType} from '../../../models/InfoModel';
-import {ScaleServices} from '../../../services';
+import {ScaleUtils} from '../../../utils';
 
 type Props = {
   onPress: (event: GestureResponderEvent) => void;
@@ -29,18 +29,18 @@ const OwnerSection = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: ScaleServices.scale(10),
-    marginHorizontal: ScaleServices.scale(1),
+    padding: ScaleUtils.scale(10),
+    marginHorizontal: ScaleUtils.scale(1),
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: ScaleServices.scale(Dimensions.get('screen').width / 1.25),
+    width: ScaleUtils.scale(Dimensions.get('screen').width / 1.25),
     alignItems: 'center',
   },
   ownerName: {
-    fontSize: ScaleServices.scale(25),
+    fontSize: ScaleUtils.scale(25),
     flex: 1,
     flexWrap: 'wrap',
-    marginLeft: ScaleServices.scale(10),
+    marginLeft: ScaleUtils.scale(10),
     color: Colors.BLACK,
     fontFamily: Fonts.SemiBold,
   },

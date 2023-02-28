@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../assets';
-import {ScaleServices} from '../services';
+import {ScaleUtils} from '../utils';
 import debounce from 'lodash.debounce';
 import TextInput from './TextInput';
 
@@ -52,7 +52,6 @@ const SearchBar: React.FunctionComponent<Props> = props => {
         onEndEditing={onEndEditing}
         autoCorrect={false}
         left={<Icon name="search" style={styles.icon} />}
-        right={value ? <Icon name="clear" style={styles.icon} /> : undefined}
         {...restProps}
       />
     </View>
@@ -61,16 +60,16 @@ const SearchBar: React.FunctionComponent<Props> = props => {
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: ScaleServices.scale(30),
+    fontSize: ScaleUtils.scale(30),
     alignSelf: 'center',
-    marginHorizontal: ScaleServices.scale(9),
+    marginHorizontal: ScaleUtils.scale(9),
   },
   searchBar: {
     backgroundColor: Colors.LIGHT_GREY,
-    height: ScaleServices.verticalScale(50),
-    borderRadius: ScaleServices.scale(10),
+    height: ScaleUtils.verticalScale(50),
+    borderRadius: ScaleUtils.scale(10),
     flexDirection: 'row',
-    marginTop: ScaleServices.verticalScale(10),
+    marginTop: ScaleUtils.verticalScale(10),
     alignItems: 'center',
   },
   input: {

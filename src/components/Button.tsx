@@ -11,8 +11,8 @@ import {
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import {Colors, Fonts} from '../assets';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {ScaleServices} from '../services';
 import debounce from 'lodash.debounce';
+import {ScaleUtils} from '../utils';
 
 type IconProps = {
   icon?: string;
@@ -127,8 +127,8 @@ const Button = (props: ButtonProps) => {
 const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
-    borderRadius: ScaleServices.scale(10),
-    paddingVertical: ScaleServices.verticalScale(10),
+    borderRadius: ScaleUtils.scale(10),
+    paddingVertical: ScaleUtils.verticalScale(10),
     backgroundColor: Colors.BTN_BLUE,
     flexDirection: 'row',
     alignItems: 'center',
@@ -138,16 +138,16 @@ const styles = StyleSheet.create({
     backgroundColor: undefined,
     alignSelf: 'center',
     fontFamily: Fonts.SemiBold,
-    fontSize: ScaleServices.scale(20),
+    fontSize: ScaleUtils.scale(20),
   },
   outlied: {
-    borderWidth: ScaleServices.scale(1),
+    borderWidth: ScaleUtils.scale(1),
     borderColor: Colors.BTN_BLUE,
     backgroundColor: undefined,
   },
   textType: {
-    padding: ScaleServices.scale(0),
-    borderWidth: ScaleServices.scale(0),
+    padding: ScaleUtils.scale(0),
+    borderWidth: ScaleUtils.scale(0),
     backgroundColor: undefined,
   },
   textTypeLabel: {
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
     color: Colors.GREY,
   },
   icon: {
-    marginHorizontal: ScaleServices.scale(10),
-    fontSize: ScaleServices.scale(20),
+    marginHorizontal: ScaleUtils.scale(10),
+    fontSize: ScaleUtils.scale(20),
   },
   disabledIcon: {
     color: Colors.GREY,
