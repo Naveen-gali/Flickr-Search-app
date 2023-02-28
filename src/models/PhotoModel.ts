@@ -1,9 +1,8 @@
-import {Instance, types} from 'mobx-state-tree';
-
-export type PhotoModelType = Instance<typeof PhotoModel>;
+import {SnapshotOut, types} from 'mobx-state-tree';
 
 export const PhotoModel = types
-  .model({
+  .model('PhotoModel')
+  .props({
     id: types.identifier,
     owner: types.string,
     secret: types.string,
@@ -13,6 +12,7 @@ export const PhotoModel = types
     ispublic: types.integer,
     isfriend: types.integer,
     isfamily: types.integer,
+    imageurl: types.optional(types.string, ''),
   })
   .views(self => ({
     isPublic(): boolean {
@@ -26,4 +26,4 @@ export const PhotoModel = types
     },
   }));
 
-export interface Photo extends Instance<typeof PhotoModel> {}
+export interface PhotoInterface extends SnapshotOut<typeof PhotoModel> {}

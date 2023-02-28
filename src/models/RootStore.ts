@@ -76,12 +76,13 @@ export const store = types
           self.photosLoading = false;
         }
       } catch (err) {
+        console.log('ERRR :_ ', err);
+
         self.error = 'Some Thing Unexpected Happened!';
       } finally {
         self.photosLoading = false;
       }
     }),
-    getImageUrl: PhotoServices.getImageUrl,
     getImageInfo: flow(function* (photo_id: string, secret: string) {
       self.infoLoading = true;
       try {

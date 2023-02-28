@@ -1,12 +1,12 @@
-import {InfoModelType} from '../models/InfoModel';
-import {PhotoModelType} from '../models/PhotoModel';
+import {InfoInterface} from '../models/InfoModel';
+import {PhotoInterface} from '../models/PhotoModel';
 
 type GetPhotosResponse = {
   photos: {
     page: number;
     pages: number;
     perpage: number;
-    photo: PhotoModelType[];
+    photo: PhotoInterface[];
   };
   stat: 'ok';
 };
@@ -18,7 +18,7 @@ type ErrorResponse = {
 };
 
 type InfoApiResponse = {
-  photo: InfoModelType;
+  photo: InfoInterface;
 };
 
 export type {GetPhotosResponse, ErrorResponse, InfoApiResponse};

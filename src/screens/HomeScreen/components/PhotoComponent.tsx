@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {PhotoModelType} from '../../../models/PhotoModel';
+import {PhotoInterface} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import Card from '../../../components/Card';
@@ -9,7 +9,7 @@ import {Fonts, Colors} from '../../../assets';
 import {ScaleUtils} from '../../../utils';
 
 type Props = {
-  photo: PhotoModelType;
+  photo: PhotoInterface;
   navigation: NativeStackNavigationProp<RootStoreParams>;
 };
 
@@ -24,12 +24,11 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
       }
       style={styles.card}>
       <FlickrImage
-        secret={photo.secret}
-        server={photo.server}
-        id={photo.id}
+        source={photo.imageurl}
         style={styles.image}
         resizeMode="cover"
       />
+
       <View style={styles.detailsContainer}>
         <Text style={styles.title} numberOfLines={6}>
           {photo.title}

@@ -15,7 +15,7 @@ import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
 import {Colors, Fonts} from '../../assets';
 import FlickrImage from '../../components/FlickrImage';
-import {ImageType, PEOPLE_URL} from '../../constants';
+import {PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
 import Button from '../../components/Button';
@@ -40,13 +40,7 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
         <ActivityIndicator size="small" color={Colors.BLUE} />
       ) : (
         <ScrollView style={styles.container}>
-          <FlickrImage
-            secret={info.secret}
-            server={info.server}
-            id={info.id}
-            type={ImageType.MEDIUM_500_px}
-            style={styles.image}
-          />
+          <FlickrImage source={info.imageurl} style={styles.image} />
           <Text style={styles.heading}>{info.title?._content}</Text>
           <OwnerSection
             onPress={() => Linking.openURL(PEOPLE_URL + info.owner.nsid)}

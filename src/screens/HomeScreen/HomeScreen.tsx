@@ -24,11 +24,10 @@ import {useNavigation} from '@react-navigation/native';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import PhotoComponent from './components/PhotoComponent';
-import {cast} from 'mobx-state-tree';
 import SearchBar from '../../components/SearchBar';
-import {Photo} from '../../constants';
 import {Colors, Fonts, Strings} from '../../assets';
 import {ScaleUtils} from '../../utils';
+import {PhotoInterface} from '../../models/PhotoModel';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -41,7 +40,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
     useContext(StoreContext);
   const [query, setQuery] = useState('');
-  const flatListRef = useRef<FlatList<Photo>>(null);
+  const flatListRef = useRef<FlatList<PhotoInterface>>(null);
   const [refreshing, setRefreshing] = useState(false);
 
   const toTop = () => {
@@ -86,8 +85,8 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     );
   };
 
-  const renderItem = ({item}: ListRenderItemInfo<Photo>) => {
-    return <PhotoComponent photo={cast(item)} navigation={navigation} />;
+  const renderItem = ({item}: ListRenderItemInfo<PhotoInterface>) => {
+    return <PhotoComponent photo={item} navigation={navigation} />;
   };
 
   return (

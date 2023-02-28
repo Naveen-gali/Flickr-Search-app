@@ -1,27 +1,14 @@
 import React from 'react';
 import {Image, ImageProps} from 'react-native';
-import {ImageType} from '../constants';
-import {useContext} from 'react';
-import {StoreContext} from '../models/RootStore';
 
 type Props = Omit<ImageProps, 'source'> & {
-  secret: string;
-  id: string;
-  server: string;
-  type?: ImageType | ImageType.MEDIUM_500_px;
+  source: string;
 };
 
 const FlickrImage = (props: Props) => {
-  const {style, id, server, secret, type, ...restProps} = props;
-  const {getImageUrl} = useContext(StoreContext);
+  const {style, source, ...restProps} = props;
 
-  return (
-    <Image
-      style={style}
-      source={{uri: getImageUrl(server, id, secret, type)}}
-      {...restProps}
-    />
-  );
+  return <Image style={style} source={{uri: source}} {...restProps} />;
 };
 
 export default FlickrImage;

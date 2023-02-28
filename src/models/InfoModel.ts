@@ -1,4 +1,4 @@
-import {Instance, types} from 'mobx-state-tree';
+import {Instance, SnapshotOut, types} from 'mobx-state-tree';
 
 export type InfoModelType = Instance<typeof InfoModel>;
 export type GiftModelType = Instance<typeof GiftModel>;
@@ -140,4 +140,7 @@ export const InfoModel = types.model('InfoModel').props({
     url: types.array(UrlModel),
   }),
   media: '',
+  imageurl: types.optional(types.string, ''),
 });
+
+export interface InfoInterface extends SnapshotOut<typeof InfoModel> {}

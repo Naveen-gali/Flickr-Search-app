@@ -17,6 +17,19 @@ function getPhotos(text: string, perPage: number, page: number) {
     text: text ? text : 'India',
     per_page: perPage,
     page: page !== 1 ? page : 1,
+  }).then(res => {
+    if (res.stat === 'ok') {
+      res.photos.photo.map(
+        a =>
+          (a.imageurl = getImageUrl(
+            a.server,
+            a.id,
+            a.secret,
+            ImageType.MEDIUM_500_px,
+          )),
+      );
+    }
+    return res;
   });
 }
 
