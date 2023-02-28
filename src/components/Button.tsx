@@ -74,7 +74,10 @@ const Button = (props: ButtonProps) => {
   };
 
   const debounceClick = useMemo(() => {
-    return debounce(onPress, 3000);
+    return debounce(onPress, 3000, {
+      leading: true,
+      trailing: false,
+    });
   }, [onPress]);
 
   useEffect(() => {

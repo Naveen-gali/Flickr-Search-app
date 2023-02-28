@@ -31,7 +31,9 @@ const SearchBar: React.FunctionComponent<Props> = props => {
   } = props;
 
   const debounceSearch = useMemo(() => {
-    return debounce(onEndEditing, 300);
+    return debounce(onEndEditing, 300, {
+      maxWait: 100,
+    });
   }, [onEndEditing]);
 
   useEffect(() => {

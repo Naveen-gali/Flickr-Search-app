@@ -140,7 +140,10 @@ export const InfoModel = types.model('InfoModel').props({
     url: types.array(UrlModel),
   }),
   media: '',
-  imageurl: types.optional(types.string, ''),
+  imageurl: types.optional(
+    types.string,
+    'https://via.placeholder.com/600x400?text=Image+Loading',
+  ),
 });
 
 export interface InfoInterface extends SnapshotOut<typeof InfoModel> {}
