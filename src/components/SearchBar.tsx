@@ -1,34 +1,22 @@
+import debounce from 'lodash.debounce';
 import React, {useEffect, useMemo} from 'react';
 import {
   StyleSheet,
-  View,
-  TextInputProps,
-  ViewStyle,
   NativeSyntheticEvent,
   TextInputEndEditingEventData,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import {Colors} from '../assets';
 import {ScaleUtils} from '../utils';
-import debounce from 'lodash.debounce';
-import TextInput from './TextInput';
+import {TextInput, TextInputProps} from './TextInput';
 
-type Props = Omit<TextInputProps, 'onEndEditing' | 'onChangeText'> & {
-  contentStyle?: ViewStyle;
+type Props = Omit<TextInputProps, 'onEndEditing'> & {
   onEndEditing: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
-  onChangeText: (text: string) => void;
 };
 
 const SearchBar: React.FunctionComponent<Props> = props => {
-  const {
-    style,
-    contentStyle,
-    placeholder,
-    value,
-    onChangeText,
-    onEndEditing,
-    ...restProps
-  } = props;
+  const {style, onEndEditing, ...restProps} = props;
 
   const debounceSearch = useMemo(() => {
     return debounce(onEndEditing, 300, {
@@ -43,20 +31,14 @@ const SearchBar: React.FunctionComponent<Props> = props => {
   });
 
   return (
-    <View style={[styles.searchBar, contentStyle]}>
-      <TextInput
-        placeholder={placeholder}
-        style={[styles.input, style]}
-        value={value}
-        onChangeText={onChangeText}
-        autoCapitalize="none"
-        mode="border-less"
-        onEndEditing={onEndEditing}
-        autoCorrect={false}
-        left={<Icon name="search" style={styles.icon} />}
-        {...restProps}
-      />
-    </View>
+    <TextInput
+      style={[styles.input, style]}
+      autoCapitalize="none"
+      onEndEditing={debounceSearch}
+      autoCorrect={false}
+      left={<Icon name="search" style={styles.icon} />}
+      {...restProps}
+    />
   );
 };
 
@@ -65,14 +47,6 @@ const styles = StyleSheet.create({
     fontSize: ScaleUtils.verticalScale(30),
     alignSelf: 'center',
     marginHorizontal: ScaleUtils.scale(9),
-  },
-  searchBar: {
-    backgroundColor: Colors.LIGHT_GREY,
-    height: ScaleUtils.verticalScale(50),
-    borderRadius: ScaleUtils.scale(10),
-    flexDirection: 'row',
-    marginTop: ScaleUtils.verticalScale(10),
-    alignItems: 'center',
   },
   input: {
     borderColor: Colors.BLACK,

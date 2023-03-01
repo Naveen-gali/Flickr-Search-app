@@ -97,6 +97,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
           onChangeText={setQuery}
           onEndEditing={onSubmit}
           placeholder={Strings.home.search_bar.placeholder}
+          mode="border-less"
         />
         {error ? (
           <View style={styles.errorContainer}>

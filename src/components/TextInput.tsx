@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput as InputField,
-  TextInputProps,
+  TextInputProps as DefaultProps,
   TextStyle,
   View,
   ViewStyle,
@@ -19,9 +19,9 @@ type InputErrorProps = {
   errorMessageStyle?: StyleProp<TextStyle>;
 };
 
-type InputProps = Omit<TextInputProps, 'onChangeText' | 'style'> &
+export type TextInputProps = Omit<DefaultProps, 'onChangeText' | 'style'> &
   InputErrorProps & {
-    mode: 'default' | 'outline' | 'border-less';
+    mode?: 'default' | 'outline' | 'border-less';
     onChangeText: (text: string) => void;
     hint?: string;
     hintStyle?: StyleProp<TextStyle>;
@@ -33,9 +33,9 @@ type InputProps = Omit<TextInputProps, 'onChangeText' | 'style'> &
     style?: StyleProp<ViewStyle>;
   };
 
-const TextInput = (props: InputProps) => {
+export const TextInput = (props: TextInputProps) => {
   const {
-    mode,
+    mode = 'default',
     onChangeText,
     hint,
     style,
@@ -156,4 +156,4 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default TextInput;
+// export default TextInput;
