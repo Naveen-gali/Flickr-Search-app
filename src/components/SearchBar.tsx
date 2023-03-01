@@ -62,7 +62,7 @@ const SearchBar: React.FunctionComponent<Props> = props => {
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: ScaleUtils.scale(30),
+    fontSize: ScaleUtils.verticalScale(30),
     alignSelf: 'center',
     marginHorizontal: ScaleUtils.scale(9),
   },

@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   resultsText: {
     marginVertical: ScaleUtils.verticalScale(10),
-    fontSize: ScaleUtils.scale(12),
+    fontSize: ScaleUtils.verticalScale(12),
     color: Colors.BLACK,
   },
   listFooter: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   error: {
     color: Colors.RED,
-    fontSize: ScaleUtils.scale(16),
+    fontSize: ScaleUtils.verticalScale(16),
   },
   errorContainer: {
     justifyContent: 'center',

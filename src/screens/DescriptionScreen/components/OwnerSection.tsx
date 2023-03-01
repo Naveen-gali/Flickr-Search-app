@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ownerName: {
-    fontSize: ScaleUtils.scale(25),
+    fontSize: ScaleUtils.verticalScale(25),
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: ScaleUtils.scale(10),

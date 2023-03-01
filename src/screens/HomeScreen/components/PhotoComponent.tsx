@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     flexWrap: 'wrap',
-    fontSize: ScaleUtils.scale(18),
+    fontSize: ScaleUtils.verticalScale(18),
     marginTop: ScaleUtils.verticalScale(15),
     color: Colors.BLACK,
     fontFamily: Fonts.Bold,

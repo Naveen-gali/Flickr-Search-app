@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: ScaleUtils.scale(25),
+    fontSize: ScaleUtils.verticalScale(25),
     color: Colors.BLACK,
     textTransform: 'capitalize',
     fontFamily: Fonts.SemiBold,

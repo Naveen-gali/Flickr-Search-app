@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: undefined,
     alignSelf: 'center',
     fontFamily: Fonts.SemiBold,
-    fontSize: ScaleUtils.scale(20),
+    fontSize: ScaleUtils.verticalScale(20),
   },
   outlied: {
     borderWidth: ScaleUtils.scale(1),
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginHorizontal: ScaleUtils.scale(10),
-    fontSize: ScaleUtils.scale(20),
+    fontSize: ScaleUtils.verticalScale(20),
   },
   disabledIcon: {
     color: Colors.GREY,

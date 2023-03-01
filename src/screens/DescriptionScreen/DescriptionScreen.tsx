@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     marginVertical: ScaleUtils.verticalScale(10),
   },
   description: {
-    fontSize: ScaleUtils.scale(16),
+    fontSize: ScaleUtils.verticalScale(16),
     textAlign: 'justify',
     color: Colors.BLACK,
     marginHorizontal: ScaleUtils.scale(5),
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Regular,
   },
   heading: {
-    fontSize: ScaleUtils.scale(30),
+    fontSize: ScaleUtils.verticalScale(30),
     textAlign: 'left',
     color: Colors.BLACK,
     padding: ScaleUtils.scale(10),
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginVertical: ScaleUtils.verticalScale(20),
   },
   labelStyle: {
-    fontSize: ScaleUtils.scale(20),
+    fontSize: ScaleUtils.verticalScale(20),
     color: Colors.LIGHT_WHITE,
   },
   btnIcon: {
