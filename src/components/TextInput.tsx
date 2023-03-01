@@ -65,9 +65,9 @@ const TextInput = (props: InputProps) => {
   };
 
   const getDisabledStyle = () => {
-    if (mode === 'outline' && editable) {
+    if (mode === 'outline' && editable === false) {
       return styles.outlineDisable;
-    } else if (mode === 'default' && editable) {
+    } else if (mode === 'default' && editable === false) {
       return styles.defaultDisable;
     }
   };
