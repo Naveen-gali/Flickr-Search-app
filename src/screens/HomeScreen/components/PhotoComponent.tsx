@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {PhotoInterface} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
@@ -29,11 +29,9 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
         resizeMode="cover"
       />
 
-      <View style={styles.detailsContainer}>
-        <Text style={styles.title} numberOfLines={6}>
-          {photo.title}
-        </Text>
-      </View>
+      <Text style={styles.title} numberOfLines={6}>
+        {photo.title}
+      </Text>
     </Card>
   );
 };
@@ -47,6 +45,7 @@ const styles = StyleSheet.create({
     marginRight: ScaleUtils.scale(10),
   },
   title: {
+    flex: 1,
     textAlign: 'center',
     flexWrap: 'wrap',
     fontSize: ScaleUtils.verticalScale(18),
@@ -54,12 +53,6 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
-  },
-  detailsContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
   },
   card: {
     marginHorizontal: ScaleUtils.scale(4),

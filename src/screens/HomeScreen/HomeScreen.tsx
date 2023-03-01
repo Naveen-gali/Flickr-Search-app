@@ -95,49 +95,45 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         mode="border-less"
       />
       {error ? (
-        <View style={styles.errorContainer}>
-          <Text style={styles.error}>
-            {error ? error : Strings.home.some_unexpected_happened}
-          </Text>
-        </View>
+        <Text style={[styles.error]}>
+          {error ? error : Strings.home.some_unexpected_happened}
+        </Text>
       ) : (
         <>
           <Text style={styles.resultsText}>
             {Strings.home.results_found} ({photosCount})
           </Text>
-          <View style={styles.flatListContainer}>
-            <FlatList
-              ref={flatListRef}
-              data={photos}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => {
-                return index.toString();
-              }}
-              alwaysBounceVertical={true}
-              ListFooterComponent={() => <Footer />}
-              refreshing={refreshing}
-              onRefresh={() => {
-                setRefreshing(true);
-                getPhotos(
-                  query.length > 0 ? query : Strings.default_query,
-                  30,
-                  undefined,
-                ).then(() => setRefreshing(false));
-              }}
-              contentContainerStyle={styles.flatListContentStyle}
-              showsVerticalScrollIndicator={false}
-              ListFooterComponentStyle={styles.listFooter}
-              onEndReachedThreshold={0.9}
-              onEndReached={() => {
-                page !== pages && !photosLoading && page < pages
-                  ? getPhotos(query, 30, page < pages ? page + 1 : page)
-                  : null;
-              }}
-              initialNumToRender={10}
-              maxToRenderPerBatch={20}
-              windowSize={10}
-            />
-          </View>
+          <FlatList
+            ref={flatListRef}
+            data={photos}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => {
+              return index.toString();
+            }}
+            alwaysBounceVertical={true}
+            ListFooterComponent={() => <Footer />}
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              getPhotos(
+                query.length > 0 ? query : Strings.default_query,
+                30,
+                undefined,
+              ).then(() => setRefreshing(false));
+            }}
+            contentContainerStyle={styles.flatListContentStyle}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponentStyle={styles.listFooter}
+            onEndReachedThreshold={0.9}
+            onEndReached={() => {
+              page !== pages && !photosLoading && page < pages
+                ? getPhotos(query, 30, page < pages ? page + 1 : page)
+                : null;
+            }}
+            initialNumToRender={10}
+            maxToRenderPerBatch={20}
+            windowSize={10}
+          />
         </>
       )}
     </SafeAreaView>
@@ -148,12 +144,8 @@ const styles = StyleSheet.create({
   rootView: {
     marginHorizontal: ScaleUtils.scale(10),
   },
-  flatListContainer: {
-    marginBottom: ScaleUtils.verticalScale(30),
-    paddingBottom: ScaleUtils.verticalScale(100),
-  },
   flatListContentStyle: {
-    paddingBottom: ScaleUtils.verticalScale(130),
+    paddingBottom: ScaleUtils.verticalScale(80),
   },
   resultsText: {
     marginVertical: ScaleUtils.verticalScale(10),
@@ -166,11 +158,8 @@ const styles = StyleSheet.create({
   error: {
     color: Colors.RED,
     fontSize: ScaleUtils.verticalScale(16),
-  },
-  errorContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: ScaleUtils.verticalScale(40),
+    textAlign: 'center',
+    marginTop: ScaleUtils.verticalScale(30),
   },
   endContainer: {
     marginVertical: ScaleUtils.verticalScale(15),
