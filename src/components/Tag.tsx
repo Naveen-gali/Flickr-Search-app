@@ -11,14 +11,14 @@ import {Colors} from '../assets';
 import debounce from 'lodash.debounce';
 import {ScaleUtils} from '../utils';
 
-type Props = {
+export type TagProps = {
   content: string;
   onPress: (event: GestureResponderEvent) => void;
   tagStyle?: ViewStyle;
   textStyle?: TextStyle;
 };
 
-const Tag = (props: Props) => {
+export const Tag = (props: TagProps) => {
   const {content, onPress, tagStyle, textStyle} = props;
 
   const debouncePress = useMemo(() => {
@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
 });
-
-export default Tag;

@@ -23,7 +23,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import PhotoComponent from './components/PhotoComponent';
-import SearchBar from '../../components/SearchBar';
+import {SearchBar} from '../../components/SearchBar';
 import {Colors, Fonts, Strings} from '../../assets';
 import {ScaleUtils} from '../../utils';
 import {PhotoInterface} from '../../models/PhotoModel';

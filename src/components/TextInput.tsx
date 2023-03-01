@@ -10,10 +10,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import {Colors, Fonts} from '../assets';
-import Label from './Label';
 import {ScaleUtils} from '../utils';
+import {Label} from './Label';
 
-type InputErrorProps = {
+export type InputErrorProps = {
   error?: boolean;
   errorMessage?: string;
   errorMessageStyle?: StyleProp<TextStyle>;
@@ -155,5 +155,3 @@ const styles = StyleSheet.create({
   },
   container: {},
 });
-
-// export default TextInput;

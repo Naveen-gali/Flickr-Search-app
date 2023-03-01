@@ -6,9 +6,9 @@ import {Colors} from '../assets';
 import {ScaleUtils} from '../utils';
 import {TextInput, TextInputProps} from './TextInput';
 
-type SearchBarProps = TextInputProps;
+export type SearchBarProps = TextInputProps;
 
-const SearchBar: React.FunctionComponent<SearchBarProps> = props => {
+export const SearchBar: React.FunctionComponent<SearchBarProps> = props => {
   const {style, onChangeText, ...restProps} = props;
 
   return (
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default SearchBar;

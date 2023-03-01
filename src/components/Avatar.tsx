@@ -3,12 +3,12 @@ import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import {Colors, Fonts} from '../assets';
 import {ScaleUtils} from '../utils';
 
-type Props = {
+export type AvatarProps = {
   name: string;
   style?: ViewStyle;
 };
 
-const Avatar = ({name, style}: Props) => {
+export const Avatar = ({name, style}: AvatarProps) => {
   const letter = name.charAt(0);
   return (
     <View style={[styles.container, style]}>
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.SemiBold,
   },
 });
-
-export default Avatar;

@@ -14,14 +14,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import debounce from 'lodash.debounce';
 import {ScaleUtils} from '../utils';
 
-type IconProps = {
+export type ButtonIconProps = {
   icon?: string;
   iconRight?: boolean;
   iconStyle?: StyleProp<TextStyle>;
 };
 
-type ButtonProps = Omit<TouchableOpacityProps, 'onPress'> &
-  IconProps & {
+export type ButtonProps = Omit<TouchableOpacityProps, 'onPress'> &
+  ButtonIconProps & {
     mode: 'text' | 'outlined' | 'default';
     isLoading?: boolean;
     textStyle?: StyleProp<TextStyle>;
@@ -29,7 +29,7 @@ type ButtonProps = Omit<TouchableOpacityProps, 'onPress'> &
     loaderColor?: ColorValue;
   };
 
-const Button = (props: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
   const {
     children,
     mode,
@@ -179,5 +179,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
   },
 });
-
-export default Button;

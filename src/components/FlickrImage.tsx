@@ -1,14 +1,12 @@
 import React from 'react';
 import {Image, ImageProps} from 'react-native';
 
-type Props = Omit<ImageProps, 'source'> & {
+export type FlickrImageProps = Omit<ImageProps, 'source'> & {
   source: string;
 };
 
-const FlickrImage = (props: Props) => {
+export const FlickrImage = (props: FlickrImageProps) => {
   const {style, source, ...restProps} = props;
 
   return <Image style={style} source={{uri: source}} {...restProps} />;
 };
-
-export default FlickrImage;

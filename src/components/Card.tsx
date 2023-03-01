@@ -7,9 +7,9 @@ import {
 import {Colors} from '../assets';
 import {ScaleUtils} from '../utils';
 
-type Props = TouchableOpacityProps;
+export type CardProps = TouchableOpacityProps;
 
-const Card = (props: Props) => {
+export const Card = (props: CardProps) => {
   const {children, onPress, style, ...restProps} = props;
   return (
     <TouchableOpacity
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHT_WHITE,
   },
 });
-
-export default Card;

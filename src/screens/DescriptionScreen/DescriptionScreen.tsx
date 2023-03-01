@@ -14,11 +14,11 @@ import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
 import {Colors, Fonts} from '../../assets';
-import FlickrImage from '../../components/FlickrImage';
+import {FlickrImage} from '../../components/FlickrImage';
 import {PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
-import Button from '../../components/Button';
+import {Button} from '../../components/Button';
 import {ScaleUtils} from '../../utils';
 
 type DescriptionScreenProps = NativeStackScreenProps<

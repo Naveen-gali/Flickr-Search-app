@@ -3,8 +3,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import {PhotoInterface} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
-import Card from '../../../components/Card';
-import FlickrImage from '../../../components/FlickrImage';
+import {Card} from '../../../components/Card';
+import {FlickrImage} from '../../../components/FlickrImage';
 import {Fonts, Colors} from '../../../assets';
 import {ScaleUtils} from '../../../utils';
 

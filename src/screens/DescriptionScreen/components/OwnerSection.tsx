@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import Avatar from '../../../components/Avatar';
+import {Avatar} from '../../../components/Avatar';
 import {Colors, Fonts} from '../../../assets';
 import {OwnerModelType} from '../../../models/InfoModel';
 import {ScaleUtils} from '../../../utils';

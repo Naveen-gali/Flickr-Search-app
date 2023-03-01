@@ -3,11 +3,11 @@ import {StyleSheet, Text, TextProps} from 'react-native';
 import {Fonts} from '../assets';
 import {ScaleUtils} from '../utils';
 
-type LabelProps = TextProps & {
+export type LabelProps = TextProps & {
   label?: string;
 };
 
-const Label = (props: LabelProps) => {
+export const Label = (props: LabelProps) => {
   const {style, label, ...restProps} = props;
   return (
     <Text style={[styles.label, style]} {...restProps}>
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
 });
-
-export default Label;

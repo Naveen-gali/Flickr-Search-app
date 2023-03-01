@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {FlatList, Linking, StyleSheet, Text} from 'react-native';
 import {StoreContext} from '../../../models/RootStore';
-import Tag from '../../../components/Tag';
+import {Tag} from '../../../components/Tag';
 import {TAG_URL} from '../../../constants';
 import {Strings} from '../../../assets';
 import {ScaleUtils} from '../../../utils';
