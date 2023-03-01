@@ -5,7 +5,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import {RootNavigator} from './src/navigation/RootNavigator';
 import {store, StoreContext} from './src/models/RootStore';
-import {Provider as PaperProvider} from 'react-native-paper';
 
 const RootStore = store.create({
   photos: [],
@@ -25,11 +24,9 @@ function App(): JSX.Element {
 
   return (
     <StoreContext.Provider value={RootStore}>
-      <PaperProvider>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </PaperProvider>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
     </StoreContext.Provider>
   );
 }
