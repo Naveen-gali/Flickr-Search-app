@@ -1,40 +1,21 @@
-import debounce from 'lodash.debounce';
-import React, {useEffect, useMemo} from 'react';
-import {
-  StyleSheet,
-  NativeSyntheticEvent,
-  TextInputEndEditingEventData,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {Colors} from '../assets';
 import {ScaleUtils} from '../utils';
 import {TextInput, TextInputProps} from './TextInput';
 
-type Props = Omit<TextInputProps, 'onEndEditing'> & {
-  onEndEditing: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
-};
+type SearchBarProps = TextInputProps;
 
-const SearchBar: React.FunctionComponent<Props> = props => {
-  const {style, onEndEditing, ...restProps} = props;
-
-  const debounceSearch = useMemo(() => {
-    return debounce(onEndEditing, 300, {
-      maxWait: 100,
-    });
-  }, [onEndEditing]);
-
-  useEffect(() => {
-    return () => {
-      debounceSearch.cancel();
-    };
-  });
+const SearchBar: React.FunctionComponent<SearchBarProps> = props => {
+  const {style, onChangeText, ...restProps} = props;
 
   return (
     <TextInput
       style={[style]}
       autoCapitalize="none"
-      onEndEditing={debounceSearch}
+      onChangeText={onChangeText}
       autoCorrect={false}
       left={<Icon name="search" style={styles.icon} />}
       inputStyle={styles.input}

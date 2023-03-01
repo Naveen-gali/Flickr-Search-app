@@ -11,7 +11,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
   ActivityIndicator,
   ListRenderItemInfo,
 } from 'react-native';
@@ -28,6 +27,7 @@ import SearchBar from '../../components/SearchBar';
 import {Colors, Fonts, Strings} from '../../assets';
 import {ScaleUtils} from '../../utils';
 import {PhotoInterface} from '../../models/PhotoModel';
+import debounce from 'lodash.debounce';
 
 type HomeScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -39,9 +39,9 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     useNavigation<NativeStackNavigationProp<RootStoreParams>>();
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
     useContext(StoreContext);
-  const [query, setQuery] = useState('');
   const flatListRef = useRef<FlatList<PhotoInterface>>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [query, setQuery] = useState('');
 
   const toTop = () => {
     flatListRef.current?.scrollToOffset({animated: true, offset: 0});
@@ -49,7 +49,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
   const loadData = useCallback(() => {
     if (!photosLoading) {
-      getPhotos(query, 30, undefined);
+      getPhotos('', 30, undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -59,17 +59,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
     return () => loadData();
   }, [loadData]);
-
-  const onSubmit = () => {
-    if (query.length > 0) {
-      getPhotos(query, 30, undefined).then(() => toTop());
-    } else {
-      Alert.alert(
-        Strings.home.search_bar.alert_title,
-        Strings.home.search_bar.alert_description,
-      );
-    }
-  };
 
   const Footer = () => {
     return (
@@ -89,12 +78,18 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     return <PhotoComponent photo={item} navigation={navigation} />;
   };
 
+  const searchPhotos = (e: string) => {
+    setQuery(e);
+    getPhotos(e, 30, undefined).then(() => toTop());
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const optimisedSearch = useCallback(debounce(searchPhotos, 500), []);
+
   return (
     <SafeAreaView style={styles.rootView}>
       <SearchBar
-        value={query}
-        onChangeText={setQuery}
-        onEndEditing={onSubmit}
+        onChangeText={optimisedSearch}
         placeholder={Strings.home.search_bar.placeholder}
         style={styles.searchBar}
         mode="border-less"
