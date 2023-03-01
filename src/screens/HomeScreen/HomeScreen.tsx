@@ -90,62 +90,61 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.rootView}>
-        <SearchBar
-          value={query}
-          onChangeText={setQuery}
-          onEndEditing={onSubmit}
-          placeholder={Strings.home.search_bar.placeholder}
-          mode="border-less"
-        />
-        {error ? (
-          <View style={styles.errorContainer}>
-            <Text style={styles.error}>
-              {error ? error : Strings.home.some_unexpected_happened}
-            </Text>
+    <SafeAreaView style={styles.rootView}>
+      <SearchBar
+        value={query}
+        onChangeText={setQuery}
+        onEndEditing={onSubmit}
+        placeholder={Strings.home.search_bar.placeholder}
+        style={styles.searchBar}
+        mode="border-less"
+      />
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.error}>
+            {error ? error : Strings.home.some_unexpected_happened}
+          </Text>
+        </View>
+      ) : (
+        <>
+          <Text style={styles.resultsText}>
+            {Strings.home.results_found} ({photosCount})
+          </Text>
+          <View style={styles.flatListContainer}>
+            <FlatList
+              ref={flatListRef}
+              data={photos}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => {
+                return index.toString();
+              }}
+              alwaysBounceVertical={true}
+              ListFooterComponent={() => <Footer />}
+              refreshing={refreshing}
+              onRefresh={() => {
+                setRefreshing(true);
+                getPhotos(
+                  query.length > 0 ? query : Strings.default_query,
+                  30,
+                  undefined,
+                ).then(() => setRefreshing(false));
+              }}
+              contentContainerStyle={styles.flatListContentStyle}
+              showsVerticalScrollIndicator={false}
+              ListFooterComponentStyle={styles.listFooter}
+              onEndReachedThreshold={0.9}
+              onEndReached={() => {
+                page !== pages && !photosLoading && page < pages
+                  ? getPhotos(query, 30, page < pages ? page + 1 : page)
+                  : null;
+              }}
+              initialNumToRender={10}
+              maxToRenderPerBatch={20}
+              windowSize={10}
+            />
           </View>
-        ) : (
-          <>
-            <Text style={styles.resultsText}>
-              {Strings.home.results_found} ({photosCount})
-            </Text>
-            <View style={styles.flatListContainer}>
-              <FlatList
-                ref={flatListRef}
-                data={photos}
-                renderItem={renderItem}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
-                alwaysBounceVertical={true}
-                ListFooterComponent={() => <Footer />}
-                refreshing={refreshing}
-                onRefresh={() => {
-                  setRefreshing(true);
-                  getPhotos(
-                    query.length > 0 ? query : Strings.default_query,
-                    30,
-                    undefined,
-                  ).then(() => setRefreshing(false));
-                }}
-                contentContainerStyle={styles.flatListContentStyle}
-                showsVerticalScrollIndicator={false}
-                ListFooterComponentStyle={styles.listFooter}
-                onEndReachedThreshold={0.9}
-                onEndReached={() => {
-                  page !== pages && !photosLoading && page < pages
-                    ? getPhotos(query, 30, page < pages ? page + 1 : page)
-                    : null;
-                }}
-                initialNumToRender={10}
-                maxToRenderPerBatch={20}
-                windowSize={10}
-              />
-            </View>
-          </>
-        )}
-      </View>
+        </>
+      )}
     </SafeAreaView>
   );
 });
@@ -153,9 +152,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 const styles = StyleSheet.create({
   rootView: {
     marginHorizontal: ScaleUtils.scale(10),
-  },
-  searchContainer: {
-    marginBottom: ScaleUtils.verticalScale(15),
   },
   flatListContainer: {
     marginBottom: ScaleUtils.verticalScale(30),
@@ -190,5 +186,12 @@ const styles = StyleSheet.create({
     fontSize: ScaleUtils.verticalScale(20),
     textAlign: 'center',
     fontFamily: Fonts.SemiBold,
+  },
+  searchBar: {
+    marginTop: ScaleUtils.verticalScale(10),
+    backgroundColor: Colors.LIGHT_GREY,
+    borderRadius: ScaleUtils.scale(10),
+    height: ScaleUtils.verticalScale(50),
+    justifyContent: 'center',
   },
 });

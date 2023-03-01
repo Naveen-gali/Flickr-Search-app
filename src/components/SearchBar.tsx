@@ -32,11 +32,12 @@ const SearchBar: React.FunctionComponent<Props> = props => {
 
   return (
     <TextInput
-      style={[styles.input, style]}
+      style={[style]}
       autoCapitalize="none"
       onEndEditing={debounceSearch}
       autoCorrect={false}
       left={<Icon name="search" style={styles.icon} />}
+      inputStyle={styles.input}
       {...restProps}
     />
   );
