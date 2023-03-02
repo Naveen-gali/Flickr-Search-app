@@ -6,7 +6,7 @@ import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import {Card} from '../../../components/Card';
 import {FlickrImage} from '../../../components/FlickrImage';
 import {Fonts, Colors} from '../../../assets';
-import {ScaleUtils} from '../../../utils';
+import {ScaleUtils, useThemeColor} from '../../../utils';
 
 type Props = {
   photo: PhotoInterface;
@@ -14,6 +14,7 @@ type Props = {
 };
 
 const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
+  const {card, onBackground} = useThemeColor();
   return (
     <Card
       onPress={() =>
@@ -22,14 +23,26 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
           secret: photo.secret,
         })
       }
-      style={styles.card}>
+      style={[
+        styles.card,
+        {
+          backgroundColor: card,
+        },
+      ]}>
       <FlickrImage
         source={photo.imageurl}
         style={styles.image}
         resizeMode="cover"
       />
 
-      <Text style={styles.title} numberOfLines={6}>
+      <Text
+        style={[
+          styles.title,
+          {
+            color: onBackground,
+          },
+        ]}
+        numberOfLines={6}>
         {photo.title}
       </Text>
     </Card>

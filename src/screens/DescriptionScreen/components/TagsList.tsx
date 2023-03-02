@@ -4,10 +4,12 @@ import {StoreContext} from '../../../models/RootStore';
 import {Tag} from '../../../components/Tag';
 import {TAG_URL} from '../../../constants';
 import {Strings} from '../../../assets';
-import {ScaleUtils} from '../../../utils';
+import {ScaleUtils, useThemeColor} from '../../../utils';
 
 const TagsList = () => {
   const {info} = useContext(StoreContext);
+
+  const {secondary, onSecondary} = useThemeColor();
 
   return (
     <FlatList
@@ -17,6 +19,12 @@ const TagsList = () => {
           key={index}
           content={item._content}
           onPress={() => Linking.openURL(TAG_URL + item._content)}
+          tagStyle={{
+            backgroundColor: secondary,
+          }}
+          textStyle={{
+            color: onSecondary,
+          }}
         />
       )}
       horizontal

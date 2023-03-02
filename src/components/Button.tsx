@@ -12,7 +12,7 @@ import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import {Colors, Fonts} from '../assets';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import debounce from 'lodash.debounce';
-import {ScaleUtils} from '../utils';
+import {ScaleUtils, useThemeColor} from '../utils';
 
 export type ButtonIconProps = {
   icon?: string;
@@ -86,10 +86,17 @@ export const Button = (props: ButtonProps) => {
     };
   });
 
+  const {primary, onPrimary} = useThemeColor();
+
   return (
     <TouchableOpacity
       style={[
-        styles.buttonContainer,
+        [
+          styles.buttonContainer,
+          {
+            backgroundColor: primary,
+          },
+        ],
         getStyle(),
         getDisabledBtnStyle(),
         iconRight ? styles.rightIcon : null,
@@ -109,6 +116,9 @@ export const Button = (props: ButtonProps) => {
                 styles.icon,
                 iconStyle,
                 disabled ? styles.disabledIcon : null,
+                {
+                  color: onPrimary,
+                },
               ]}
             />
           ) : null}
@@ -118,6 +128,9 @@ export const Button = (props: ButtonProps) => {
               mode !== 'default' ? styles.textTypeLabel : null,
               disabled ? getDisabledLabelStyle() : null,
               textStyle,
+              {
+                color: onPrimary,
+              },
             ]}>
             {children}
           </Text>

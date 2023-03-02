@@ -24,8 +24,8 @@ import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import PhotoComponent from './components/PhotoComponent';
 import {SearchBar} from '../../components/SearchBar';
-import {Colors, Fonts, Strings} from '../../assets';
-import {ScaleUtils} from '../../utils';
+import {Colors, Fonts, Pallete, Strings} from '../../assets';
+import {ScaleUtils, useThemeColor} from '../../utils';
 import {PhotoInterface} from '../../models/PhotoModel';
 import debounce from 'lodash.debounce';
 
@@ -86,6 +86,8 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const optimisedSearch = useCallback(debounce(searchPhotos, 500), []);
 
+  const {placeholderColor} = useThemeColor();
+
   return (
     <SafeAreaView style={styles.rootView}>
       <SearchBar
@@ -93,6 +95,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         placeholder={Strings.home.search_bar.placeholder}
         style={styles.searchBar}
         mode="border-less"
+        placeholderTextColor={placeholderColor}
       />
       {error ? (
         <Text style={[styles.error]}>
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
     marginVertical: ScaleUtils.verticalScale(20),
   },
   error: {
-    color: Colors.RED,
+    color: Pallete.error,
     fontSize: ScaleUtils.verticalScale(16),
     textAlign: 'center',
     marginTop: ScaleUtils.verticalScale(30),

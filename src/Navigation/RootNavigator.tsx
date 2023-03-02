@@ -22,7 +22,9 @@ export const RootNavigator = () => {
       <Stack.Screen
         name={RouteName.HomeScreen}
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={RouteName.Description}
