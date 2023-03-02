@@ -86,12 +86,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     getPhotos(e, 30, undefined).then(() => setLoading(false));
   };
 
-  // const ListRenderer = () => {
-  //   return (
-
-  //   );
-  // };
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const optimisedSearch = useCallback(debounce(searchPhotos, 500), []);
 
@@ -104,6 +98,25 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         </Text>
       </View>
     );
+  };
+
+  const onEndReached = () => {
+    page !== pages && !photosLoading && page < pages
+      ? getPhotos(query, 30, page < pages ? page + 1 : page)
+      : null;
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getPhotos(
+      query.length > 0 ? query : Strings.default_query,
+      30,
+      undefined,
+    ).then(() => setRefreshing(false));
+  };
+
+  const keyExtractor = (item: PhotoInterface, index: number): string => {
+    return index.toString();
   };
 
   return (
@@ -126,29 +139,16 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
             ref={flatListRef}
             data={photos}
             renderItem={renderItem}
-            keyExtractor={(item, index) => {
-              return index.toString();
-            }}
+            keyExtractor={keyExtractor}
             alwaysBounceVertical={true}
             ListFooterComponent={<Footer />}
             refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);
-              getPhotos(
-                query.length > 0 ? query : Strings.default_query,
-                30,
-                undefined,
-              ).then(() => setRefreshing(false));
-            }}
+            onRefresh={onRefresh}
             contentContainerStyle={styles.flatListContentStyle}
             showsVerticalScrollIndicator={false}
             ListFooterComponentStyle={styles.listFooter}
             onEndReachedThreshold={0.9}
-            onEndReached={() => {
-              page !== pages && !photosLoading && page < pages
-                ? getPhotos(query, 30, page < pages ? page + 1 : page)
-                : null;
-            }}
+            onEndReached={onEndReached}
             initialNumToRender={10}
             maxToRenderPerBatch={20}
             windowSize={10}
