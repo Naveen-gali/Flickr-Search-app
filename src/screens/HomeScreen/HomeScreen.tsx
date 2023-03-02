@@ -42,10 +42,8 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   const flatListRef = useRef<FlatList<PhotoInterface>>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [query, setQuery] = useState('');
-
-  const toTop = () => {
-    flatListRef.current?.scrollToOffset({animated: true, offset: 0});
-  };
+  const [loading, setLoading] = useState(false);
+  const {placeholderColor, secondary} = useThemeColor();
 
   const loadData = useCallback(() => {
     if (!photosLoading) {
@@ -64,9 +62,13 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     return (
       <View style={styles.listFooter}>
         {page !== pages ? (
-          <ActivityIndicator color={Colors.BLACK} size={'large'} />
+          <ActivityIndicator color={secondary} size={'large'} />
         ) : photosLoading ? (
-          <ActivityIndicator color={Colors.GREY} />
+          <ActivityIndicator color={secondary} />
+        ) : error ? (
+          <Text style={[styles.error]}>
+            {error ? error : Strings.home.some_unexpected_happened}
+          </Text>
         ) : (
           <Text style={styles.endText}>{Strings.home.endReached}</Text>
         )}
@@ -79,14 +81,30 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   };
 
   const searchPhotos = (e: string) => {
+    setLoading(true);
     setQuery(e);
-    getPhotos(e, 30, undefined).then(() => toTop());
+    getPhotos(e, 30, undefined).then(() => setLoading(false));
   };
+
+  // const ListRenderer = () => {
+  //   return (
+
+  //   );
+  // };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const optimisedSearch = useCallback(debounce(searchPhotos, 500), []);
 
-  const {placeholderColor} = useThemeColor();
+  const SearchLoading = () => {
+    return (
+      <View style={styles.searchLoading}>
+        <ActivityIndicator size={'large'} color={secondary} />
+        <Text style={styles.searchLoadingText}>
+          {Strings.home.photos_loading}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.rootView}>
@@ -97,10 +115,8 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         mode="border-less"
         placeholderTextColor={placeholderColor}
       />
-      {error ? (
-        <Text style={[styles.error]}>
-          {error ? error : Strings.home.some_unexpected_happened}
-        </Text>
+      {loading ? (
+        <SearchLoading />
       ) : (
         <>
           <Text style={styles.resultsText}>
@@ -114,7 +130,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
               return index.toString();
             }}
             alwaysBounceVertical={true}
-            ListFooterComponent={() => <Footer />}
+            ListFooterComponent={<Footer />}
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true);
@@ -146,6 +162,16 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 const styles = StyleSheet.create({
   rootView: {
     marginHorizontal: ScaleUtils.scale(10),
+  },
+  searchLoading: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: ScaleUtils.scale(10),
+    marginTop: ScaleUtils.verticalScale(10),
+  },
+  searchLoadingText: {
+    marginTop: ScaleUtils.verticalScale(10),
+    fontSize: ScaleUtils.verticalScale(15),
   },
   flatListContentStyle: {
     paddingBottom: ScaleUtils.verticalScale(80),

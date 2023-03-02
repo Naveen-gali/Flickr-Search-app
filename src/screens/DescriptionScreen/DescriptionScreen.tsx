@@ -19,7 +19,7 @@ import {PEOPLE_URL} from '../../constants';
 import OwnerSection from './components/OwnerSection';
 import {cast} from 'mobx-state-tree';
 import {Button} from '../../components/Button';
-import {ScaleUtils} from '../../utils';
+import {ScaleUtils, useThemeColor} from '../../utils';
 
 type DescriptionScreenProps = NativeStackScreenProps<
   RootStoreParams,
@@ -29,6 +29,7 @@ type DescriptionScreenProps = NativeStackScreenProps<
 export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
   const {photoId, secret} = route.params;
   const {getImageInfo, info, infoLoading} = useContext(StoreContext);
+  const {secondary} = useThemeColor();
 
   useEffect(() => {
     getImageInfo(photoId, secret);
@@ -37,7 +38,7 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
   return (
     <View style={styles.rootContainer}>
       {infoLoading ? (
-        <ActivityIndicator size="small" color={Colors.BLUE} />
+        <ActivityIndicator size="small" color={secondary} />
       ) : (
         <ScrollView style={styles.container}>
           <FlickrImage source={info.imageurl} style={styles.image} />
