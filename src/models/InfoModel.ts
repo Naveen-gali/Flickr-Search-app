@@ -62,10 +62,7 @@ const EditabilityModel = types.model({
   canaddmeta: 0,
 });
 
-const PubliceditabilityModel = types.model({
-  cancomment: 0,
-  canaddmeta: 0,
-});
+const PubliceditabilityModel = types.optional(EditabilityModel, {});
 
 const UsageModel = types.model({
   candownload: 0,
