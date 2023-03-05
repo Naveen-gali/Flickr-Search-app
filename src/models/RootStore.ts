@@ -10,6 +10,7 @@ import {createContext} from 'react';
 import {PhotoModel} from './PhotoModel';
 import {InfoModel} from './InfoModel';
 import {InfoServices, PhotoServices} from '../services';
+import {Strings} from '../assets';
 
 export type StoreType = Instance<typeof store>;
 
@@ -94,7 +95,7 @@ export const store = types
         self.infoLoading = false;
       } catch (err) {
         self.infoLoading = false;
-        self.error = 'SomeThing Unexpected Happened!';
+        self.error = Strings.home.some_unexpected_happened;
       }
     }),
   }));

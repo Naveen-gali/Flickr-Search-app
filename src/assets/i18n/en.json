@@ -3,7 +3,6 @@
         "results_found": "Results Found",
         "endReached": "End Reached",
         "some_unexpected_happened": "Some Thing Unexpected Happened",
-        "default_query":"India",
         "search_bar": {
             "alert_title": "Search Bar Empty!",
             "placeholder": "Search Photos",

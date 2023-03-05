@@ -108,11 +108,9 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    getPhotos(
-      query.length > 0 ? query : Strings.default_query,
-      30,
-      undefined,
-    ).then(() => setRefreshing(false));
+    getPhotos(query.length > 0 ? query : 'India', 30, undefined).then(() =>
+      setRefreshing(false),
+    );
   };
 
   const keyExtractor = (item: PhotoInterface, index: number): string => {

@@ -8,7 +8,8 @@
         "alert_title": "Barra di ricerca vuota!",
         "placeholder": "Cerca foto",
         "alert_description": "Digita SomeThing to Search!"
-      }
+      },
+      "photos_loading":"Photos Loading..."
     },
     "description": {
       "no_tags_found": "Nessun tag trovato",
