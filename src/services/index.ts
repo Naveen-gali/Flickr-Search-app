@@ -1,2 +1,2 @@
-export * as InfoServices from './InfoServices';
-export * as PhotoServices from './PhotoServices';
+export * as InfoService from './InfoService';
+export * as PhotoService from './PhotoServices';

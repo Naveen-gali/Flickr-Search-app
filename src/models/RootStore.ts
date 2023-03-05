@@ -9,7 +9,7 @@ import {
 import {createContext} from 'react';
 import {PhotoModel} from './PhotoModel';
 import {InfoModel} from './InfoModel';
-import {InfoServices, PhotoServices} from '../services';
+import {InfoService, PhotoService} from '../services';
 import {Strings} from '../assets';
 
 export type StoreType = Instance<typeof store>;
@@ -61,7 +61,7 @@ export const store = types
       self.photosLoading = true;
       try {
         const response = yield* toGenerator(
-          PhotoServices.getPhotos(text, perPage, page),
+          PhotoService.getPhotos(text, perPage, page),
         );
         if (response.stat === 'ok') {
           self.photos =
@@ -88,7 +88,7 @@ export const store = types
       self.infoLoading = true;
       try {
         const response = yield* toGenerator(
-          InfoServices.getImageInfo(photo_id, secret),
+          InfoService.getImageInfo(photo_id, secret),
         );
         self.info = response.photo;
 
