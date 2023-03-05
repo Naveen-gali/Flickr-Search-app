@@ -29,10 +29,7 @@ import {ScaleUtils, useThemeColor} from '../../utils';
 import {PhotoInterface} from '../../models/PhotoModel';
 import debounce from 'lodash.debounce';
 
-type HomeScreenProps = NativeStackScreenProps<
-  RootStoreParams,
-  RouteName.HomeScreen
->;
+type HomeScreenProps = NativeStackScreenProps<RootStoreParams, RouteName.Home>;
 
 export const HomeScreen = observer((_props: HomeScreenProps) => {
   const navigation =

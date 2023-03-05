@@ -4,13 +4,12 @@ import {HomeScreen, DescriptionScreen} from '../screens';
 import {Strings} from '../assets';
 
 export enum RouteName {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  HomeScreen = 'HomeScreen',
+  Home = 'HomeScreen',
   Description = 'Description',
 }
 
 export type RootStoreParams = {
-  [RouteName.HomeScreen]: undefined;
+  [RouteName.Home]: undefined;
   [RouteName.Description]: {photoId: string; secret: string};
 };
 
@@ -20,7 +19,7 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={RouteName.HomeScreen}
+        name={RouteName.Home}
         component={HomeScreen}
         options={{
           headerShown: false,
