@@ -5,6 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import {RootNavigator} from './src/navigation/RootNavigator';
 import {store, StoreContext} from './src/models/RootStore';
+import {useColorScheme} from 'react-native';
+import {DarkTheme, LightTheme} from './src/assets';
 
 const RootStore = store.create({
   photos: [],
@@ -22,9 +24,11 @@ function App(): JSX.Element {
     RNBootSplash.hide({fade: true, duration: 500});
   });
 
+  const theme = useColorScheme();
+
   return (
     <StoreContext.Provider value={RootStore}>
-      <NavigationContainer>
+      <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
         <RootNavigator />
       </NavigationContainer>
     </StoreContext.Provider>

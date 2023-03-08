@@ -19,7 +19,7 @@ export const Label = (props: LabelProps) => {
 const styles = StyleSheet.create({
   label: {
     fontFamily: Fonts.SemiBold,
-    fontSize: ScaleUtils.verticalScale(16),
+    fontSize: ScaleUtils.verticalScale(15),
     flexWrap: 'wrap',
   },
 });

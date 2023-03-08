@@ -9,7 +9,7 @@ import {ScaleUtils, useThemeColor} from '../../../utils';
 const TagsList = () => {
   const {info} = useContext(StoreContext);
 
-  const {secondary, onSecondary} = useThemeColor();
+  const {colors} = useThemeColor();
 
   return (
     <FlatList
@@ -20,10 +20,10 @@ const TagsList = () => {
           content={item._content}
           onPress={() => Linking.openURL(TAG_URL + item._content)}
           tagStyle={{
-            backgroundColor: secondary,
+            backgroundColor: colors.secondary,
           }}
           textStyle={{
-            color: onSecondary,
+            color: colors.onSecondary,
           }}
         />
       )}

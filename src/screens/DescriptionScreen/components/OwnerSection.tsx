@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Avatar} from '../../../components/Avatar';
-import {Colors, Fonts} from '../../../assets';
+import {Fonts} from '../../../assets';
 import {OwnerModelType} from '../../../models/InfoModel';
-import {ScaleUtils} from '../../../utils';
+import {ScaleUtils, useThemeColor} from '../../../utils';
 
 type Props = {
   onPress: (event: GestureResponderEvent) => void;
@@ -18,11 +18,14 @@ type Props = {
 
 const OwnerSection = (props: Props) => {
   const {onPress, owner} = props;
+  const {colors} = useThemeColor();
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Avatar name={owner.username} />
-      <Text style={styles.ownerName}>{owner.username}</Text>
+      <Text style={[styles.ownerName, {color: colors.text}]}>
+        {owner.username}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: ScaleUtils.scale(10),
-    color: Colors.BLACK,
+
     fontFamily: Fonts.SemiBold,
   },
 });

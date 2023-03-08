@@ -12,7 +12,14 @@
     },
     "description": {
         "no_tags_found": "No Tags Found",
-        "description": "Description"
+        "description": "Description",
+        "comments":"comments",
+        "comments_placeholder":"Comment on Post",
+        "view_in_browser" : "View in Browser"
+    },
+    "default_query" : "India",
+    "input" : {
+        "default_error": "Error Occured!"
     },
     "screen_titles": {
         "description":"Description"

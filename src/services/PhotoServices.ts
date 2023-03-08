@@ -14,7 +14,7 @@ function getImageUrl(
 
 function getPhotos(text: string, perPage: number, page: number) {
   return GetApi<GetPhotosResponse | ErrorResponse>(ApiMethods.SEARCH_METHOD, {
-    text: text ? text : 'India',
+    text: text,
     per_page: perPage,
     page: page !== 1 ? page : 1,
   }).then(res => {

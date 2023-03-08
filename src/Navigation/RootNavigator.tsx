@@ -4,7 +4,7 @@ import {HomeScreen, DescriptionScreen} from '../screens';
 import {Strings} from '../assets';
 
 export enum RouteName {
-  Home = 'HomeScreen',
+  Home = 'Home',
   Description = 'Description',
 }
 

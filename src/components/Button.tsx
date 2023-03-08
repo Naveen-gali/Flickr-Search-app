@@ -9,7 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
-import {Colors, Fonts} from '../assets';
+import {Fonts} from '../assets';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import debounce from 'lodash.debounce';
 import {ScaleUtils, useThemeColor} from '../utils';
@@ -49,7 +49,12 @@ export const Button = (props: ButtonProps) => {
     if (mode === 'default') {
       return;
     } else if (mode === 'outlined') {
-      return styles.outlied;
+      return [
+        styles.outlied,
+        {
+          borderColor: colors.primary,
+        },
+      ];
     } else if (mode === 'text') {
       return styles.textType;
     }
@@ -59,9 +64,9 @@ export const Button = (props: ButtonProps) => {
     if (disabled && mode === 'text') {
       return null;
     } else if (disabled && mode === 'default') {
-      return styles.disabledDefault;
+      return {backgroundColor: colors.disabledBtn};
     } else if (disabled && mode === 'outlined') {
-      return styles.disabledOutlined;
+      return {borderColor: colors.disabledBtn};
     }
   };
 
@@ -69,7 +74,7 @@ export const Button = (props: ButtonProps) => {
     if (mode === 'default') {
       return;
     } else {
-      return styles.disabledLabel;
+      return {color: colors.onDisabledBtn};
     }
   };
 
@@ -86,7 +91,7 @@ export const Button = (props: ButtonProps) => {
     };
   });
 
-  const {primary, onPrimary} = useThemeColor();
+  const {colors} = useThemeColor();
 
   return (
     <TouchableOpacity
@@ -94,7 +99,7 @@ export const Button = (props: ButtonProps) => {
         [
           styles.buttonContainer,
           {
-            backgroundColor: primary,
+            backgroundColor: colors.primary,
           },
         ],
         getStyle(),
@@ -115,9 +120,9 @@ export const Button = (props: ButtonProps) => {
               style={[
                 styles.icon,
                 iconStyle,
-                disabled ? styles.disabledIcon : null,
+                disabled ? {color: colors.onPrimary} : null,
                 {
-                  color: onPrimary,
+                  color: colors.onPrimary,
                 },
               ]}
             />
@@ -125,11 +130,11 @@ export const Button = (props: ButtonProps) => {
           <Text
             style={[
               styles.text,
-              mode !== 'default' ? styles.textTypeLabel : null,
+              mode !== 'default' ? {color: colors.onPrimary} : null,
               disabled ? getDisabledLabelStyle() : null,
               textStyle,
               {
-                color: onPrimary,
+                color: colors.onPrimary,
               },
             ]}>
             {children}
@@ -145,7 +150,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: ScaleUtils.scale(10),
     paddingVertical: ScaleUtils.verticalScale(10),
-    backgroundColor: Colors.BTN_BLUE,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   },
   outlied: {
     borderWidth: ScaleUtils.scale(1),
-    borderColor: Colors.BTN_BLUE,
+
     backgroundColor: undefined,
   },
   textType: {
@@ -166,28 +170,25 @@ const styles = StyleSheet.create({
     borderWidth: ScaleUtils.scale(0),
     backgroundColor: undefined,
   },
-  textTypeLabel: {
-    color: Colors.BLACK,
-  },
-  loading: {
-    color: Colors.LIGHT_WHITE,
-  },
-  disabledOutlined: {
-    borderColor: Colors.GREY,
-  },
-  disabledDefault: {
-    backgroundColor: Colors.GREY,
-  },
-  disabledLabel: {
-    color: Colors.GREY,
-  },
+  // textTypeLabel: {
+  //   color: Colors.BLACK,
+  // },
+  // disabledOutlined: {
+  //   borderColor: Colors.GREY,
+  // },
+  // disabledDefault: {
+  //   backgroundColor: Colors.GREY,
+  // },
+  // disabledLabel: {
+  //   color: Colors.GREY,
+  // },
   icon: {
     marginHorizontal: ScaleUtils.scale(10),
     fontSize: ScaleUtils.verticalScale(20),
   },
-  disabledIcon: {
-    color: Colors.GREY,
-  },
+  // disabledIcon: {
+  //   color: Colors.GREY,
+  // },
   rightIcon: {
     flexDirection: 'row-reverse',
   },

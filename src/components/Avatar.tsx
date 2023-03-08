@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, ViewStyle} from 'react-native';
-import {Colors, Fonts} from '../assets';
-import {ScaleUtils} from '../utils';
+import {Fonts} from '../assets';
+import {ScaleUtils, useThemeColor} from '../utils';
 
 export type AvatarProps = {
   name: string;
@@ -9,10 +9,11 @@ export type AvatarProps = {
 };
 
 export const Avatar = ({name, style}: AvatarProps) => {
+  const {colors} = useThemeColor();
   const letter = name.charAt(0);
   return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.text}>{letter}</Text>
+    <View style={[styles.container, {backgroundColor: colors.card}, style]}>
+      <Text style={[styles.text, {color: colors.text}]}>{letter}</Text>
     </View>
   );
 };
@@ -20,7 +21,6 @@ export const Avatar = ({name, style}: AvatarProps) => {
 const styles = StyleSheet.create({
   container: {
     borderWidth: ScaleUtils.scale(1),
-    backgroundColor: Colors.DEFAULT_AVATAR_COLOR,
     height: ScaleUtils.scale(45),
     width: ScaleUtils.scale(45),
     borderRadius: ScaleUtils.scale(45) / 2,
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: ScaleUtils.verticalScale(25),
-    color: Colors.BLACK,
     textTransform: 'capitalize',
     fontFamily: Fonts.SemiBold,
   },

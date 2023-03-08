@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
+  Animated,
   StyleProp,
   StyleSheet,
   Text,
@@ -9,8 +10,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Colors, Fonts} from '../assets';
-import {ScaleUtils} from '../utils';
+import {Fonts, Pallete, Strings} from '../assets';
+import {ScaleUtils, useThemeColor} from '../utils';
 import {Label} from './Label';
 
 export type InputErrorProps = {
@@ -50,6 +51,7 @@ export const TextInput = (props: TextInputProps) => {
     inputStyle,
     left,
     right,
+    value,
     ...restProps
   } = props;
   const [focused, setFocused] = useState(false);
@@ -72,27 +74,112 @@ export const TextInput = (props: TextInputProps) => {
     }
   };
 
+  const floatLabel = useRef(new Animated.Value(0)).current;
+
+  const yInterpolate = floatLabel.interpolate({
+    inputRange: [0, 1],
+    outputRange: [4, -20],
+  });
+
+  const animation = {
+    transform: [
+      {
+        translateY: yInterpolate,
+      },
+    ],
+  };
+
+  const moveLabelTop = () => {
+    Animated.timing(floatLabel, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const moveLabelDown = () => {
+    Animated.timing(floatLabel, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const onFocusHandler = () => {
+    if (value === '') {
+      moveLabelTop();
+    }
+  };
+
+  const onBlurHandler = () => {
+    if (value === '') {
+      moveLabelDown();
+    }
+  };
+
+  const {colors} = useThemeColor();
+
   return (
     <View style={[styles.container, style]}>
-      {label ? <Label style={labelStyle} label={label} /> : null}
       <View style={styles.inputContainer}>
         {left ? left : null}
-        <InputField
-          onChangeText={onChangeText}
-          style={[
-            styles.input,
-            getStyle(),
-            focused && mode !== 'border-less' ? styles.focused : null,
-            error ? styles.error : null,
-            getDisabledStyle(),
-            inputStyle,
-          ]}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          placeholder={placeholder}
-          editable={editable}
-          {...restProps}
-        />
+        <View style={styles.labelAndInputContainer}>
+          <Animated.View
+            style={[
+              styles.animatedLabel,
+              mode === 'outline'
+                ? {
+                    backgroundColor: colors.placeholder,
+                  }
+                : null,
+              animation,
+            ]}>
+            {label ? (
+              <Label
+                style={[
+                  {
+                    backgroundColor: colors.background,
+                    color: colors.text,
+                  },
+                  styles.defaultLabel,
+                  focused ? [styles.focusedLabel, labelStyle] : null,
+                ]}
+                label={label}
+              />
+            ) : null}
+          </Animated.View>
+          <InputField
+            onChangeText={onChangeText}
+            style={[
+              styles.input,
+              {
+                borderBottomColor: colors.inactiveInputBottom,
+                color: colors.text,
+              },
+              getStyle(),
+              focused && mode !== 'border-less'
+                ? [
+                    styles.focused,
+                    {borderBottomColor: colors.activeInputBottom},
+                  ]
+                : null,
+              error ? styles.error : null,
+              getDisabledStyle(),
+              inputStyle,
+            ]}
+            onFocus={() => {
+              onFocusHandler();
+              setFocused(true);
+            }}
+            onBlur={() => {
+              onBlurHandler();
+              setFocused(false);
+            }}
+            placeholder={placeholder}
+            editable={editable}
+            {...restProps}
+          />
+        </View>
         {right ? right : null}
       </View>
       {hint && !error ? (
@@ -100,7 +187,7 @@ export const TextInput = (props: TextInputProps) => {
       ) : null}
       {error ? (
         <Text style={[styles.errorMessage, errorMessageStyle]}>
-          {errorMessage ? errorMessage : 'Error Occured'}
+          {errorMessage ? errorMessage : Strings.input.default_error}
         </Text>
       ) : null}
     </View>
@@ -112,14 +199,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: ScaleUtils.scale(10),
     borderRadius: ScaleUtils.scale(3),
-    backgroundColor: Colors.LIGHT_GREY,
     fontSize: ScaleUtils.verticalScale(15),
     borderBottomWidth: ScaleUtils.verticalScale(2),
-    borderBottomColor: Colors.GREY,
   },
   focused: {
     borderBottomWidth: ScaleUtils.scale(2),
-    borderBottomColor: Colors.BLACK,
   },
   hint: {
     fontSize: ScaleUtils.verticalScale(12),
@@ -127,23 +211,23 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Italic,
   },
   error: {
-    borderColor: Colors.RED,
+    borderColor: Pallete.error,
   },
   errorMessage: {
-    color: Colors.RED,
+    color: Pallete.error,
     marginTop: ScaleUtils.verticalScale(5),
   },
   outline: {
     borderWidth: ScaleUtils.scale(1),
   },
   outlineDisable: {
-    borderColor: Colors.GREY,
-    backgroundColor: Colors.LIGHT_WHITE,
+    borderColor: Pallete.disabledBorder,
+    backgroundColor: Pallete.disabledInput,
     borderWidth: ScaleUtils.scale(1),
   },
   defaultDisable: {
     borderBottomWidth: ScaleUtils.scale(3),
-    borderBottomColor: Colors.GREY,
+    borderBottomColor: Pallete.disabledBorder,
   },
   borderLess: {
     borderBottomWidth: 0,
@@ -154,4 +238,20 @@ const styles = StyleSheet.create({
     marginHorizontal: ScaleUtils.scale(7),
   },
   container: {},
+  animatedLabel: {
+    top: 5,
+    left: 15,
+    position: 'absolute',
+    zIndex: 10000,
+    overflow: 'hidden',
+  },
+  defaultLabel: {
+    fontFamily: Fonts.Italic,
+  },
+  focusedLabel: {
+    fontFamily: Fonts.SemiBold,
+  },
+  labelAndInputContainer: {
+    flex: 1,
+  },
 });

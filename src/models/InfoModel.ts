@@ -1,4 +1,5 @@
 import {Instance, SnapshotOut, types} from 'mobx-state-tree';
+import {DEFAULT_IMAGE_URL} from '../constants';
 
 export type InfoModelType = Instance<typeof InfoModel>;
 export type GiftModelType = Instance<typeof GiftModel>;
@@ -137,10 +138,7 @@ export const InfoModel = types.model('InfoModel').props({
     url: types.array(UrlModel),
   }),
   media: '',
-  imageurl: types.optional(
-    types.string,
-    'https://via.placeholder.com/600x400?text=Image+Loading',
-  ),
+  imageurl: types.optional(types.string, DEFAULT_IMAGE_URL),
 });
 
 export interface InfoInterface extends SnapshotOut<typeof InfoModel> {}

@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import {Colors} from '../assets';
 import debounce from 'lodash.debounce';
-import {ScaleUtils} from '../utils';
+import {ScaleUtils, useThemeColor} from '../utils';
 
 export type TagProps = {
   content: string;
@@ -31,11 +30,13 @@ export const Tag = (props: TagProps) => {
     };
   });
 
+  const {colors} = useThemeColor();
+
   return (
     <TouchableOpacity
       style={[styles.container, tagStyle]}
       onPress={debouncePress}>
-      <Text style={[styles.text, textStyle]}># {content}</Text>
+      <Text style={[{color: colors.text}, textStyle]}># {content}</Text>
     </TouchableOpacity>
   );
 };
@@ -45,9 +46,5 @@ const styles = StyleSheet.create({
     marginHorizontal: ScaleUtils.scale(5),
     padding: ScaleUtils.scale(8),
     borderRadius: ScaleUtils.scale(10),
-    backgroundColor: Colors.GREY,
-  },
-  text: {
-    color: Colors.BLACK,
   },
 });

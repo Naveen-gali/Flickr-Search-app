@@ -5,7 +5,7 @@ import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import {Card} from '../../../components/Card';
 import {FlickrImage} from '../../../components/FlickrImage';
-import {Fonts, Colors} from '../../../assets';
+import {Fonts} from '../../../assets';
 import {ScaleUtils, useThemeColor} from '../../../utils';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
-  const {card, onBackground} = useThemeColor();
+  const {colors} = useThemeColor();
   return (
     <Card
       onPress={() =>
@@ -26,7 +26,7 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
       style={[
         styles.card,
         {
-          backgroundColor: card,
+          backgroundColor: colors.card,
         },
       ]}>
       <FlickrImage
@@ -39,7 +39,7 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
         style={[
           styles.title,
           {
-            color: onBackground,
+            color: colors.heading,
           },
         ]}
         numberOfLines={6}>
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     fontSize: ScaleUtils.verticalScale(18),
     marginTop: ScaleUtils.verticalScale(15),
-    color: Colors.BLACK,
     fontFamily: Fonts.Bold,
     textTransform: 'capitalize',
   },

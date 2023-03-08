@@ -61,7 +61,11 @@ export const store = types
       self.photosLoading = true;
       try {
         const response = yield* toGenerator(
-          PhotoService.getPhotos(text, perPage, page),
+          PhotoService.getPhotos(
+            text ? text : Strings.default_query,
+            perPage,
+            page,
+          ),
         );
         if (response.stat === 'ok') {
           self.photos =
@@ -70,16 +74,12 @@ export const store = types
               : cast(response.photos.photo);
           self.page = response.photos.page;
           self.pages = response.photos.pages;
-          console.log('RES :_ ', response.photos.photo);
         } else {
           self.error = response.message;
-          console.log('ERR :_ ', response.message);
           self.photosLoading = false;
         }
       } catch (err) {
-        console.log('ERRR :_ ', err);
-
-        self.error = 'Some Thing Unexpected Happened!';
+        self.error = Strings.home.some_unexpected_happened;
       } finally {
         self.photosLoading = false;
       }
