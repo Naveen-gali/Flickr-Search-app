@@ -3,9 +3,11 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -72,16 +74,18 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
                 setValue(e);
               }}
               label={Strings.description.comments_placeholder}
-              numberOfLines={5}
               value={value}
               mode="outline"
               style={styles.commentInput}
               right={
-                <Icon
-                  name="check"
-                  style={[styles.icon, {color: colors.text}]}
-                />
+                <TouchableOpacity onPress={() => console.log('P')}>
+                  <Icon
+                    name="check"
+                    style={[styles.icon, {color: colors.text}]}
+                  />
+                </TouchableOpacity>
               }
+              hint="Comment"
             />
           </View>
 

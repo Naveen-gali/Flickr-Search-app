@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     fontSize: ScaleUtils.verticalScale(30),
     alignSelf: 'center',
     marginHorizontal: ScaleUtils.scale(9),
+    paddingVertical: 10,
   },
 });

@@ -3,17 +3,18 @@ import {StyleSheet, Text} from 'react-native';
 import {PhotoInterface} from '../../../models/PhotoModel';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
-import {Card} from '../../../components/Card';
+import {Card, CardProps} from '../../../components/Card';
 import {FlickrImage} from '../../../components/FlickrImage';
 import {Fonts} from '../../../assets';
 import {ScaleUtils, useThemeColor} from '../../../utils';
 
-type Props = {
+type Props = CardProps & {
   photo: PhotoInterface;
   navigation: NativeStackNavigationProp<RootStoreParams>;
 };
 
-const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
+const PhotoComponent: React.FC<Props> = (props: Props) => {
+  const {photo, navigation, ...restProps} = props;
   const {colors} = useThemeColor();
   return (
     <Card
@@ -28,7 +29,8 @@ const PhotoComponent: React.FC<Props> = ({photo, navigation}) => {
         {
           backgroundColor: colors.card,
         },
-      ]}>
+      ]}
+      {...restProps}>
       <FlickrImage
         source={photo.imageurl}
         style={styles.image}

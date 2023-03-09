@@ -1,3 +1,10 @@
+import {useNavigation} from '@react-navigation/native';
+import type {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import debounce from 'lodash.debounce';
+import {observer} from 'mobx-react-lite';
 import React, {
   useCallback,
   useContext,
@@ -6,28 +13,26 @@ import React, {
   useState,
 } from 'react';
 import {
+  ActivityIndicator,
+  Animated,
+  Dimensions,
   FlatList,
+  ListRenderItemInfo,
   SafeAreaView,
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
-  ListRenderItemInfo,
 } from 'react-native';
-import type {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
-import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
-import {useNavigation} from '@react-navigation/native';
-import {StoreContext} from '../../models/RootStore';
-import {observer} from 'mobx-react-lite';
-import PhotoComponent from './components/PhotoComponent';
-import {SearchBar} from '../../components/SearchBar';
 import {Fonts, Pallete, Strings} from '../../assets';
-import {ScaleUtils, useThemeColor} from '../../utils';
+import {Card} from '../../components/Card';
+import {FlickrImage} from '../../components/FlickrImage';
+import {SearchBar} from '../../components/SearchBar';
+import {DEFAULT_IMAGE_URL} from '../../constants';
 import {PhotoInterface} from '../../models/PhotoModel';
-import debounce from 'lodash.debounce';
+import {StoreContext} from '../../models/RootStore';
+import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
+import {ScaleUtils, useThemeColor} from '../../utils';
+import PhotoComponent from './components/PhotoComponent';
 
 type HomeScreenProps = NativeStackScreenProps<RootStoreParams, RouteName.Home>;
 
@@ -40,6 +45,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   const [refreshing, setRefreshing] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(DEFAULT_IMAGE_URL);
   const {colors} = useThemeColor();
 
   const loadData = useCallback(() => {
@@ -73,8 +79,53 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     );
   };
 
+  const showModal = () => {
+    Animated.spring(imagePreview, {
+      toValue: 1,
+      friction: 5,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const hideModal = () => {
+    Animated.timing(imagePreview, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const imagePreview = useRef(new Animated.Value(0)).current;
+
+  const yInterpolate = imagePreview.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -50],
+  });
+
+  const animation = {
+    opacity: imagePreview,
+    transform: [
+      {
+        translateY: yInterpolate,
+      },
+    ],
+  };
+
   const renderItem = ({item}: ListRenderItemInfo<PhotoInterface>) => {
-    return <PhotoComponent photo={item} navigation={navigation} />;
+    return (
+      <PhotoComponent
+        photo={item}
+        navigation={navigation}
+        onLongPress={() => {
+          setSelected(item.imageurl);
+          showModal();
+        }}
+        onPressOut={() => {
+          hideModal();
+        }}
+        // {...panResponder.panHandlers}
+      />
+    );
   };
 
   const searchPhotos = (e: string) => {
@@ -111,6 +162,24 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   const keyExtractor = (item: PhotoInterface, index: number): string => {
     return index.toString();
   };
+
+  // const panResponder = PanResponder.create({
+  //   onStartShouldSetPanResponder: (evt, gestureState) => true,
+  //   onMoveShouldSetPanResponder: (evt, gestureState) => true,
+  //   onPanResponderGrant: () => {
+  //     hideModal();
+  //     // showModal();
+  //   },
+  //   onPanResponderMove: (e, gestureState) => {
+  //     console.log('E', e);
+  //   },
+  //   onPanResponderRelease: (e, gestureState) => {
+  //     console.log('Released');
+  //   },
+  //   onPanResponderEnd(e, gestureState) {
+  //     hideModal();
+  //   },
+  // });
 
   return (
     <SafeAreaView style={styles.rootView}>
@@ -159,6 +228,24 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
           />
         </>
       )}
+      <Animated.View
+        pointerEvents="none"
+        style={[
+          StyleSheet.absoluteFill,
+          styles.modal,
+          {
+            shadowColor: colors.border,
+          },
+          animation,
+        ]}>
+        <Card style={styles.animCard}>
+          <FlickrImage
+            source={selected}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </Card>
+      </Animated.View>
     </SafeAreaView>
   );
 });
@@ -183,7 +270,6 @@ const styles = StyleSheet.create({
   resultsText: {
     marginVertical: ScaleUtils.verticalScale(10),
     fontSize: ScaleUtils.verticalScale(12),
-    // color: Colors.BLACK,
   },
   listFooter: {
     marginVertical: ScaleUtils.verticalScale(20),
@@ -209,5 +295,29 @@ const styles = StyleSheet.create({
     borderRadius: ScaleUtils.scale(10),
     height: ScaleUtils.verticalScale(50),
     justifyContent: 'center',
+  },
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: ScaleUtils.scale(Dimensions.get('screen').width - 40),
+    height: ScaleUtils.verticalScale(330),
+    overflow: 'hidden',
+    marginHorizontal: ScaleUtils.scale(10),
+  },
+  animCard: {
+    width: ScaleUtils.scale(Dimensions.get('screen').width - 30),
+    height: ScaleUtils.verticalScale(380),
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: ScaleUtils.scale(10),
   },
 });

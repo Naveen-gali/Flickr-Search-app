@@ -183,10 +183,17 @@ export const TextInput = (props: TextInputProps) => {
         {right ? right : null}
       </View>
       {hint && !error ? (
-        <Text style={[styles.hint, hintStyle]}>{hint}</Text>
+        <Text style={[styles.hint, {color: colors.text}, hintStyle]}>
+          {hint}
+        </Text>
       ) : null}
       {error ? (
-        <Text style={[styles.errorMessage, errorMessageStyle]}>
+        <Text
+          style={[
+            styles.errorMessage,
+            {color: Pallete.error},
+            errorMessageStyle,
+          ]}>
           {errorMessage ? errorMessage : Strings.input.default_error}
         </Text>
       ) : null}
