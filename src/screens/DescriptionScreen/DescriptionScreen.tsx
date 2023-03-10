@@ -3,14 +3,13 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import type {StackScreenProps} from '@react-navigation/stack';
 import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
@@ -24,14 +23,15 @@ import {Button} from '../../components/Button';
 import {ScaleUtils, useThemeColor} from '../../utils';
 import {TextInput} from '../../components/TextInput';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {SharedElement} from 'react-navigation-shared-element';
 
-type DescriptionScreenProps = NativeStackScreenProps<
+type DescriptionScreenProps = StackScreenProps<
   RootStoreParams,
   RouteName.Description
 >;
 
 export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
-  const {photoId, secret} = route.params;
+  const {photoId, secret, image} = route.params;
   const {getImageInfo, info, infoLoading} = useContext(StoreContext);
   const {colors} = useThemeColor();
   const [value, setValue] = useState('');
@@ -42,64 +42,73 @@ export const DescriptionScreen = observer(({route}: DescriptionScreenProps) => {
 
   return (
     <View style={styles.rootContainer}>
-      {infoLoading ? (
-        <ActivityIndicator size="small" color={colors.secondary} />
-      ) : (
-        <ScrollView style={styles.container}>
-          <FlickrImage source={info.imageurl} style={styles.image} />
-          <Text style={[styles.heading, {color: colors.heading}]}>
-            {info.title?._content}
-          </Text>
-          <OwnerSection
-            onPress={() => Linking.openURL(PEOPLE_URL + info.owner.nsid)}
-            owner={cast(info.owner)}
-          />
-          <TagsList />
-          <Text style={[styles.description, {color: colors.text}]}>
-            {info.description._content}
-          </Text>
-
-          <View style={styles.commentSection}>
-            <Text
-              style={[
-                styles.comments,
-                {
-                  color: colors.text,
-                },
-              ]}>
-              {Strings.description.comments}
+      <ScrollView style={styles.container}>
+        <SharedElement id={photoId}>
+          <FlickrImage source={image} style={styles.image} />
+        </SharedElement>
+        {infoLoading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color={colors.secondary} />
+            <Text style={[styles.loadingText, {color: colors.text}]}>
+              {Strings.description.loading}
             </Text>
-            <TextInput
-              onChangeText={e => {
-                setValue(e);
-              }}
-              label={Strings.description.comments_placeholder}
-              value={value}
-              mode="outline"
-              style={styles.commentInput}
-              right={
-                <TouchableOpacity onPress={() => console.log('P')}>
-                  <Icon
-                    name="check"
-                    style={[styles.icon, {color: colors.text}]}
-                  />
-                </TouchableOpacity>
-              }
-              hint="Comment"
-            />
           </View>
+        ) : (
+          <View>
+            <Text style={[styles.heading, {color: colors.heading}]}>
+              {info.title?._content}
+            </Text>
+            <OwnerSection
+              onPress={() => Linking.openURL(PEOPLE_URL + info.owner.nsid)}
+              owner={cast(info.owner)}
+            />
+            <TagsList />
+            <Text style={[styles.description, {color: colors.text}]}>
+              {info.description._content}
+            </Text>
 
-          <Button
-            mode="default"
-            style={styles.viewBtn}
-            onPress={() => Linking.openURL(info.urls?.url[0]._content)}
-            icon="ios-share"
-            textStyle={styles.labelStyle}
-            iconStyle={styles.btnIcon}>
-            {Strings.description.view_in_browser}
-          </Button>
-        </ScrollView>
-      )}
+            <View style={styles.commentSection}>
+              <Text
+                style={[
+                  styles.comments,
+                  {
+                    color: colors.text,
+                  },
+                ]}>
+                {Strings.description.comments}
+              </Text>
+              <TextInput
+                onChangeText={e => {
+                  setValue(e);
+                }}
+                label={Strings.description.comments_placeholder}
+                value={value}
+                mode="outline"
+                style={styles.commentInput}
+                right={
+                  <TouchableOpacity onPress={() => console.log('P')}>
+                    <Icon
+                      name="check"
+                      style={[styles.icon, {color: colors.text}]}
+                    />
+                  </TouchableOpacity>
+                }
+                hint="Comment"
+              />
+            </View>
+
+            <Button
+              mode="default"
+              style={styles.viewBtn}
+              onPress={() => Linking.openURL(info.urls?.url[0]._content)}
+              icon="ios-share"
+              textStyle={styles.labelStyle}
+              iconStyle={styles.btnIcon}>
+              {Strings.description.view_in_browser}
+            </Button>
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 });
@@ -153,5 +162,13 @@ const styles = StyleSheet.create({
     fontSize: ScaleUtils.verticalScale(30),
     alignSelf: 'center',
     marginHorizontal: ScaleUtils.scale(9),
+  },
+  loadingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: ScaleUtils.verticalScale(20),
+  },
+  loadingText: {
+    marginTop: ScaleUtils.verticalScale(10),
   },
 });

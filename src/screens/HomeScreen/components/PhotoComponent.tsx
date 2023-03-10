@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {PhotoInterface} from '../../../models/PhotoModel';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {StackNavigationProp} from '@react-navigation/stack';
 import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
 import {Card, CardProps} from '../../../components/Card';
 import {FlickrImage} from '../../../components/FlickrImage';
 import {Fonts} from '../../../assets';
 import {ScaleUtils, useThemeColor} from '../../../utils';
+import {SharedElement} from 'react-navigation-shared-element';
 
 type Props = CardProps & {
   photo: PhotoInterface;
-  navigation: NativeStackNavigationProp<RootStoreParams>;
+  navigation: StackNavigationProp<RootStoreParams>;
 };
 
 const PhotoComponent: React.FC<Props> = (props: Props) => {
@@ -22,6 +23,7 @@ const PhotoComponent: React.FC<Props> = (props: Props) => {
         navigation.navigate(RouteName.Description, {
           photoId: photo.id,
           secret: photo.secret,
+          image: photo.imageurl,
         })
       }
       style={[
@@ -31,11 +33,13 @@ const PhotoComponent: React.FC<Props> = (props: Props) => {
         },
       ]}
       {...restProps}>
-      <FlickrImage
-        source={photo.imageurl}
-        style={styles.image}
-        resizeMode="cover"
-      />
+      <SharedElement id={photo.id}>
+        <FlickrImage
+          source={photo.imageurl}
+          style={styles.image}
+          resizeMode="cover"
+        />
+      </SharedElement>
 
       <Text
         style={[

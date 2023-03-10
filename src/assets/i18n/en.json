@@ -15,7 +15,8 @@
         "description": "Description",
         "comments":"comments",
         "comments_placeholder":"Comment on Post",
-        "view_in_browser" : "View in Browser"
+        "view_in_browser" : "View in Browser",
+        "loading": "Loading Content..."
     },
     "default_query" : "India",
     "input" : {

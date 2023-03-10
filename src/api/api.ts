@@ -13,8 +13,6 @@ ApiInstance.interceptors.request.use(
       nojsoncallback: 1,
       ...config.params,
     };
-    console.log(config.params);
-
     return config;
   },
   function (error) {
@@ -39,8 +37,6 @@ export function GetApi<T>(method: string, params: {}): Promise<T> {
     params,
   })
     .then(response => {
-      console.log('GET API RES :_ ', response);
-
       return response.data;
     })
     .catch(err => {

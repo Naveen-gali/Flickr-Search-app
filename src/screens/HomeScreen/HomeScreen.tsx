@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import type {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+  StackNavigationProp,
+  StackScreenProps,
+} from '@react-navigation/stack';
 import debounce from 'lodash.debounce';
 import {observer} from 'mobx-react-lite';
 import React, {
@@ -23,6 +23,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import {SharedElement} from 'react-navigation-shared-element';
 import {Fonts, Pallete, Strings} from '../../assets';
 import {Card} from '../../components/Card';
 import {FlickrImage} from '../../components/FlickrImage';
@@ -34,18 +35,20 @@ import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {ScaleUtils, useThemeColor} from '../../utils';
 import PhotoComponent from './components/PhotoComponent';
 
-type HomeScreenProps = NativeStackScreenProps<RootStoreParams, RouteName.Home>;
+type HomeScreenProps = StackScreenProps<RootStoreParams, RouteName.Home>;
 
 export const HomeScreen = observer((_props: HomeScreenProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStoreParams>>();
+  const navigation = useNavigation<StackNavigationProp<RootStoreParams>>();
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
     useContext(StoreContext);
   const flatListRef = useRef<FlatList<PhotoInterface>>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(DEFAULT_IMAGE_URL);
+  const [selected, setSelected] = useState({
+    id: '',
+    imageUrl: DEFAULT_IMAGE_URL,
+  });
   const {colors} = useThemeColor();
 
   const loadData = useCallback(() => {
@@ -90,7 +93,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
   const hideModal = () => {
     Animated.timing(imagePreview, {
       toValue: 0,
-      duration: 100,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   };
@@ -99,30 +102,58 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
 
   const yInterpolate = imagePreview.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, -50],
+    outputRange: [0, -55],
+  });
+
+  const xInterpolate = imagePreview.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  const scaleX = imagePreview.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  const scaleY = imagePreview.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
   });
 
   const animation = {
     opacity: imagePreview,
     transform: [
       {
+        translateX: xInterpolate,
+      },
+      {
         translateY: yInterpolate,
+      },
+      {
+        scaleX: scaleX,
+      },
+      {
+        scaleY: scaleY,
       },
     ],
   };
 
-  const renderItem = ({item}: ListRenderItemInfo<PhotoInterface>) => {
+  const renderItem = ({item, index}: ListRenderItemInfo<PhotoInterface>) => {
     return (
       <PhotoComponent
         photo={item}
         navigation={navigation}
         onLongPress={() => {
-          setSelected(item.imageurl);
+          setSelected({
+            id: item.id,
+            imageUrl: item.imageurl,
+          });
           showModal();
         }}
         onPressOut={() => {
           hideModal();
         }}
+        index={index}
         // {...panResponder.panHandlers}
       />
     );
@@ -239,11 +270,13 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
           animation,
         ]}>
         <Card style={styles.animCard}>
-          <FlickrImage
-            source={selected}
-            style={styles.image}
-            resizeMode="contain"
-          />
+          <SharedElement id={selected.id}>
+            <FlickrImage
+              source={selected.imageUrl}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </SharedElement>
         </Card>
       </Animated.View>
     </SafeAreaView>
