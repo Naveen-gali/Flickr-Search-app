@@ -1,63 +1,32 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  TextInputProps,
-  ViewStyle,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import {StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-type Props = TextInputProps & {contentStyle?: ViewStyle};
+import {ScaleUtils} from '../utils';
+import {TextInput, TextInputProps} from './TextInput';
 
-const SearchBar: React.FunctionComponent<Props> = props => {
-  const {
-    style,
-    contentStyle,
-    placeholder,
-    value,
-    onChangeText,
-    onEndEditing,
-    ...restProps
-  } = props;
+export type SearchBarProps = Omit<TextInputProps, 'label'>;
+
+export const SearchBar: React.FunctionComponent<SearchBarProps> = props => {
+  const {style, onChangeText, ...restProps} = props;
 
   return (
-    <View style={[styles.searchBarStyle, contentStyle]}>
-      <Icon name="search" style={styles.iconStyle} />
-      <TextInput
-        placeholder={placeholder}
-        style={[styles.inputStyle, style]}
-        value={value}
-        onChangeText={onChangeText}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onEndEditing={onEndEditing}
-        {...restProps}
-      />
-    </View>
+    <TextInput
+      style={[style]}
+      autoCapitalize="none"
+      onChangeText={onChangeText}
+      autoCorrect={false}
+      left={<Icon name="search" style={styles.icon} />}
+      {...restProps}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  iconStyle: {
-    fontSize: 30,
+  icon: {
+    fontSize: ScaleUtils.verticalScale(30),
     alignSelf: 'center',
-    marginHorizontal: 15,
-  },
-  searchBarStyle: {
-    backgroundColor: '#DDDBDB',
-    height: 50,
-    borderRadius: 10,
-    // marginHorizontal: 2,
-    flexDirection: 'row',
-    marginTop: 10,
-    // marginBottom: 10
-  },
-  inputStyle: {
-    borderColor: 'black',
-    flex: 1,
-    fontSize: 18,
+    marginHorizontal: ScaleUtils.scale(9),
+    paddingVertical: 10,
   },
 });
-
-export default SearchBar;

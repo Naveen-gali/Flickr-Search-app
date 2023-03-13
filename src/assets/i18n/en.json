@@ -1,0 +1,28 @@
+{
+    "home": {
+        "results_found": "Results Found",
+        "endReached": "End Reached",
+        "some_unexpected_happened": "Some Thing Unexpected Happened",
+        "search_bar": {
+            "alert_title": "Search Bar Empty!",
+            "placeholder": "Search Photos",
+            "alert_description": "Type SomeThing to Search!"
+        },
+        "photos_loading":"Photos Loading..."
+    },
+    "description": {
+        "no_tags_found": "No Tags Found",
+        "description": "Description",
+        "comments":"comments",
+        "comments_placeholder":"Comment on Post",
+        "view_in_browser" : "View in Browser",
+        "loading": "Loading Content..."
+    },
+    "default_query" : "India",
+    "input" : {
+        "default_error": "Error Occured!"
+    },
+    "screen_titles": {
+        "description":"Description"
+    }
+}

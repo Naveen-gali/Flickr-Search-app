@@ -1,11 +1,13 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+import React, {useEffect} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 
 import RNBootSplash from 'react-native-bootsplash';
 import {RootNavigator} from './src/navigation/RootNavigator';
-import {store, StoreContext} from './src/models/store';
-import {Provider as PaperProvider} from 'react-native-paper';
+import {store, StoreContext} from './src/models/RootStore';
+import {useColorScheme} from 'react-native';
+import {DarkTheme, LightTheme} from './src/assets';
 
 const RootStore = store.create({
   photos: [],
@@ -19,14 +21,17 @@ const RootStore = store.create({
 });
 
 function App(): JSX.Element {
+  useEffect(() => {
+    RNBootSplash.hide({fade: true, duration: 500});
+  });
+
+  const theme = useColorScheme();
+
   return (
     <StoreContext.Provider value={RootStore}>
-      <PaperProvider>
-        <NavigationContainer
-          onReady={() => RNBootSplash.hide({fade: true, duration: 500})}>
-          <RootNavigator />
-        </NavigationContainer>
-      </PaperProvider>
+      <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
+        <RootNavigator />
+      </NavigationContainer>
     </StoreContext.Provider>
   );
 }

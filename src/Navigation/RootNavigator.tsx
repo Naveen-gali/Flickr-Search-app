@@ -1,24 +1,46 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../screens/HomeScreen';
-import DescriptionScreen from '../screens/DescriptionScreen';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+import {HomeScreen, DescriptionScreen} from '../screens';
+import {Strings} from '../assets';
+
+export enum RouteName {
+  Home = 'Home',
+  Description = 'Description',
+}
 
 export type RootStoreParams = {
-  Home: undefined;
-  DescriptionScreen: {photoId: string; secret: string};
+  [RouteName.Home]: undefined;
+  [RouteName.Description]: {photoId: string; secret: string; image: string};
 };
 
-const Stack = createNativeStackNavigator<RootStoreParams>();
+// const Stack = createNativeStackNavigator<RootStoreParams>();
+const Stack = createSharedElementStackNavigator<RootStoreParams>();
 
 export const RootNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{headerShown: false}}
+        name={RouteName.Home}
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+        sharedElements={() => {
+          return [];
+        }}
       />
-      <Stack.Screen name="DescriptionScreen" component={DescriptionScreen} />
+      <Stack.Screen
+        name={RouteName.Description}
+        component={DescriptionScreen}
+        options={{
+          title: Strings.screen_titles.description,
+        }}
+        sharedElements={route => {
+          const {photoId} = route.params;
+          return [{id: photoId, animation: 'fade-in'}];
+        }}
+      />
     </Stack.Navigator>
   );
 };

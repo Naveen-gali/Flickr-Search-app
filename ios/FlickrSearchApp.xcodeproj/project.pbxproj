@@ -12,10 +12,22 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1C4D8AB7F2BB41B8BFD614D4 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 087DBF5384544D5CB00BCDDB /* SourceSansPro-Regular.ttf */; };
+		1CD5C7B553DA401ABDF5B090 /* SourceSansPro-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B12950AF9D745D5A8D34014 /* SourceSansPro-ExtraLightItalic.ttf */; };
+		289119DB34454B4681C3670D /* SourceSansPro-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7340B534446E44BAA46909DC /* SourceSansPro-BoldItalic.ttf */; };
+		36CF6AD68ADE42399F44A9E8 /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3274D07075454758A7E8D548 /* SourceSansPro-ExtraLight.ttf */; };
+		3EB609F5C7E3482F9DDD6C7F /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD8E81D4BA1E4AFD86138FB1 /* SourceSansPro-SemiBold.ttf */; };
+		4969BC8435E64FDCAC28DC14 /* SourceSansPro-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B841ECDFC48C4DACBCA95B09 /* SourceSansPro-BlackItalic.ttf */; };
+		4F33AC91BCD14104BAF79DEF /* SourceSansPro-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63972BED719E4F9A930329AF /* SourceSansPro-SemiBoldItalic.ttf */; };
+		5CCD5E97250A4104A71C56EE /* SourceSansPro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC8607664766464D8B7D602E /* SourceSansPro-Italic.ttf */; };
+		61A60E0F2753492FA23AB41A /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A243DAC6A544C4EB38CF206 /* SourceSansPro-Light.ttf */; };
+		66CF652767E34CCD970EC4F0 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F032D191A4662ACF91D95 /* SourceSansPro-Black.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-FlickrSearchApp-FlickrSearchAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-FlickrSearchApp-FlickrSearchAppTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		857BFE5CBED04B0D88B771F4 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3E5203254AC4EBD8AC579E2 /* SourceSansPro-Bold.ttf */; };
 		8A086DB3297AB15F0007EBE4 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A086DB2297AB15F0007EBE4 /* BootSplash.storyboard */; };
+		8A57201B299F37E4004DC167 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		8AD84527297D0C4A005E388C /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 8AD84526297D0C4A005E388C /* Fonts */; };
+		B30833B5AAC4438592E9A871 /* SourceSansPro-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7208F5E59A4D485D95758B79 /* SourceSansPro-LightItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +44,7 @@
 		00E356EE1AD99517003FC87E /* FlickrSearchAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrSearchAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FlickrSearchAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrSearchAppTests.m; sourceTree = "<group>"; };
+		087DBF5384544D5CB00BCDDB /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Regular.ttf"; path = "../src/assets/fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FlickrSearchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FlickrSearchApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = FlickrSearchApp/AppDelegate.mm; sourceTree = "<group>"; };
@@ -39,14 +52,25 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FlickrSearchApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FlickrSearchApp/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-FlickrSearchApp-FlickrSearchAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlickrSearchApp-FlickrSearchAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B12950AF9D745D5A8D34014 /* SourceSansPro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-ExtraLightItalic.ttf"; path = "../src/assets/fonts/SourceSansPro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		3274D07075454758A7E8D548 /* SourceSansPro-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-ExtraLight.ttf"; path = "../src/assets/fonts/SourceSansPro-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3A243DAC6A544C4EB38CF206 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Light.ttf"; path = "../src/assets/fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-FlickrSearchApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchApp.debug.xcconfig"; path = "Target Support Files/Pods-FlickrSearchApp/Pods-FlickrSearchApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-FlickrSearchApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchApp.release.xcconfig"; path = "Target Support Files/Pods-FlickrSearchApp/Pods-FlickrSearchApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-FlickrSearchApp-FlickrSearchAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchApp-FlickrSearchAppTests.debug.xcconfig"; path = "Target Support Files/Pods-FlickrSearchApp-FlickrSearchAppTests/Pods-FlickrSearchApp-FlickrSearchAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-FlickrSearchApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlickrSearchApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FlickrSearchApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		63972BED719E4F9A930329AF /* SourceSansPro-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-SemiBoldItalic.ttf"; path = "../src/assets/fonts/SourceSansPro-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		6C9F032D191A4662ACF91D95 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Black.ttf"; path = "../src/assets/fonts/SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
+		7208F5E59A4D485D95758B79 /* SourceSansPro-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-LightItalic.ttf"; path = "../src/assets/fonts/SourceSansPro-LightItalic.ttf"; sourceTree = "<group>"; };
+		7340B534446E44BAA46909DC /* SourceSansPro-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-BoldItalic.ttf"; path = "../src/assets/fonts/SourceSansPro-BoldItalic.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-FlickrSearchApp-FlickrSearchAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchApp-FlickrSearchAppTests.release.xcconfig"; path = "Target Support Files/Pods-FlickrSearchApp-FlickrSearchAppTests/Pods-FlickrSearchApp-FlickrSearchAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		8A086DB2297AB15F0007EBE4 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = FlickrSearchApp/BootSplash.storyboard; sourceTree = "<group>"; };
+		8AAAC10129BB28E90034C1D4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		8AD84526297D0C4A005E388C /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
+		B841ECDFC48C4DACBCA95B09 /* SourceSansPro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-BlackItalic.ttf"; path = "../src/assets/fonts/SourceSansPro-BlackItalic.ttf"; sourceTree = "<group>"; };
+		DD8E81D4BA1E4AFD86138FB1 /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-SemiBold.ttf"; path = "../src/assets/fonts/SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
+		E3E5203254AC4EBD8AC579E2 /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Bold.ttf"; path = "../src/assets/fonts/SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
+		EC8607664766464D8B7D602E /* SourceSansPro-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Italic.ttf"; path = "../src/assets/fonts/SourceSansPro-Italic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -87,6 +111,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0307E40F2A1A48D1893203CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6C9F032D191A4662ACF91D95 /* SourceSansPro-Black.ttf */,
+				B841ECDFC48C4DACBCA95B09 /* SourceSansPro-BlackItalic.ttf */,
+				E3E5203254AC4EBD8AC579E2 /* SourceSansPro-Bold.ttf */,
+				7340B534446E44BAA46909DC /* SourceSansPro-BoldItalic.ttf */,
+				3274D07075454758A7E8D548 /* SourceSansPro-ExtraLight.ttf */,
+				2B12950AF9D745D5A8D34014 /* SourceSansPro-ExtraLightItalic.ttf */,
+				EC8607664766464D8B7D602E /* SourceSansPro-Italic.ttf */,
+				3A243DAC6A544C4EB38CF206 /* SourceSansPro-Light.ttf */,
+				7208F5E59A4D485D95758B79 /* SourceSansPro-LightItalic.ttf */,
+				087DBF5384544D5CB00BCDDB /* SourceSansPro-Regular.ttf */,
+				DD8E81D4BA1E4AFD86138FB1 /* SourceSansPro-SemiBold.ttf */,
+				63972BED719E4F9A930329AF /* SourceSansPro-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* FlickrSearchApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +139,6 @@
 				8A086DB2297AB15F0007EBE4 /* BootSplash.storyboard */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = FlickrSearchApp;
@@ -122,12 +164,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8AAAC10129BB28E90034C1D4 /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* FlickrSearchApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FlickrSearchAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0307E40F2A1A48D1893203CF /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -241,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A57201B299F37E4004DC167 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +294,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A086DB3297AB15F0007EBE4 /* BootSplash.storyboard in Resources */,
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8AD84527297D0C4A005E388C /* Fonts in Resources */,
+				66CF652767E34CCD970EC4F0 /* SourceSansPro-Black.ttf in Resources */,
+				4969BC8435E64FDCAC28DC14 /* SourceSansPro-BlackItalic.ttf in Resources */,
+				857BFE5CBED04B0D88B771F4 /* SourceSansPro-Bold.ttf in Resources */,
+				289119DB34454B4681C3670D /* SourceSansPro-BoldItalic.ttf in Resources */,
+				36CF6AD68ADE42399F44A9E8 /* SourceSansPro-ExtraLight.ttf in Resources */,
+				1CD5C7B553DA401ABDF5B090 /* SourceSansPro-ExtraLightItalic.ttf in Resources */,
+				5CCD5E97250A4104A71C56EE /* SourceSansPro-Italic.ttf in Resources */,
+				61A60E0F2753492FA23AB41A /* SourceSansPro-Light.ttf in Resources */,
+				B30833B5AAC4438592E9A871 /* SourceSansPro-LightItalic.ttf in Resources */,
+				1C4D8AB7F2BB41B8BFD614D4 /* SourceSansPro-Regular.ttf in Resources */,
+				3EB609F5C7E3482F9DDD6C7F /* SourceSansPro-SemiBold.ttf in Resources */,
+				4F33AC91BCD14104BAF79DEF /* SourceSansPro-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +552,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FlickrSearchApp/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -522,6 +579,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = FlickrSearchApp/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,6 +599,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AAAC10129BB28E90034C1D4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -613,6 +672,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AAAC10129BB28E90034C1D4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
