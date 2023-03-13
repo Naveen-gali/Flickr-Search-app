@@ -34,6 +34,7 @@ import {StoreContext} from '../../models/RootStore';
 import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
 import {ScaleUtils, useThemeColor} from '../../utils';
 import PhotoComponent from './components/PhotoComponent';
+import Config from 'react-native-config/index';
 
 type HomeScreenProps = StackScreenProps<RootStoreParams, RouteName.Home>;
 
@@ -50,6 +51,8 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     imageUrl: DEFAULT_IMAGE_URL,
   });
   const {colors} = useThemeColor();
+
+  console.log(Config);
 
   const loadData = useCallback(() => {
     if (!photosLoading) {
@@ -138,7 +141,7 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     ],
   };
 
-  const renderItem = ({item, index}: ListRenderItemInfo<PhotoInterface>) => {
+  const renderItem = ({item}: ListRenderItemInfo<PhotoInterface>) => {
     return (
       <PhotoComponent
         photo={item}
@@ -153,7 +156,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         onPressOut={() => {
           hideModal();
         }}
-        index={index}
         // {...panResponder.panHandlers}
       />
     );
@@ -226,6 +228,12 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         mode="border-less"
         placeholderTextColor={colors.placeholder}
       />
+      <Text
+        style={{
+          color: '#ffffff',
+        }}>
+        {Config.API_URL}
+      </Text>
       {loading ? (
         <SearchLoading />
       ) : (
