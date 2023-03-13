@@ -31,15 +31,14 @@ import {SearchBar} from '../../components/SearchBar';
 import {DEFAULT_IMAGE_URL} from '../../constants';
 import {PhotoInterface} from '../../models/PhotoModel';
 import {StoreContext} from '../../models/RootStore';
-import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
+import {RootNavigatorParams, RouteName} from '../../navigation/RootNavigator';
 import {ScaleUtils, useThemeColor} from '../../utils';
 import PhotoComponent from './components/PhotoComponent';
-import Config from 'react-native-config/index';
 
-type HomeScreenProps = StackScreenProps<RootStoreParams, RouteName.Home>;
+type HomeScreenProps = StackScreenProps<RootNavigatorParams, RouteName.Home>;
 
 export const HomeScreen = observer((_props: HomeScreenProps) => {
-  const navigation = useNavigation<StackNavigationProp<RootStoreParams>>();
+  const navigation = useNavigation<StackNavigationProp<RootNavigatorParams>>();
   const {getPhotos, photosCount, photos, photosLoading, page, error, pages} =
     useContext(StoreContext);
   const flatListRef = useRef<FlatList<PhotoInterface>>(null);
@@ -51,8 +50,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     imageUrl: DEFAULT_IMAGE_URL,
   });
   const {colors} = useThemeColor();
-
-  console.log(Config);
 
   const loadData = useCallback(() => {
     if (!photosLoading) {
@@ -156,7 +153,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         onPressOut={() => {
           hideModal();
         }}
-        // {...panResponder.panHandlers}
       />
     );
   };
@@ -196,24 +192,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
     return index.toString();
   };
 
-  // const panResponder = PanResponder.create({
-  //   onStartShouldSetPanResponder: (evt, gestureState) => true,
-  //   onMoveShouldSetPanResponder: (evt, gestureState) => true,
-  //   onPanResponderGrant: () => {
-  //     hideModal();
-  //     // showModal();
-  //   },
-  //   onPanResponderMove: (e, gestureState) => {
-  //     console.log('E', e);
-  //   },
-  //   onPanResponderRelease: (e, gestureState) => {
-  //     console.log('Released');
-  //   },
-  //   onPanResponderEnd(e, gestureState) {
-  //     hideModal();
-  //   },
-  // });
-
   return (
     <SafeAreaView style={styles.rootView}>
       <SearchBar
@@ -228,12 +206,6 @@ export const HomeScreen = observer((_props: HomeScreenProps) => {
         mode="border-less"
         placeholderTextColor={colors.placeholder}
       />
-      <Text
-        style={{
-          color: '#ffffff',
-        }}>
-        {Config.API_URL}
-      </Text>
       {loading ? (
         <SearchLoading />
       ) : (

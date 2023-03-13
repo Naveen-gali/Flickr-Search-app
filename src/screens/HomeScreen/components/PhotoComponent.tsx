@@ -2,7 +2,10 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {PhotoInterface} from '../../../models/PhotoModel';
 import type {StackNavigationProp} from '@react-navigation/stack';
-import {RootStoreParams, RouteName} from '../../../navigation/RootNavigator';
+import {
+  RootNavigatorParams,
+  RouteName,
+} from '../../../navigation/RootNavigator';
 import {Card, CardProps} from '../../../components/Card';
 import {FlickrImage} from '../../../components/FlickrImage';
 import {Fonts} from '../../../assets';
@@ -11,7 +14,7 @@ import {SharedElement} from 'react-navigation-shared-element';
 
 type Props = CardProps & {
   photo: PhotoInterface;
-  navigation: StackNavigationProp<RootStoreParams>;
+  navigation: StackNavigationProp<RootNavigatorParams>;
 };
 
 const PhotoComponent: React.FC<Props> = (props: Props) => {

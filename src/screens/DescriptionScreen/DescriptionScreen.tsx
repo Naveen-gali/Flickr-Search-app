@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import type {StackScreenProps} from '@react-navigation/stack';
-import {RootStoreParams, RouteName} from '../../navigation/RootNavigator';
+import {RootNavigatorParams, RouteName} from '../../navigation/RootNavigator';
 import {StoreContext} from '../../models/RootStore';
 import {observer} from 'mobx-react-lite';
 import TagsList from './components/TagsList';
@@ -26,7 +26,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {SharedElement} from 'react-navigation-shared-element';
 
 type DescriptionScreenProps = StackScreenProps<
-  RootStoreParams,
+  RootNavigatorParams,
   RouteName.Description
 >;
 

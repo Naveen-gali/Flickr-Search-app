@@ -18,6 +18,9 @@
         "view_in_browser" : "View in Browser",
         "loading": "Loading Content..."
     },
+    "profile":{
+        "default_text": "Profile SCreen"
+    },
     "default_query" : "India",
     "input" : {
         "default_error": "Error Occured!"

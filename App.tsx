@@ -4,7 +4,8 @@ import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 import RNBootSplash from 'react-native-bootsplash';
-import {RootNavigator} from './src/navigation/RootNavigator';
+// import {DrawerNavigator, RootNavigator} from './src/navigation/RootNavigator';
+import {BottomTabNavigator} from './src/navigation/RootNavigator';
 import {store, StoreContext} from './src/models/RootStore';
 import {useColorScheme} from 'react-native';
 import {DarkTheme, LightTheme} from './src/assets';
@@ -30,7 +31,9 @@ function App(): JSX.Element {
   return (
     <StoreContext.Provider value={RootStore}>
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
-        <RootNavigator />
+        {/* <RootNavigator /> */}
+        {/* <DrawerNavigator /> */}
+        <BottomTabNavigator />
       </NavigationContainer>
     </StoreContext.Provider>
   );

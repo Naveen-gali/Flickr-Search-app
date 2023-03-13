@@ -7,10 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "build-staging": "ENVFILE=.env.staging npx react-native run-ios -- --reset-cache",
+    "build-staging-android": "ENVFILE=.env.staging npx react-native run-android -- --reset-cache"
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.8",
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/stack": "^6.3.16",
     "axios": "^1.2.3",
@@ -25,6 +29,7 @@
     "react-native-config": "^1.5.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-localization": "^2.3.1",
+    "react-native-reanimated": "^3.0.2",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-screens": "^3.19.0",
     "react-native-shared-element": "^0.8.8",
